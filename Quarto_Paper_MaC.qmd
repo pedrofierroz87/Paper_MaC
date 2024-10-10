@@ -1,0 +1,425 @@
+---
+title: "Quarto_Paper_MaC"
+format: html
+editor: visual
+---
+
+# Democracy and social media: Between the dialogue and the strategy
+
+Andrés Scherman^1^, Pedro Fierro^2^ and Leo Yuanliang Shan^3^
+
+^1^ LEAS at School of Communication and Journalism, Universidad Adolfo Ibáñez.
+
+^2^ Business School, Universidad Adolfo Ibáñez; and Department of Media and Communication, London School of Economics.
+
+^3^ School of Journalism and Mass Communication, University of Wisconsin-Madison.
+
+## Abstract
+
+This study analyzes the role of traditional news media and social media in public deliberation within democratic systems. Using the concepts of Understanding Orientation (consensus-oriented, communicative rationality) and Strategic Orientation (goal-oriented, instrumental rationality), proposed by Jürgen Habermas, this study looks at the public space in a digital context to explore how the news media can either contribute to the existence of rational communication in the public debate or, conversely, promote interventions of a strategic nature. To estimate the influence of traditional news media and social media on the orientation to engage in dialogue with others within a framework of rationality and equality, this study relies on a two-wave online panel survey conducted in Chile before and after the constitutional referendum, held on September 4, 2022, a period of intense political polarization. The first wave (T1) received 2,117 responses, and the second wave (T2) received 903 responses. Results show that Understanding Orientation is a predictor of political situations linked to public deliberation, such as Political Participation and Political Interest. However, news consumption in both traditional news outlets and social media is not associated with the presence of Understanding Orientation, but rather with Strategic Orientation. These results support a more pessimistic view of the contribution of the news media and social media to creating a rational public sphere, where reason should predominate in interactions between citizens to strengthen democracy.
+
+## Methodology
+
+### Data
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r results='hide', message=FALSE, warning=FALSE}
+library(haven)
+library(knitr)
+library(lattice)
+library(tidyverse)
+library(here)
+library(flextable)
+library(devtools)
+library(lavaan)
+library(ggplot2)
+library(plm)
+library(naniar)
+library(purrr)
+library(psych)
+library(interactions)
+library(semPlot)
+library(coefplot)
+```
+
+```{r results='hide', message=FALSE, warning=FALSE}
+#Import Data
+data_w1 <- read_sav("Data_W1.sav")
+
+# ID
+data_w1$id <- data_w1$CodPanelista
+```
+
+### Variables
+
+```{r results='hide', message=FALSE, warning=FALSE}
+# Age
+data_w1$age_num <- data_w1$age
+
+# Socioeconomic Status
+data_w1$ses <- data_w1$RECO_NSE
+
+# Education
+data_w1$educ <- data_w1$P60
+
+# Sex (1=women)
+data_w1 <- data_w1%>%
+  mutate(sex = ifelse(SEX == 2, 1,
+                      ifelse(SEX == 1, 0, NA)))
+
+# Ideology
+data_w1$ideology <- ifelse(data_w1$P32 == 99, NA, data_w1$P32)
+
+# Online Political Efficacy
+data_w1$ope1 <- data_w1$P59_1
+data_w1$ope2 <- data_w1$P59_2
+data_w1$ope3 <- data_w1$P59_3
+data_w1$ope4 <- data_w1$P59_4
+
+# External Political Efficacy (recode)
+data_w1$extef1 <- data_w1$P58_1
+data_w1$extef2 <- data_w1$P58_2
+data_w1$extef3 <- data_w1$P58_3
+
+# To recode efficacies (intef1, intef3, extef1, extef3, extef4)
+data_w1 <- data_w1 %>%
+  mutate(across(c(extef1, extef2, extef3), ~ 6 - .x))
+
+# Internal Political Efficacy
+data_w1$intef1 <- data_w1$P58_4
+data_w1$intef2 <- data_w1$P58_5
+data_w1$intef3 <- data_w1$P58_6
+
+# Media Exposure
+data_w1$tv <- data_w1$P4_1
+data_w1$cable <- data_w1$P4_2
+data_w1$newspaper <- data_w1$P4_3
+data_w1$radio <- data_w1$P4_4
+data_w1$tradonline <- data_w1$P4_5
+data_w1$online <- data_w1$P4_6
+data_w1$podcast <- data_w1$P4_7
+data_w1$officialsm <- data_w1$P4_8
+
+# Social Media Exposure
+data_w1$fb <- ifelse(data_w1$P5_1 == 99, NA, data_w1$P5_1)
+data_w1$insta <- ifelse(data_w1$P5_2 == 99, NA, data_w1$P5_2)
+data_w1$twitter <- ifelse(data_w1$P5_3 == 99, NA, data_w1$P5_3)
+data_w1$whatsapp <- ifelse(data_w1$P5_4 == 99, NA, data_w1$P5_4)
+data_w1$youtube <- ifelse(data_w1$P5_5 == 99, NA, data_w1$P5_5)
+data_w1$tiktok <- ifelse(data_w1$P5_6 == 99, NA, data_w1$P5_6)
+data_w1$discord <- ifelse(data_w1$P5_7 == 99, NA, data_w1$P5_7)
+data_w1$twitch <- ifelse(data_w1$P5_8 == 99, NA, data_w1$P5_8)
+
+# Franja Exposure
+data_w1$franja <- data_w1$P6_1
+
+# Social Media Political Use
+data_w1$use1 <- data_w1$P25_5
+data_w1$use2 <- data_w1$P25_6
+data_w1$use3 <- data_w1$P25_7
+data_w1$use4 <- data_w1$P25_8
+data_w1$use5 <- data_w1$P25_9
+data_w1$use6 <- data_w1$P25_10
+data_w1$use7 <- data_w1$P25_11
+
+# Interest
+data_w1$polint <- data_w1$P21
+data_w1$procint <- data_w1$P22
+data_w1$plebint <- data_w1$P23
+
+# Interpersonal confidence
+data_w1 <- data_w1%>%
+  mutate(intercon = ifelse(P51 == 2, 1,
+                      ifelse(P51 == 1, 0, NA)))
+
+#Understanding orientation
+data_w1$under1 <- data_w1$P48_1
+data_w1$under2 <- data_w1$P48_4
+data_w1$under3 <- data_w1$P48_5
+data_w1$under4 <- data_w1$P48_7
+
+#Strategic orientation
+data_w1$strate1 <- data_w1$P49_2
+data_w1$strate2 <- data_w1$P49_3
+data_w1$strate3 <- data_w1$P49_4
+data_w1$strate4 <- data_w1$P49_8
+
+```
+
+#### Understanding Orientation
+
+#### Strategic Orientation
+
+#### Political Efficacy
+
+#### Political Interest
+
+#### Media Exposure
+
+#### Sociodemographic Variables
+
+### Analysis
+
+```{r}
+cronbach_ope <- alpha(na.omit(data_w1[c("ope1", "ope2", "ope3", "ope4")]))
+cronbach_ope
+
+cronbach_intef <- alpha(na.omit(data_w1[c("intef1", "intef2", "intef3")]))
+cronbach_intef
+
+cronbach_extef <- alpha(na.omit(data_w1[c("extef1", "extef2", "extef3")]))
+cronbach_extef
+
+cronbach_media <- alpha(na.omit(data_w1[c("tv", "cable", "newspaper", "radio")]))
+cronbach_media
+
+cronbach_digital <- alpha(na.omit(data_w1[c("tradonline", "online", "podcast", "officialsm")]))
+cronbach_digital
+
+cronbach_social <- alpha(na.omit(data_w1[c("fb", "insta", "twitter", "whatsapp", "youtube", "tiktok")]))
+cronbach_social
+
+cronbach_interest <- alpha(na.omit(data_w1[c("polint", "procint", "plebint")]))
+cronbach_interest
+
+cronbach_under <- alpha(na.omit(data_w1[c("under1", "under2", "under3", "under4")]))
+cronbach_under
+
+cronbach_strate <- alpha(na.omit(data_w1[c("strate1", "strate2", "strate3", "strate4")]))
+cronbach_strate
+
+```
+
+```{r}
+data_w1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "discord", "twitch", "franja", "use1", "use2", "use3", "use4", "use5", "use6", "use7", "age_num", "ses", "sex", "educ", "under1", "under2", "under3", "under4", "strate1", "strate2", "strate3", "strate4")])
+sum(is.na(data_w1_na))
+
+data_w1_na <- data_w1_na %>%
+  mutate(across(where(is.labelled), as.numeric))
+
+cfa.model1 <- 'ope =~ ope1 + ope2 + ope3 + ope4
+              intef =~ intef1 + intef2 + intef3
+              extef =~ extef1 + extef2 + extef3
+              interest =~ polint + procint + plebint'
+cfa.model2 <- 'media =~ tv + cable + newspaper + radio
+              digital =~ tradonline + online + podcast + officialsm
+              social =~ fb + insta + twitter + whatsapp + youtube + tiktok'
+cfa.model3 <- 'under =~ under1 + under2 + under3 + under4
+              strate =~ strate1 + strate2 + strate3 + strate4'
+
+fit_cfa1 <- cfa(cfa.model1, data = data_w1_na)
+latent_scores1 <- predict(fit_cfa1)
+
+fit_cfa2 <- cfa(cfa.model2, data = data_w1_na)
+latent_scores2 <- predict(fit_cfa2)
+
+fit_cfa3 <- cfa(cfa.model3, data = data_w1_na)
+latent_scores3 <- predict(fit_cfa3)
+
+data_w1_scores <- cbind(data_w1_na, latent_scores1, latent_scores2, latent_scores3)
+```
+
+#### Measurement Model
+
+```{r}
+semPaths(fit_cfa1, "std", layout = "tree", rotation = 2,
+         whatLabels = "std", edge.label.cex = 0.8,
+         sizeMan = 3, sizeLat = 7, title = TRUE)
+semPaths(fit_cfa2, "std", layout = "tree", rotation = 2,
+         whatLabels = "std", edge.label.cex = 0.8,
+         sizeMan = 3, sizeLat = 7, title = TRUE)
+semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
+         whatLabels = "std", edge.label.cex = 0.8,
+         sizeMan = 3, sizeLat = 7, title = TRUE)
+
+```
+
+### Regressions
+
+```{r}
+model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model1)
+```
+
+```{r}
+model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model2)
+```
+
+```{r}
+# Update the extraction function to avoid spaces in names
+get_coef <- function(model, model_name) {
+  coefs <- summary(model)$coefficients
+  data.frame(
+    Term = rownames(coefs),
+    Estimate = coefs[, "Estimate"],
+    Std_Error = coefs[, "Std. Error"],  # Rename to 'Std_Error'
+    Model = model_name
+  )
+}
+
+# Apply the function to both models
+coef_df1 <- get_coef(model1, "Model 1")
+coef_df2 <- get_coef(model2, "Model 2")
+
+# Combine the data frames and remove the intercept
+coef_df <- rbind(coef_df1, coef_df2)
+coef_df <- coef_df[coef_df$Term != "(Intercept)", ]
+
+```
+
+```{r}
+# Assuming coef_df is already prepared as per previous instructions
+
+# Update the extraction function to avoid spaces in names
+get_coef <- function(model, model_name) {
+  coefs <- summary(model)$coefficients
+  data.frame(
+    Term = rownames(coefs),
+    Estimate = coefs[, "Estimate"],
+    Std_Error = coefs[, "Std. Error"],  # Rename to 'Std_Error'
+    Model = model_name
+  )
+}
+
+# Apply the function to both models
+coef_df1 <- get_coef(model1, "Model 1")
+coef_df2 <- get_coef(model2, "Model 2")
+
+# Combine the data frames and remove the intercept
+coef_df <- rbind(coef_df1, coef_df2)
+coef_df <- coef_df[coef_df$Term != "(Intercept)", ]
+
+# Calculate 95% confidence intervals and determine significance
+coef_df <- coef_df %>%
+  mutate(
+    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
+    )
+
+# Create a mapping of old variable names to new names
+name_mapping <- c(
+  ses = "Socioeconomic Status",
+  sex = "Gender",
+  age_num = "Age",
+  media = "Media Expo.",
+  digital = "Dig, Media Expo.",
+  social = "Soc. Media Expo.",
+  interest = "Pol. Interest",
+  intercon = "Interp. Conf.",
+  extef = "Ext. Efficacy",
+  intef = "Int. Efficacy",
+  ope = "Onl. Efficacy"
+)
+
+# Apply the mapping to the dataframe
+coef_df <- coef_df %>%
+  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
+
+# Define a dodge width for better separation
+dodge_width <- 0.5
+
+# Create the plot with updated names
+ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
+  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Estimated Coefficients") +
+  coord_flip() +  # Flips the axes for better visualization of terms
+  scale_color_manual(values = c("darkblue", "darkred"),
+                     labels = c("Understanding", "Strategic")) +  # Set custom colors for each model
+  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
+  theme(
+    legend.position = "right",  # Hide the legend for line size
+    axis.text.y = element_text(size = 8)  # Adjust text size if needed
+  )
+```
+
+```{r}
+
+model2_1 <- lm(strate1 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model2_1)
+model2_2 <- lm(strate2 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model2_2)
+model2_3 <- lm(strate3 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model2_3)
+model2_4 <- lm(strate4 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+summary(model2_4)
+
+```
+
+```{r}
+
+# Apply the function to both models
+coef_strate1 <- get_coef(model2_1, "Model S1")
+coef_strate2 <- get_coef(model2_2, "Model S2")
+coef_strate3 <- get_coef(model2_3, "Model S3")
+coef_strate4 <- get_coef(model2_4, "Model S4")
+
+# Combine the data frames and remove the intercept
+coef_strate <- rbind(coef_strate1, coef_strate2, coef_strate3, coef_strate4)
+coef_strate <- coef_strate[coef_strate$Term != "(Intercept)", ]
+
+# Calculate 95% confidence intervals and determine significance
+coef_strate <- coef_strate %>%
+  mutate(
+    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)
+  )
+
+
+# Apply the mapping to the dataframe
+coef_strate <- coef_strate %>%
+  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
+
+# Define a dodge width for better separation
+dodge_width <- 0.5
+
+# Create the plot with updated names
+ggplot(coef_strate, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
+  geom_pointrange(position = position_dodge(width = dodge_width)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Estimated Coefficients") +
+  coord_flip() +  # Flips the axes for better visualization of terms
+  scale_color_manual(
+    values = c("darkblue", "darkred","darkgreen", "purple"),
+    labels = c("Talk if I win", "Form is more important", "Not express what I think", "Agreements waste of time")) +  # Set custom colors for each model
+  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
+  theme(
+    legend.position = "right",
+    axis.text.y = element_text(size = 8)  # Adjust text size if needed
+  )
+```
+
+\`\`\`
+
+### Alternative models
+
+```{r}
+data_w1_scores$undersum <- (data_w1_scores$under1+data_w1_scores$under2+data_w1_scores$under3+data_w1_scores$under4)/4
+data_w1_scores$stratesum <- (data_w1_scores$strate1+data_w1_scores$strate2+data_w1_scores$strate3+data_w1_scores$strate4)/4
+
+data_w1_scores$mediasum <- (data_w1_scores$tv+data_w1_scores$cable+data_w1_scores$newspaper+data_w1_scores$radio)/4
+data_w1_scores$digitalsum <-(data_w1_scores$tradonline+data_w1_scores$online+data_w1_scores$podcast+data_w1_scores$officialsm)/4
+data_w1_scores$socialsum <- (data_w1_scores$fb+data_w1_scores$insta+data_w1_scores$twitter+data_w1_scores$whatsapp+data_w1_scores$youtube+data_w1_scores$tiktok)/6
+
+data_w1_scores$extefsum <- (data_w1_scores$extef1+data_w1_scores$extef2+data_w1_scores$extef3)/3
+data_w1_scores$intefsum <- (data_w1_scores$intef1+data_w1_scores$intef2+data_w1_scores$intef3)/3
+data_w1_scores$opesum <- (data_w1_scores$ope1+data_w1_scores$ope2+data_w1_scores$ope3+data_w1_scores$ope4)/4
+
+```
+
+#### Regressions
+
+```{r}
+model_a1 <- lm(undersum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_w1_scores)
+summary(model_a1)
+
+model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_w1_scores)
+summary(model_a2)
+```
+
