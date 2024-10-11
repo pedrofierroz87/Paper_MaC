@@ -247,27 +247,6 @@ model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest 
 summary(model2)
 ```
 
-```{r}
-# Update the extraction function to avoid spaces in names
-get_coef <- function(model, model_name) {
-  coefs <- summary(model)$coefficients
-  data.frame(
-    Term = rownames(coefs),
-    Estimate = coefs[, "Estimate"],
-    Std_Error = coefs[, "Std. Error"],  # Rename to 'Std_Error'
-    Model = model_name
-  )
-}
-
-# Apply the function to both models
-coef_df1 <- get_coef(model1, "Model 1")
-coef_df2 <- get_coef(model2, "Model 2")
-
-# Combine the data frames and remove the intercept
-coef_df <- rbind(coef_df1, coef_df2)
-coef_df <- coef_df[coef_df$Term != "(Intercept)", ]
-
-```
 
 ```{r}
 # Assuming coef_df is already prepared as per previous instructions
@@ -421,5 +400,176 @@ summary(model_a1)
 
 model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_w1_scores)
 summary(model_a2)
+```
+
+# Replicating with wave 3
+
+```{r}
+#Import Data
+data_w3 <- read_sav("Data_W3.sav")
+
+# ID
+data_w3$id <- data_w3$CodPanelista
+```
+
+```{r}
+
+#Understanding orientation
+data_w3$under_w3_1 <- data_w3$P48_1
+data_w3$under_w3_2 <- data_w3$P48_2
+data_w3$under_w3_3 <- data_w3$P48_3
+data_w3$under_w3_4 <- data_w3$P48_4
+data_w3$under_w3_5 <- data_w3$P48_5
+data_w3$under_w3_6 <- data_w3$P48_6
+data_w3$under_w3_7 <- data_w3$P48_7
+data_w3$under_w3_8 <- data_w3$P48_8
+
+#Strategic orientation
+data_w3$strate_w3_1 <- data_w3$P49_1
+data_w3$strate_w3_2 <- data_w3$P49_2
+data_w3$strate_w3_3 <- data_w3$P49_3
+data_w3$strate_w3_4 <- data_w3$P49_4
+data_w3$strate_w3_5 <- data_w3$P49_5
+data_w3$strate_w3_6 <- data_w3$P49_6
+data_w3$strate_w3_7 <- data_w3$P49_7
+data_w3$strate_w3_8 <- data_w3$P49_8
+
+```
+
+```{r}
+# Assuming 'id' is your key variable for merging
+data_w3_selected <- data_w3 %>%
+  select(id, starts_with("strate_w3_"), starts_with("under_w3_")) %>%
+  drop_na()
+```
+
+```{r}
+# Merge dataframes
+merged_data <- data_w1_scores %>%
+  left_join(data_w3_selected, by = "id") %>%
+  drop_na()
+```
+
+
+```{r}
+cronbach_ope_m <- alpha(na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
+cronbach_ope_m
+
+cronbach_intef_m <- alpha(na.omit(merged_data[c("intef1", "intef2", "intef3")]))
+cronbach_intef_m
+
+cronbach_extef_m <- alpha(na.omit(merged_data[c("extef1", "extef2", "extef3")]))
+cronbach_extef_m
+
+cronbach_media_m <- alpha(na.omit(merged_data[c("tv", "cable", "newspaper", "radio")]))
+cronbach_media_m
+
+cronbach_digital_m <- alpha(na.omit(merged_data[c("tradonline", "online", "podcast", "officialsm")]))
+cronbach_digital_m
+
+cronbach_social_m <- alpha(na.omit(merged_data[c("fb", "insta", "twitter", "whatsapp", "youtube", "tiktok")]))
+cronbach_social_m
+
+cronbach_interest_m <- alpha(na.omit(merged_data[c("polint", "procint", "plebint")]))
+cronbach_interest_m
+
+cronbach_under_m <- alpha(na.omit(merged_data[c("under_w3_1", "under_w3_2", "under_w3_3", "under_w3_4", "under_w3_5", "under_w3_6", "under_w3_7", "under_w3_8")]))
+cronbach_under_m
+
+cronbach_strate_m <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
+cronbach_strate_m
+```
+
+
+```{r}
+merged_data <- merged_data %>%
+  mutate(across(where(is.labelled), as.numeric))
+
+cfa.model_w3_1 <- 'ope_w3 =~ ope1 + ope2 + ope3 + ope4
+              intef_w3 =~ intef1 + intef2 + intef3
+              extef_w3 =~ extef1 + extef2 + extef3
+              interest_w3 =~ polint + procint + plebint'
+cfa.model_w3_2 <- 'media_w3 =~ tv + cable + newspaper + radio
+              digital_w3 =~ tradonline + online + podcast + officialsm
+              social_w3 =~ fb + insta + twitter + whatsapp + youtube + tiktok'
+cfa.model_w3_3 <- 'under_w3 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
+              strate_w3 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
+
+fit_cfa_w3_1 <- cfa(cfa.model_w3_1, data = merged_data)
+latent_scores_w3_1 <- predict(fit_cfa_w3_1)
+
+fit_cfa_w3_2 <- cfa(cfa.model_w3_2, data = merged_data)
+latent_scores_w3_2 <- predict(fit_cfa_w3_2)
+
+fit_cfa_w3_3 <- cfa(cfa.model_w3_3, data = merged_data)
+latent_scores_w3_3 <- predict(fit_cfa_w3_3)
+
+merged_data <- cbind(merged_data, latent_scores_w3_1, latent_scores_w3_2, latent_scores_w3_3)
+```
+
+```{r}
+model_w3_1 <- lm(under_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + ope_w3, data = merged_data)
+summary(model_w3_1)
+```
+
+```{r}
+model_w3_2 <- lm(strate_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + ope_w3, data = merged_data)
+summary(model_w3_2)
+```
+
+```{r}
+
+# Apply the function to both models
+coef_df_w3_1 <- get_coef(model_w3_1, "Model w3_1")
+coef_df_w3_2 <- get_coef(model_w3_2, "Model w3_2")
+
+# Combine the data frames and remove the intercept
+coef_df_w3 <- rbind(coef_df_w3_1, coef_df_w3_2)
+coef_df_w3 <- coef_df_w3[coef_df_w3$Term != "(Intercept)", ]
+
+# Calculate 95% confidence intervals and determine significance
+coef_df_w3 <- coef_df_w3 %>%
+  mutate(
+    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
+    )
+
+# Create a mapping of old variable names to new names
+name_mapping_w3 <- c(
+  ses = "Socioeconomic Status",
+  sex = "Gender",
+  age_num = "Age",
+  media_w3 = "Media Expo.",
+  digital_w3 = "Dig, Media Expo.",
+  social_w3 = "Soc. Media Expo.",
+  interest_w3 = "Pol. Interest",
+  intercon = "Interp. Conf.",
+  extef_w3 = "Ext. Efficacy",
+  intef_w3 = "Int. Efficacy",
+  ope_w3 = "Onl. Efficacy"
+)
+
+# Apply the mapping to the dataframe
+coef_df_w3 <- coef_df_w3 %>%
+  mutate(Term = factor(Term, levels = names(name_mapping_w3), labels = name_mapping_w3))
+
+# Define a dodge width for better separation
+dodge_width <- 0.5
+
+# Create the plot with updated names
+ggplot(coef_df_w3, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
+  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Estimated Coefficients") +
+  coord_flip() +  # Flips the axes for better visualization of terms
+  scale_color_manual(values = c("darkblue", "darkred"),
+                     labels = c("Understanding", "Strategic")) +  # Set custom colors for each model
+  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
+  theme(
+    legend.position = "right",  # Hide the legend for line size
+    axis.text.y = element_text(size = 8)  # Adjust text size if needed
+  )
 ```
 

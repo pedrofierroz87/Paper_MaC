@@ -703,103 +703,83 @@ F-statistic: 7.785 on 11 and 1122 DF,  p-value: 4.123e-13</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the extraction function to avoid spaces in names</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>get_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, model_name) {</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Term =</span> <span class="fu">rownames</span>(coefs),</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Estimate =</span> coefs[, <span class="st">"Estimate"</span>],</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Std_Error =</span> coefs[, <span class="st">"Std. Error"</span>],  <span class="co"># Rename to 'Std_Error'</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> model_name</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>coef_df1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model1, <span class="st">"Model 1"</span>)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>coef_df2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2, <span class="st">"Model 2"</span>)</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df1, coef_df2)</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df[coef_df<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming coef_df is already prepared as per previous instructions</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the extraction function to avoid spaces in names</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>get_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, model_name) {</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Term =</span> <span class="fu">rownames</span>(coefs),</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Estimate =</span> coefs[, <span class="st">"Estimate"</span>],</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Std_Error =</span> coefs[, <span class="st">"Std. Error"</span>],  <span class="co"># Rename to 'Std_Error'</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> model_name</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>coef_df1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model1, <span class="st">"Model 1"</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>coef_df2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2, <span class="st">"Model 2"</span>)</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df1, coef_df2)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df[coef_df<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)  </span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping of old variable names to new names</span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>name_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">ses =</span> <span class="st">"Socioeconomic Status"</span>,</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_num =</span> <span class="st">"Age"</span>,</span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">media =</span> <span class="st">"Media Expo."</span>,</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">digital =</span> <span class="st">"Dig, Media Expo."</span>,</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">social =</span> <span class="st">"Soc. Media Expo."</span>,</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">interest =</span> <span class="st">"Pol. Interest"</span>,</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercon =</span> <span class="st">"Interp. Conf."</span>,</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">extef =</span> <span class="st">"Ext. Efficacy"</span>,</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">intef =</span> <span class="st">"Int. Efficacy"</span>,</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">ope =</span> <span class="st">"Onl. Efficacy"</span></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width), <span class="fu">aes</span>(<span class="at">size =</span> Significant)) <span class="sc">+</span></span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Understanding"</span>, <span class="st">"Strategic"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,  <span class="co"># Hide the legend for line size</span></span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming coef_df is already prepared as per previous instructions</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the extraction function to avoid spaces in names</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>get_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, model_name) {</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Term =</span> <span class="fu">rownames</span>(coefs),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Estimate =</span> coefs[, <span class="st">"Estimate"</span>],</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Std_Error =</span> coefs[, <span class="st">"Std. Error"</span>],  <span class="co"># Rename to 'Std_Error'</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> model_name</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>coef_df1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model1, <span class="st">"Model 1"</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>coef_df2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2, <span class="st">"Model 2"</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df1, coef_df2)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df[coef_df<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)  </span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping of old variable names to new names</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>name_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">ses =</span> <span class="st">"Socioeconomic Status"</span>,</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_num =</span> <span class="st">"Age"</span>,</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">media =</span> <span class="st">"Media Expo."</span>,</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">digital =</span> <span class="st">"Dig, Media Expo."</span>,</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">social =</span> <span class="st">"Soc. Media Expo."</span>,</span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">interest =</span> <span class="st">"Pol. Interest"</span>,</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercon =</span> <span class="st">"Interp. Conf."</span>,</span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">extef =</span> <span class="st">"Ext. Efficacy"</span>,</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">intef =</span> <span class="st">"Int. Efficacy"</span>,</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">ope =</span> <span class="st">"Onl. Efficacy"</span></span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width), <span class="fu">aes</span>(<span class="at">size =</span> Significant)) <span class="sc">+</span></span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Understanding"</span>, <span class="st">"Strategic"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,  <span class="co"># Hide the legend for line size</span></span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in
 ggplot2 3.3.4.
 ℹ Please use "none" instead.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model2_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate1 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model2_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate1 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -831,8 +811,8 @@ Residual standard error: 1.141 on 1122 degrees of freedom
 Multiple R-squared:  0.0797,    Adjusted R-squared:  0.07068 
 F-statistic: 8.834 on 11 and 1122 DF,  p-value: 3.331e-15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model2_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate2 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model2_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate2 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -864,8 +844,8 @@ Residual standard error: 1.267 on 1122 degrees of freedom
 Multiple R-squared:  0.0559,    Adjusted R-squared:  0.04665 
 F-statistic:  6.04 on 11 and 1122 DF,  p-value: 1.173e-09</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model2_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model2_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -897,8 +877,8 @@ Residual standard error: 1.367 on 1122 degrees of freedom
 Multiple R-squared:  0.0354,    Adjusted R-squared:  0.02594 
 F-statistic: 3.743 on 11 and 1122 DF,  p-value: 2.822e-05</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model2_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate4 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model2_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate4 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -932,49 +912,49 @@ F-statistic:  3.63 on 11 and 1122 DF,  p-value: 4.539e-05</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>coef_strate1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_1, <span class="st">"Model S1"</span>)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>coef_strate2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_2, <span class="st">"Model S2"</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>coef_strate3 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_3, <span class="st">"Model S3"</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>coef_strate4 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_4, <span class="st">"Model S4"</span>)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_strate1, coef_strate2, coef_strate3, coef_strate4)</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate[coef_strate<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
-<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_strate, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
-<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width)) <span class="sc">+</span></span>
-<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
-<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
-<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>,<span class="st">"darkgreen"</span>, <span class="st">"purple"</span>),</span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Talk if I win"</span>, <span class="st">"Form is more important"</span>, <span class="st">"Not express what I think"</span>, <span class="st">"Agreements waste of time"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
-<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
-<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
-<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>coef_strate1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_1, <span class="st">"Model S1"</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>coef_strate2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_2, <span class="st">"Model S2"</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>coef_strate3 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_3, <span class="st">"Model S3"</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>coef_strate4 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_4, <span class="st">"Model S4"</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_strate1, coef_strate2, coef_strate3, coef_strate4)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate[coef_strate<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_strate, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width)) <span class="sc">+</span></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>,<span class="st">"darkgreen"</span>, <span class="st">"purple"</span>),</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Talk if I win"</span>, <span class="st">"Form is more important"</span>, <span class="st">"Not express what I think"</span>, <span class="st">"Agreements waste of time"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>```</p>
@@ -982,22 +962,22 @@ F-statistic:  3.63 on 11 and 1122 DF,  p-value: 4.539e-05</code></pre>
 <section id="alternative-models" class="level3">
 <h3 class="anchored" data-anchor-id="alternative-models">Alternative models</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>undersum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>under1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under4)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>stratesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>strate1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate4)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>mediasum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>tv<span class="sc">+</span>data_w1_scores<span class="sc">$</span>cable<span class="sc">+</span>data_w1_scores<span class="sc">$</span>newspaper<span class="sc">+</span>data_w1_scores<span class="sc">$</span>radio)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>digitalsum <span class="ot">&lt;-</span>(data_w1_scores<span class="sc">$</span>tradonline<span class="sc">+</span>data_w1_scores<span class="sc">$</span>online<span class="sc">+</span>data_w1_scores<span class="sc">$</span>podcast<span class="sc">+</span>data_w1_scores<span class="sc">$</span>officialsm)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>socialsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>fb<span class="sc">+</span>data_w1_scores<span class="sc">$</span>insta<span class="sc">+</span>data_w1_scores<span class="sc">$</span>twitter<span class="sc">+</span>data_w1_scores<span class="sc">$</span>whatsapp<span class="sc">+</span>data_w1_scores<span class="sc">$</span>youtube<span class="sc">+</span>data_w1_scores<span class="sc">$</span>tiktok)<span class="sc">/</span><span class="dv">6</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>extefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>extef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef3)<span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>intefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>intef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef3)<span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>opesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>ope1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope4)<span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>undersum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>under1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under4)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>stratesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>strate1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate4)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>mediasum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>tv<span class="sc">+</span>data_w1_scores<span class="sc">$</span>cable<span class="sc">+</span>data_w1_scores<span class="sc">$</span>newspaper<span class="sc">+</span>data_w1_scores<span class="sc">$</span>radio)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>digitalsum <span class="ot">&lt;-</span>(data_w1_scores<span class="sc">$</span>tradonline<span class="sc">+</span>data_w1_scores<span class="sc">$</span>online<span class="sc">+</span>data_w1_scores<span class="sc">$</span>podcast<span class="sc">+</span>data_w1_scores<span class="sc">$</span>officialsm)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>socialsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>fb<span class="sc">+</span>data_w1_scores<span class="sc">$</span>insta<span class="sc">+</span>data_w1_scores<span class="sc">$</span>twitter<span class="sc">+</span>data_w1_scores<span class="sc">$</span>whatsapp<span class="sc">+</span>data_w1_scores<span class="sc">$</span>youtube<span class="sc">+</span>data_w1_scores<span class="sc">$</span>tiktok)<span class="sc">/</span><span class="dv">6</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>extefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>extef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef3)<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>intefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>intef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef3)<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>opesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>ope1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope4)<span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="regressions-1" class="level4">
 <h4 class="anchored" data-anchor-id="regressions-1">Regressions</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model_a1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(undersum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model_a1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(undersum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1030,8 +1010,8 @@ Residual standard error: 0.8403 on 1122 degrees of freedom
 Multiple R-squared:  0.2523,    Adjusted R-squared:  0.245 
 F-statistic: 34.42 on 11 and 1122 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>model_a2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(stratesum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model_a2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(stratesum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1068,6 +1048,555 @@ F-statistic: 8.149 on 11 and 1122 DF,  p-value: 7.779e-14</code></pre>
 </section>
 </section>
 </section>
+</section>
+<section id="replicating-with-wave-3" class="level1">
+<h1>Replicating with wave 3</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Data</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data_w3 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"Data_W3.sav"</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ID</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>id <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>CodPanelista</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Understanding orientation</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_1 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_1</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_2 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_2</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_3 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_3</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_4 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_4</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_5 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_5</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_6 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_6</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_7 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_7</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_8 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_8</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Strategic orientation</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_1 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_1</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_2 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_2</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_3 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_3</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_4 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_4</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_5 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_5</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_6 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_6</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_7 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_7</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_8 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'id' is your key variable for merging</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>data_w3_selected <span class="ot">&lt;-</span> data_w3 <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, <span class="fu">starts_with</span>(<span class="st">"strate_w3_"</span>), <span class="fu">starts_with</span>(<span class="st">"under_w3_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge dataframes</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> data_w1_scores <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data_w3_selected, <span class="at">by =</span> <span class="st">"id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cronbach_ope_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"ope1"</span>, <span class="st">"ope2"</span>, <span class="st">"ope3"</span>, <span class="st">"ope4"</span>)]))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>cronbach_ope_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.85      0.85    0.82      0.59 5.7 0.011  2.7 1.1     0.56
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.83  0.85  0.87
+Duhachek  0.83  0.85  0.87
+
+ Reliability if an item is dropped:
+     raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+ope1      0.79      0.79    0.71      0.55 3.7    0.017 0.0021  0.57
+ope2      0.77      0.77    0.69      0.53 3.4    0.018 0.0008  0.54
+ope3      0.84      0.84    0.79      0.63 5.1    0.013 0.0140  0.57
+ope4      0.84      0.84    0.79      0.63 5.1    0.013 0.0143  0.58
+
+ Item statistics 
+       n raw.r std.r r.cor r.drop mean  sd
+ope1 486  0.86  0.86  0.82   0.74  2.5 1.3
+ope2 486  0.88  0.88  0.85   0.77  2.8 1.3
+ope3 486  0.79  0.79  0.67   0.62  3.0 1.3
+ope4 486  0.79  0.79  0.67   0.62  2.4 1.3
+
+Non missing response frequency for each item
+        1    2    3    4    5 miss
+ope1 0.30 0.17 0.32 0.11 0.10    0
+ope2 0.23 0.17 0.33 0.14 0.12    0
+ope3 0.18 0.13 0.33 0.20 0.17    0
+ope4 0.33 0.18 0.30 0.11 0.08    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>cronbach_intef_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"intef1"</span>, <span class="st">"intef2"</span>, <span class="st">"intef3"</span>)]))</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>cronbach_intef_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("intef1", "intef2", "intef3")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean sd median_r
+      0.74      0.74    0.68      0.49 2.9 0.021  3.5  1     0.42
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt      0.7  0.74  0.78
+Duhachek   0.7  0.74  0.78
+
+ Reliability if an item is dropped:
+       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+intef1      0.78      0.78    0.64      0.64 3.6    0.020    NA  0.64
+intef2      0.59      0.59    0.42      0.42 1.5    0.037    NA  0.42
+intef3      0.57      0.57    0.40      0.40 1.4    0.039    NA  0.40
+
+ Item statistics 
+         n raw.r std.r r.cor r.drop mean  sd
+intef1 486  0.75  0.75  0.52   0.46  3.4 1.2
+intef2 486  0.84  0.84  0.74   0.62  3.3 1.3
+intef3 486  0.84  0.85  0.75   0.64  3.6 1.2
+
+Non missing response frequency for each item
+          1    2    3    4    5 miss
+intef1 0.09 0.09 0.35 0.19 0.27    0
+intef2 0.12 0.10 0.34 0.21 0.23    0
+intef3 0.07 0.08 0.30 0.22 0.32    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cronbach_extef_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"extef1"</span>, <span class="st">"extef2"</span>, <span class="st">"extef3"</span>)]))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>cronbach_extef_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("extef1", "extef2", "extef3")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.75      0.75    0.67      0.51 3.1 0.019  2.1 1.1     0.49
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.71  0.75  0.79
+Duhachek  0.71  0.75  0.79
+
+ Reliability if an item is dropped:
+       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+extef1      0.65      0.65    0.49      0.49 1.9    0.031    NA  0.49
+extef2      0.65      0.65    0.48      0.48 1.9    0.032    NA  0.48
+extef3      0.71      0.71    0.55      0.55 2.4    0.026    NA  0.55
+
+ Item statistics 
+         n raw.r std.r r.cor r.drop mean  sd
+extef1 486  0.82  0.83  0.69   0.60  2.2 1.3
+extef2 486  0.82  0.83  0.70   0.60  2.0 1.3
+extef3 486  0.81  0.80  0.63   0.55  2.2 1.4
+
+Non missing response frequency for each item
+          1    2    3    4    5 miss
+extef1 0.44 0.16 0.23 0.09 0.08    0
+extef2 0.55 0.14 0.17 0.06 0.07    0
+extef3 0.48 0.12 0.20 0.10 0.09    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cronbach_media_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"tv"</span>, <span class="st">"cable"</span>, <span class="st">"newspaper"</span>, <span class="st">"radio"</span>)]))</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>cronbach_media_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("tv", "cable", "newspaper", "radio")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N  ase mean  sd median_r
+      0.73      0.74    0.69      0.41 2.8 0.02  2.7 1.1     0.39
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.69  0.73  0.77
+Duhachek  0.69  0.73  0.77
+
+ Reliability if an item is dropped:
+          raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+tv             0.69      0.69    0.61      0.43 2.3    0.025 0.0046  0.42
+cable          0.65      0.65    0.57      0.39 1.9    0.028 0.0112  0.36
+newspaper      0.66      0.66    0.58      0.39 1.9    0.027 0.0129  0.37
+radio          0.70      0.69    0.61      0.43 2.3    0.024 0.0064  0.42
+
+ Item statistics 
+            n raw.r std.r r.cor r.drop mean  sd
+tv        486  0.74  0.73  0.59   0.50  3.4 1.5
+cable     486  0.78  0.77  0.66   0.57  2.6 1.5
+newspaper 486  0.75  0.76  0.65   0.55  2.1 1.3
+radio     486  0.72  0.72  0.58   0.49  2.5 1.4
+
+Non missing response frequency for each item
+             1    2    3    4    5 miss
+tv        0.19 0.11 0.18 0.19 0.33    0
+cable     0.34 0.16 0.19 0.16 0.15    0
+newspaper 0.48 0.16 0.19 0.10 0.07    0
+radio     0.37 0.16 0.19 0.16 0.12    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>cronbach_digital_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"tradonline"</span>, <span class="st">"online"</span>, <span class="st">"podcast"</span>, <span class="st">"officialsm"</span>)]))</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>cronbach_digital_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("tradonline", "online", "podcast", 
+    "officialsm")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean sd median_r
+      0.76      0.76    0.72      0.45 3.3 0.018  2.3  1     0.42
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.73  0.76   0.8
+Duhachek  0.73  0.76   0.8
+
+ Reliability if an item is dropped:
+           raw_alpha std.alpha G6(smc) average_r S/N alpha se   var.r med.r
+tradonline      0.70      0.70    0.62      0.44 2.4    0.024 0.00556  0.43
+online          0.65      0.66    0.56      0.39 1.9    0.027 0.00019  0.38
+podcast         0.72      0.73    0.65      0.47 2.6    0.022 0.00837  0.43
+officialsm      0.75      0.75    0.67      0.49 2.9    0.020 0.00969  0.52
+
+ Item statistics 
+             n raw.r std.r r.cor r.drop mean  sd
+tradonline 486  0.78  0.77  0.66   0.58  2.4 1.4
+online     486  0.82  0.82  0.76   0.65  2.3 1.4
+podcast    486  0.72  0.75  0.61   0.53  1.8 1.2
+officialsm 486  0.74  0.72  0.56   0.50  2.7 1.4
+
+Non missing response frequency for each item
+              1    2    3    4    5 miss
+tradonline 0.36 0.17 0.21 0.16 0.09    0
+online     0.40 0.19 0.17 0.14 0.09    0
+podcast    0.60 0.15 0.13 0.08 0.03    0
+officialsm 0.32 0.14 0.21 0.18 0.14    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>cronbach_social_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"fb"</span>, <span class="st">"insta"</span>, <span class="st">"twitter"</span>, <span class="st">"whatsapp"</span>, <span class="st">"youtube"</span>, <span class="st">"tiktok"</span>)]))</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>cronbach_social_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("fb", "insta", "twitter", "whatsapp", 
+    "youtube", "tiktok")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.85      0.85    0.83      0.48 5.5 0.011  2.6 1.2     0.48
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.83  0.85  0.87
+Duhachek  0.83  0.85  0.87
+
+ Reliability if an item is dropped:
+         raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+fb            0.82      0.82    0.80      0.48 4.6    0.013 0.0060  0.50
+insta         0.81      0.81    0.78      0.46 4.3    0.014 0.0082  0.45
+twitter       0.84      0.84    0.82      0.52 5.4    0.011 0.0034  0.52
+whatsapp      0.81      0.81    0.78      0.46 4.2    0.014 0.0063  0.48
+youtube       0.82      0.82    0.80      0.47 4.5    0.013 0.0074  0.50
+tiktok        0.83      0.83    0.81      0.49 4.9    0.012 0.0074  0.50
+
+ Item statistics 
+           n raw.r std.r r.cor r.drop mean  sd
+fb       486  0.75  0.75  0.69   0.63  3.0 1.6
+insta    486  0.80  0.80  0.75   0.69  2.8 1.6
+twitter  486  0.67  0.67  0.57   0.52  2.4 1.6
+whatsapp 486  0.81  0.81  0.77   0.70  2.9 1.7
+youtube  486  0.76  0.77  0.70   0.65  2.5 1.5
+tiktok   486  0.72  0.73  0.64   0.59  2.1 1.5
+
+Non missing response frequency for each item
+            1    2    3    4    5 miss
+fb       0.28 0.11 0.16 0.18 0.27    0
+insta    0.33 0.13 0.17 0.16 0.21    0
+twitter  0.48 0.09 0.13 0.14 0.15    0
+whatsapp 0.36 0.11 0.14 0.11 0.28    0
+youtube  0.41 0.14 0.14 0.15 0.16    0
+tiktok   0.59 0.09 0.09 0.09 0.13    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>cronbach_interest_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"polint"</span>, <span class="st">"procint"</span>, <span class="st">"plebint"</span>)]))</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>cronbach_interest_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("polint", "procint", "plebint")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N  ase mean  sd median_r
+      0.87      0.87    0.84       0.7 6.9 0.01  3.2 1.4     0.63
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.85  0.87  0.89
+Duhachek  0.85  0.87  0.89
+
+ Reliability if an item is dropped:
+        raw_alpha std.alpha G6(smc) average_r  S/N alpha se var.r med.r
+polint       0.92      0.92    0.85      0.85 11.0   0.0076    NA  0.85
+procint      0.77      0.77    0.63      0.63  3.4   0.0207    NA  0.63
+plebint      0.76      0.76    0.61      0.61  3.2   0.0216    NA  0.61
+
+ Item statistics 
+          n raw.r std.r r.cor r.drop mean  sd
+polint  486  0.83  0.84  0.68   0.65  2.9 1.5
+procint 486  0.92  0.92  0.89   0.81  3.3 1.5
+plebint 486  0.93  0.92  0.90   0.82  3.5 1.5
+
+Non missing response frequency for each item
+           1    2    3    4    5 miss
+polint  0.30 0.10 0.22 0.20 0.18    0
+procint 0.21 0.09 0.19 0.20 0.31    0
+plebint 0.19 0.08 0.14 0.18 0.40    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>cronbach_under_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"under_w3_1"</span>, <span class="st">"under_w3_2"</span>, <span class="st">"under_w3_3"</span>, <span class="st">"under_w3_4"</span>, <span class="st">"under_w3_5"</span>, <span class="st">"under_w3_6"</span>, <span class="st">"under_w3_7"</span>, <span class="st">"under_w3_8"</span>)]))</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>cronbach_under_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("under_w3_1", "under_w3_2", "under_w3_3", 
+    "under_w3_4", "under_w3_5", "under_w3_6", "under_w3_7", "under_w3_8")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N    ase mean   sd median_r
+      0.86      0.86    0.86      0.44 6.4 0.0093  3.7 0.83     0.44
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.85  0.86  0.88
+Duhachek  0.85  0.86  0.88
+
+ Reliability if an item is dropped:
+           raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+under_w3_1      0.85      0.86    0.85      0.46 5.9   0.0100 0.0119  0.46
+under_w3_2      0.86      0.86    0.86      0.47 6.2   0.0094 0.0114  0.46
+under_w3_3      0.85      0.85    0.84      0.45 5.6   0.0104 0.0152  0.43
+under_w3_4      0.84      0.85    0.84      0.44 5.5   0.0107 0.0140  0.45
+under_w3_5      0.86      0.86    0.85      0.47 6.1   0.0097 0.0088  0.45
+under_w3_6      0.84      0.84    0.84      0.43 5.2   0.0113 0.0116  0.43
+under_w3_7      0.83      0.84    0.83      0.42 5.1   0.0115 0.0095  0.43
+under_w3_8      0.84      0.84    0.83      0.43 5.2   0.0112 0.0107  0.43
+
+ Item statistics 
+             n raw.r std.r r.cor r.drop mean  sd
+under_w3_1 486  0.65  0.67  0.60   0.55  4.3 1.0
+under_w3_2 486  0.62  0.62  0.53   0.49  3.7 1.2
+under_w3_3 486  0.70  0.71  0.65   0.60  3.9 1.1
+under_w3_4 486  0.74  0.74  0.68   0.64  3.8 1.2
+under_w3_5 486  0.64  0.63  0.56   0.51  3.1 1.2
+under_w3_6 486  0.79  0.79  0.76   0.71  3.7 1.2
+under_w3_7 486  0.81  0.80  0.79   0.73  3.6 1.2
+under_w3_8 486  0.78  0.78  0.75   0.70  3.6 1.2
+
+Non missing response frequency for each item
+              1    2    3    4    5 miss
+under_w3_1 0.03 0.02 0.19 0.18 0.58    0
+under_w3_2 0.08 0.05 0.29 0.22 0.36    0
+under_w3_3 0.04 0.04 0.29 0.28 0.36    0
+under_w3_4 0.08 0.04 0.27 0.23 0.38    0
+under_w3_5 0.13 0.11 0.42 0.19 0.15    0
+under_w3_6 0.07 0.08 0.30 0.24 0.32    0
+under_w3_7 0.08 0.06 0.31 0.25 0.30    0
+under_w3_8 0.07 0.06 0.38 0.20 0.29    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cronbach_strate_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"strate_w3_1"</span>, <span class="st">"strate_w3_2"</span>, <span class="st">"strate_w3_3"</span>, <span class="st">"strate_w3_4"</span>, <span class="st">"strate_w3_5"</span>, <span class="st">"strate_w3_6"</span>, <span class="st">"strate_w3_7"</span>, <span class="st">"strate_w3_8"</span>)]))</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>cronbach_strate_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = na.omit(merged_data[c("strate_w3_1", "strate_w3_2", 
+    "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", 
+    "strate_w3_7", "strate_w3_8")]))
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.76      0.76    0.76      0.29 3.2 0.016  2.7 0.8      0.3
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.73  0.76  0.79
+Duhachek  0.73  0.76  0.79
+
+ Reliability if an item is dropped:
+            raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+strate_w3_1      0.74      0.74    0.73      0.29 2.8    0.018 0.0099  0.31
+strate_w3_2      0.74      0.74    0.73      0.28 2.8    0.018 0.0081  0.29
+strate_w3_3      0.74      0.74    0.73      0.29 2.8    0.018 0.0105  0.31
+strate_w3_4      0.73      0.73    0.72      0.28 2.7    0.019 0.0116  0.29
+strate_w3_5      0.76      0.76    0.74      0.31 3.1    0.017 0.0067  0.31
+strate_w3_6      0.73      0.73    0.72      0.28 2.7    0.019 0.0088  0.29
+strate_w3_7      0.74      0.74    0.73      0.29 2.9    0.018 0.0093  0.31
+strate_w3_8      0.72      0.72    0.71      0.27 2.6    0.019 0.0084  0.30
+
+ Item statistics 
+              n raw.r std.r r.cor r.drop mean  sd
+strate_w3_1 486  0.60  0.60  0.52   0.45  2.6 1.2
+strate_w3_2 486  0.61  0.62  0.54   0.47  2.1 1.3
+strate_w3_3 486  0.61  0.61  0.52   0.45  2.8 1.3
+strate_w3_4 486  0.65  0.65  0.57   0.50  2.8 1.3
+strate_w3_5 486  0.51  0.51  0.40   0.34  3.5 1.3
+strate_w3_6 486  0.64  0.64  0.58   0.50  2.2 1.3
+strate_w3_7 486  0.59  0.59  0.51   0.43  3.3 1.4
+strate_w3_8 486  0.69  0.68  0.63   0.55  2.4 1.3
+
+Non missing response frequency for each item
+               1    2    3    4    5 miss
+strate_w3_1 0.29 0.13 0.38 0.10 0.09    0
+strate_w3_2 0.51 0.12 0.25 0.07 0.06    0
+strate_w3_3 0.25 0.14 0.36 0.10 0.15    0
+strate_w3_4 0.23 0.14 0.35 0.14 0.14    0
+strate_w3_5 0.10 0.08 0.34 0.19 0.30    0
+strate_w3_6 0.44 0.14 0.24 0.09 0.08    0
+strate_w3_7 0.15 0.09 0.34 0.15 0.27    0
+strate_w3_8 0.38 0.12 0.29 0.11 0.09    0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as.numeric))</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_1 <span class="ot">&lt;-</span> <span class="st">'ope_w3 =~ ope1 + ope2 + ope3 + ope4</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="st">              intef_w3 =~ intef1 + intef2 + intef3</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="st">              extef_w3 =~ extef1 + extef2 + extef3</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="st">              interest_w3 =~ polint + procint + plebint'</span></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_2 <span class="ot">&lt;-</span> <span class="st">'media_w3 =~ tv + cable + newspaper + radio</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="st">              digital_w3 =~ tradonline + online + podcast + officialsm</span></span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="st">              social_w3 =~ fb + insta + twitter + whatsapp + youtube + tiktok'</span></span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_3 <span class="ot">&lt;-</span> <span class="st">'under_w3 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="st">              strate_w3 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'</span></span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_1 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_1, <span class="at">data =</span> merged_data)</span>
+<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_1)</span>
+<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-17"><a href="#cb70-17" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_2 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_2, <span class="at">data =</span> merged_data)</span>
+<span id="cb70-18"><a href="#cb70-18" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_2)</span>
+<span id="cb70-19"><a href="#cb70-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-20"><a href="#cb70-20" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_3 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_3, <span class="at">data =</span> merged_data)</span>
+<span id="cb70-21"><a href="#cb70-21" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_3)</span>
+<span id="cb70-22"><a href="#cb70-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-23"><a href="#cb70-23" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(merged_data, latent_scores_w3_1, latent_scores_w3_2, latent_scores_w3_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>model_w3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(under_w3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media_w3 <span class="sc">+</span> digital_w3 <span class="sc">+</span> social_w3 <span class="sc">+</span> interest_w3 <span class="sc">+</span> intercon <span class="sc">+</span> extef_w3 <span class="sc">+</span> intef_w3 <span class="sc">+</span> ope_w3, <span class="at">data =</span> merged_data)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_w3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = under_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + 
+    social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + 
+    ope_w3, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.75970 -0.33250  0.03831  0.35806  1.27286 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) -0.162455   0.117364  -1.384  0.16695   
+ses         -0.011682   0.020023  -0.583  0.55988   
+sex         -0.043346   0.047668  -0.909  0.36364   
+age_num      0.004513   0.001779   2.537  0.01151 * 
+media_w3    -0.001889   0.061104  -0.031  0.97535   
+digital_w3   0.022543   0.053595   0.421  0.67423   
+social_w3    0.039046   0.030793   1.268  0.20541   
+interest_w3  0.060523   0.030755   1.968  0.04966 * 
+intercon     0.132380   0.073052   1.812  0.07060 . 
+extef_w3     0.037030   0.041461   0.893  0.37224   
+intef_w3     0.187589   0.065574   2.861  0.00441 **
+ope_w3       0.053559   0.025935   2.065  0.03945 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5057 on 474 degrees of freedom
+Multiple R-squared:  0.177, Adjusted R-squared:  0.1579 
+F-statistic: 9.265 on 11 and 474 DF,  p-value: 3.971e-15</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>model_w3_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate_w3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media_w3 <span class="sc">+</span> digital_w3 <span class="sc">+</span> social_w3 <span class="sc">+</span> interest_w3 <span class="sc">+</span> intercon <span class="sc">+</span> extef_w3 <span class="sc">+</span> intef_w3 <span class="sc">+</span> ope_w3, <span class="at">data =</span> merged_data)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_w3_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + 
+    social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + 
+    ope_w3, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.71343 -0.35332  0.02565  0.31123  1.66757 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.095511   0.125466   0.761   0.4469    
+ses          0.051044   0.021406   2.385   0.0175 *  
+sex         -0.122222   0.050959  -2.398   0.0169 *  
+age_num     -0.004348   0.001902  -2.286   0.0227 *  
+media_w3     0.275902   0.065323   4.224 2.88e-05 ***
+digital_w3  -0.116575   0.057295  -2.035   0.0424 *  
+social_w3    0.067353   0.032918   2.046   0.0413 *  
+interest_w3 -0.020140   0.032878  -0.613   0.5405    
+intercon    -0.092104   0.078096  -1.179   0.2388    
+extef_w3    -0.050013   0.044323  -1.128   0.2597    
+intef_w3    -0.142436   0.070101  -2.032   0.0427 *  
+ope_w3       0.063258   0.027725   2.282   0.0230 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5406 on 474 degrees of freedom
+Multiple R-squared:  0.1352,    Adjusted R-squared:  0.1151 
+F-statistic: 6.736 on 11 and 474 DF,  p-value: 1.528e-10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>coef_df_w3_1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model_w3_1, <span class="st">"Model w3_1"</span>)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>coef_df_w3_2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model_w3_2, <span class="st">"Model w3_2"</span>)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df_w3_1, coef_df_w3_2)</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3[coef_df_w3<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3 <span class="sc">%&gt;%</span></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
+<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
+<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)  </span>
+<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping of old variable names to new names</span></span>
+<span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a>name_mapping_w3 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ses =</span> <span class="st">"Socioeconomic Status"</span>,</span>
+<span id="cb75-20"><a href="#cb75-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb75-21"><a href="#cb75-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_num =</span> <span class="st">"Age"</span>,</span>
+<span id="cb75-22"><a href="#cb75-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_w3 =</span> <span class="st">"Media Expo."</span>,</span>
+<span id="cb75-23"><a href="#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">digital_w3 =</span> <span class="st">"Dig, Media Expo."</span>,</span>
+<span id="cb75-24"><a href="#cb75-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">social_w3 =</span> <span class="st">"Soc. Media Expo."</span>,</span>
+<span id="cb75-25"><a href="#cb75-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">interest_w3 =</span> <span class="st">"Pol. Interest"</span>,</span>
+<span id="cb75-26"><a href="#cb75-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercon =</span> <span class="st">"Interp. Conf."</span>,</span>
+<span id="cb75-27"><a href="#cb75-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">extef_w3 =</span> <span class="st">"Ext. Efficacy"</span>,</span>
+<span id="cb75-28"><a href="#cb75-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">intef_w3 =</span> <span class="st">"Int. Efficacy"</span>,</span>
+<span id="cb75-29"><a href="#cb75-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">ope_w3 =</span> <span class="st">"Onl. Efficacy"</span></span>
+<span id="cb75-30"><a href="#cb75-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-31"><a href="#cb75-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-32"><a href="#cb75-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
+<span id="cb75-33"><a href="#cb75-33" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3 <span class="sc">%&gt;%</span></span>
+<span id="cb75-34"><a href="#cb75-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping_w3), <span class="at">labels =</span> name_mapping_w3))</span>
+<span id="cb75-35"><a href="#cb75-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-36"><a href="#cb75-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
+<span id="cb75-37"><a href="#cb75-37" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb75-38"><a href="#cb75-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-39"><a href="#cb75-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
+<span id="cb75-40"><a href="#cb75-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df_w3, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
+<span id="cb75-41"><a href="#cb75-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width), <span class="fu">aes</span>(<span class="at">size =</span> Significant)) <span class="sc">+</span></span>
+<span id="cb75-42"><a href="#cb75-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb75-43"><a href="#cb75-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb75-44"><a href="#cb75-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
+<span id="cb75-45"><a href="#cb75-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
+<span id="cb75-46"><a href="#cb75-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
+<span id="cb75-47"><a href="#cb75-47" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Understanding"</span>, <span class="st">"Strategic"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
+<span id="cb75-48"><a href="#cb75-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
+<span id="cb75-49"><a href="#cb75-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb75-50"><a href="#cb75-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,  <span class="co"># Hide the legend for line size</span></span>
+<span id="cb75-51"><a href="#cb75-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
+<span id="cb75-52"><a href="#cb75-52" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 
 </main>
