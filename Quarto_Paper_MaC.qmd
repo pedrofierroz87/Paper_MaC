@@ -288,8 +288,6 @@ merged_data <- data_w1_na %>%
 ```
 
 
-### Analysis
-
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 cronbach_ope <- alpha(na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
 cronbach_ope
@@ -377,7 +375,7 @@ semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
 ```
 Note: Own elaboration.
 
-The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. To ensure the robustness of our results, we also applied SEM for two of the orientations. These results, which are presented in the appendix, are consistent with the findings described in the following section.
+The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.
 
 ### Results
 
@@ -535,20 +533,20 @@ latent_scores_w1_3 <- predict(fit_cfa_w1_3)
 data_justw1_na <- cbind(data_justw1_na, latent_scores_w1_1, latent_scores_w1_2, latent_scores_w1_3)
 ```
 
-**Appendix 1**. OLS for Understanding Orientation just using W1.
+**Appendix 3**. OLS for Understanding Orientation just using W1.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model1_w1 <- lm(under_1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model1_w1)
 ```
 
-**Appendix 2**. OLS for Strategic Orientation just using W1.
+**Appendix 4**. OLS for Strategic Orientation just using W1.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model2_w1 <- lm(strate_1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model2_w1)
 ```
 
-**Appendix 3**. OLS for Strategic Orientation just using W1, no factor.
+**Appendix 5**. OLS for Strategic Orientation just using W1, no factor.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 model2_1 <- lm(strate1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
@@ -637,7 +635,7 @@ data_justw1_na$opesum <- (data_justw1_na$ope1+data_justw1_na$ope2+data_justw1_na
 
 ```
 
-**Appendix 4**. OLS for Understanding Orientation and Strategic Orientation just using W1 and by adding observable variebles (not CFA).
+**Appendix 6**. OLS for Understanding Orientation and Strategic Orientation just using W1 and by adding observable variebles (not CFA).
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model_a1 <- lm(undersum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_justw1_na)
