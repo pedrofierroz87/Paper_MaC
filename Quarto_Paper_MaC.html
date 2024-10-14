@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -108,135 +74,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plm)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semPlot)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coefplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_w1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"Data_W1.sav"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ID</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>id <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>CodPanelista</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The data for this study was obtained from a national survey conducted in Chile under the supervision of the Millennium Nucleus for the Study of Politics, Public Opinion, and Media in Chile (Nucleo MEPOP). The complete survey consisted of three waves, but this study only utilizes data from the first and third waves. Wave 1 was conducted between August 25 and September 8, while Wave 3 was conducted between [insert dates]. The total sample size for this analysis was 950 individuals, specifically those who participated in both Wave 1 and Wave 3.</p>
+<p>It is important to note that the survey instrument did not necessarily include the same questions across all three waves. As a result, the analyses presented in this paper are cross-sectional in nature. While the dependent variable was constructed from responses in Wave 3, all independent variables were drawn from Wave 1. The survey design employed quotas based on gender, age, and socioeconomic level, ensuring alignment with national distributions.</p>
 </section>
 <section id="variables" class="level3">
 <h3 class="anchored" data-anchor-id="variables">Variables</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>age_num <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>age</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Socioeconomic Status</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ses <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>RECO_NSE</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Education</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>educ <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P60</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sex (1=women)</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>data_w1 <span class="ot">&lt;-</span> data_w1<span class="sc">%&gt;%</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">ifelse</span>(SEX <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(SEX <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="cn">NA</span>)))</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Ideology</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ideology <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P32 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P32)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Online Political Efficacy</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ope1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P59_1</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ope2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P59_2</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ope3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P59_3</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>ope4 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P59_4</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># External Political Efficacy (recode)</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>extef1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_1</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>extef2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_2</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>extef3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_3</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># To recode efficacies (intef1, intef3, extef1, extef3, extef4)</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>data_w1 <span class="ot">&lt;-</span> data_w1 <span class="sc">%&gt;%</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(extef1, extef2, extef3), <span class="sc">~</span> <span class="dv">6</span> <span class="sc">-</span> .x))</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Internal Political Efficacy</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>intef1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_4</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>intef2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_5</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>intef3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P58_6</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Media Exposure</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>tv <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_1</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>cable <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_2</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>newspaper <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_3</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>radio <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_4</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>tradonline <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_5</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>online <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_6</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>podcast <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_7</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>officialsm <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P4_8</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Social Media Exposure</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>fb <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_1 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_1)</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>insta <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_2 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_2)</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>twitter <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_3 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_3)</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>whatsapp <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_4 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_4)</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>youtube <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_5 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_5)</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>tiktok <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_6 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_6)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>discord <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_7 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_7)</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>twitch <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_w1<span class="sc">$</span>P5_8 <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA</span>, data_w1<span class="sc">$</span>P5_8)</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Franja Exposure</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>franja <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P6_1</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Social Media Political Use</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_5</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_6</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_7</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use4 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_8</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use5 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_9</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use6 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_10</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>use7 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P25_11</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Interest</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>polint <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P21</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>procint <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P22</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>plebint <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P23</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpersonal confidence</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>data_w1 <span class="ot">&lt;-</span> data_w1<span class="sc">%&gt;%</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">intercon =</span> <span class="fu">ifelse</span>(P51 <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>,</span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(P51 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="cn">NA</span>)))</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co">#Understanding orientation</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>under1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P48_1</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>under2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P48_4</span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>under3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P48_5</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>under4 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P48_7</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">#Strategic orientation</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>strate1 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P49_2</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>strate2 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P49_3</span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>strate3 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P49_4</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>data_w1<span class="sc">$</span>strate4 <span class="ot">&lt;-</span> data_w1<span class="sc">$</span>P49_8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="understanding-orientation" class="level4">
-<h4 class="anchored" data-anchor-id="understanding-orientation">Understanding Orientation</h4>
+<h4 class="anchored" data-anchor-id="understanding-orientation">Understanding orientation:</h4>
+<p>Following the previously mentioned literature, understanding orientation was measured by asking respondents to indicate how much they agree or disagree with the following statements:</p>
+<p>Under1: “In political conversations, it is essential to listen carefully to what others have to say.”</p>
+<p>Under2: “When I talk about politics, learning is more important to me than convincing.”</p>
+<p>Under3: “Through my conversations, I promote solidarity with others.”</p>
+<p>Under4: “At its core, politics aims to reach agreements through conversation.”</p>
+<p>Under5: “When I talk about politics, I feel connected to the people I talk with.”</p>
+<p>Under6: “Through conversation, political interests can be directed toward the common good.”</p>
+<p>Under7: “Talking about politics allows me to understand why others see things differently.”</p>
+<p>Under8: “Political conversations are important for protecting people’s rights.”</p>
+<p>All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.86).</p>
 </section>
 <section id="strategic-orientation" class="level4">
 <h4 class="anchored" data-anchor-id="strategic-orientation">Strategic Orientation</h4>
+<p>Similarly, to measure strategic orientations, all respondents were asked to indicate how much they agree or disagree with the following statements:</p>
+<p>Strate1: “Saying one thing while thinking another is fundamental when talking about politics.”</p>
+<p>Strate2: “I talk about politics if I gain something from it.”</p>
+<p>Strate3: “In political conversations, form is more important than content.”</p>
+<p>Strate4: “When talking about politics, it is sometimes better not to express what you truly think.”</p>
+<p>Strate5: “People are tired of being asked to talk in order to reach political agreements.”</p>
+<p>Strate6: “The head of the household decides and does not need to reach an agreement with other family members.”</p>
+<p>Strate7: “Instead of so much discussion, it’s better for someone to just say how things are.”</p>
+<p>Strate8: “Trying to reach agreements through conversation is a waste of time; it’s better if someone decides what to do and gets it done.”</p>
+<p>All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.75).</p>
 </section>
 <section id="political-efficacy" class="level4">
 <h4 class="anchored" data-anchor-id="political-efficacy">Political Efficacy</h4>
+<p>In line with the literature, political efficacy was divided into three distinct dimensions. First, external efficacy—i.e., beliefs about system responsiveness—was measured using the following statements:</p>
+<p>extef1: “Politicians don’t really care about what voters think.”</p>
+<p>extef2: “Politicians waste a lot of taxpayers’ money.”</p>
+<p>extef3: “People like me have no influence over what is decided in parliament or government.”</p>
+<p>Similarly, internal efficacy—self-competence beliefs—was measured with the following statements:</p>
+<p>intef1: “In general, I don’t find it difficult to take a stance on political issues.”</p>
+<p>intef2: “People like me are qualified to participate in political discussions.”</p>
+<p>intef3: “People like me have political opinions that are worth listening to.”</p>
+<p>Finally, following recent literature, an additional set of questions was used to measure online political efficacy—i.e., the belief that, because of the Internet, it is possible to have more influence on politics and public issues:</p>
+<p>ope1: “Using the internet, people like me have more political power.”</p>
+<p>ope2: “Using the internet, I can have more say over what the government does.”</p>
+<p>ope3: “Using the internet, it is easier for me to understand politics.”</p>
+<p>ope4: “Using the internet, public officials care more about what I think.”</p>
+<p>All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was created for each of the dimensions (external efficacy: α = XX; internal efficacy: α = XX; online political efficacy: α = XX).</p>
+</section>
+<section id="understanding-orientation-1" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-orientation-1">Understanding Orientation</h4>
+</section>
+<section id="strategic-orientation-1" class="level4">
+<h4 class="anchored" data-anchor-id="strategic-orientation-1">Strategic Orientation</h4>
+</section>
+<section id="political-efficacy-1" class="level4">
+<h4 class="anchored" data-anchor-id="political-efficacy-1">Political Efficacy</h4>
 </section>
 <section id="political-interest" class="level4">
 <h4 class="anchored" data-anchor-id="political-interest">Political Interest</h4>
@@ -250,1353 +143,779 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="analysis" class="level3">
 <h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cronbach_ope <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"ope1"</span>, <span class="st">"ope2"</span>, <span class="st">"ope3"</span>, <span class="st">"ope4"</span>)]))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cronbach_ope</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("ope1", "ope2", "ope3", "ope4")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N    ase mean sd median_r
-      0.82      0.82    0.79      0.53 4.6 0.0064  2.8  1     0.51
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.81  0.82  0.83
-Duhachek  0.81  0.82  0.83
-
- Reliability if an item is dropped:
-     raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-ope1      0.75      0.75    0.67      0.50 3.0   0.0093 0.0006  0.50
-ope2      0.74      0.74    0.66      0.49 2.9   0.0098 0.0006  0.48
-ope3      0.80      0.80    0.75      0.58 4.1   0.0074 0.0141  0.52
-ope4      0.80      0.80    0.75      0.57 4.0   0.0077 0.0166  0.53
-
- Item statistics 
-        n raw.r std.r r.cor r.drop mean  sd
-ope1 2117  0.84  0.84  0.78   0.69  2.6 1.3
-ope2 2117  0.85  0.85  0.81   0.72  2.9 1.3
-ope3 2117  0.77  0.77  0.63   0.58  3.1 1.3
-ope4 2117  0.77  0.77  0.64   0.59  2.4 1.3
-
-Non missing response frequency for each item
-        1    2    3    4    5 miss
-ope1 0.28 0.17 0.32 0.13 0.10    0
-ope2 0.22 0.16 0.32 0.16 0.14    0
-ope3 0.16 0.13 0.33 0.21 0.18    0
-ope4 0.34 0.18 0.29 0.10 0.09    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cronbach_intef <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"intef1"</span>, <span class="st">"intef2"</span>, <span class="st">"intef3"</span>)]))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cronbach_intef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("intef1", "intef2", "intef3")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
-      0.71      0.71    0.64      0.45 2.5 0.011  3.5 0.97     0.39
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.69  0.71  0.73
-Duhachek  0.69  0.71  0.73
-
- Reliability if an item is dropped:
-       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-intef1      0.75      0.75    0.60      0.60 3.0    0.011    NA  0.60
-intef2      0.54      0.54    0.37      0.37 1.2    0.020    NA  0.37
-intef3      0.56      0.56    0.39      0.39 1.3    0.019    NA  0.39
-
- Item statistics 
-          n raw.r std.r r.cor r.drop mean  sd
-intef1 2117  0.73  0.74  0.49   0.42  3.5 1.2
-intef2 2117  0.84  0.83  0.72   0.59  3.3 1.3
-intef3 2117  0.82  0.82  0.71   0.59  3.7 1.2
-
-Non missing response frequency for each item
-          1    2    3    4    5 miss
-intef1 0.08 0.08 0.35 0.22 0.28    0
-intef2 0.12 0.11 0.32 0.22 0.23    0
-intef3 0.06 0.08 0.28 0.23 0.35    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cronbach_extef <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"extef1"</span>, <span class="st">"extef2"</span>, <span class="st">"extef3"</span>)]))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cronbach_extef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("extef1", "extef2", "extef3")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean sd median_r
-      0.71      0.71    0.62      0.45 2.4 0.011  2.1  1     0.43
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.69  0.71  0.73
-Duhachek  0.69  0.71  0.73
-
- Reliability if an item is dropped:
-       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-extef1      0.60      0.60    0.43      0.43 1.5    0.017    NA  0.43
-extef2      0.59      0.59    0.42      0.42 1.5    0.018    NA  0.42
-extef3      0.66      0.66    0.49      0.49 1.9    0.015    NA  0.49
-
- Item statistics 
-          n raw.r std.r r.cor r.drop mean  sd
-extef1 2117  0.80  0.80  0.64   0.54  2.2 1.3
-extef2 2117  0.80  0.81  0.65   0.55  1.9 1.2
-extef3 2117  0.79  0.78  0.59   0.50  2.1 1.3
-
-Non missing response frequency for each item
-          1    2    3    4    5 miss
-extef1 0.43 0.18 0.23 0.08 0.08    0
-extef2 0.55 0.16 0.18 0.05 0.06    0
-extef3 0.47 0.15 0.22 0.07 0.08    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cronbach_media <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"tv"</span>, <span class="st">"cable"</span>, <span class="st">"newspaper"</span>, <span class="st">"radio"</span>)]))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cronbach_media</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("tv", "cable", "newspaper", "radio")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N  ase mean  sd median_r
-      0.71      0.71    0.68      0.39 2.5 0.01  2.6 1.1     0.37
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.69  0.71  0.73
-Duhachek  0.69  0.71  0.73
-
- Reliability if an item is dropped:
-          raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-tv             0.67      0.68    0.59      0.41 2.1    0.012 0.0055  0.37
-cable          0.61      0.61    0.53      0.35 1.6    0.015 0.0169  0.28
-newspaper      0.65      0.65    0.58      0.39 1.9    0.013 0.0199  0.36
-radio          0.67      0.67    0.59      0.40 2.0    0.012 0.0165  0.37
-
- Item statistics 
-             n raw.r std.r r.cor r.drop mean  sd
-tv        2117  0.72  0.71  0.57   0.47  3.3 1.5
-cable     2117  0.78  0.77  0.68   0.57  2.7 1.5
-newspaper 2117  0.71  0.73  0.60   0.50  2.1 1.3
-radio     2117  0.72  0.72  0.58   0.47  2.5 1.5
-
-Non missing response frequency for each item
-             1    2    3    4    5 miss
-tv        0.19 0.14 0.19 0.16 0.31    0
-cable     0.33 0.16 0.19 0.16 0.17    0
-newspaper 0.50 0.17 0.16 0.09 0.08    0
-radio     0.37 0.16 0.19 0.14 0.15    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cronbach_digital <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"tradonline"</span>, <span class="st">"online"</span>, <span class="st">"podcast"</span>, <span class="st">"officialsm"</span>)]))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cronbach_digital</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("tradonline", "online", "podcast", 
-    "officialsm")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N  ase mean sd median_r
-      0.71      0.72    0.67      0.39 2.5 0.01  2.4  1     0.35
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.69  0.71  0.73
-Duhachek  0.69  0.71  0.73
-
- Reliability if an item is dropped:
-           raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-tradonline      0.63      0.64    0.55      0.37 1.7    0.014 0.0067  0.33
-online          0.59      0.59    0.49      0.33 1.5    0.015 0.0015  0.31
-podcast         0.68      0.68    0.61      0.42 2.2    0.012 0.0138  0.37
-officialsm      0.70      0.70    0.63      0.44 2.3    0.011 0.0163  0.46
-
- Item statistics 
-              n raw.r std.r r.cor r.drop mean  sd
-tradonline 2117  0.76  0.76  0.65   0.54  2.5 1.4
-online     2117  0.80  0.80  0.73   0.60  2.4 1.4
-podcast    2117  0.67  0.70  0.54   0.46  1.8 1.2
-officialsm 2117  0.70  0.68  0.50   0.43  2.9 1.5
-
-Non missing response frequency for each item
-              1    2    3    4    5 miss
-tradonline 0.36 0.18 0.20 0.15 0.12    0
-online     0.42 0.17 0.17 0.13 0.12    0
-podcast    0.62 0.14 0.12 0.08 0.05    0
-officialsm 0.29 0.13 0.21 0.16 0.21    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cronbach_social <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"fb"</span>, <span class="st">"insta"</span>, <span class="st">"twitter"</span>, <span class="st">"whatsapp"</span>, <span class="st">"youtube"</span>, <span class="st">"tiktok"</span>)]))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cronbach_social</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("fb", "insta", "twitter", "whatsapp", 
-    "youtube", "tiktok")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N    ase mean  sd median_r
-      0.82      0.82     0.8      0.42 4.4 0.0077  2.7 1.1     0.43
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt      0.8  0.82  0.83
-Duhachek   0.8  0.82  0.83
-
- Reliability if an item is dropped:
-         raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-fb            0.78      0.78    0.75      0.42 3.6   0.0093 0.0066  0.43
-insta         0.77      0.77    0.74      0.41 3.4   0.0096 0.0100  0.39
-twitter       0.81      0.81    0.79      0.47 4.4   0.0079 0.0046  0.45
-whatsapp      0.77      0.77    0.74      0.40 3.4   0.0098 0.0064  0.42
-youtube       0.78      0.78    0.75      0.41 3.5   0.0094 0.0081  0.42
-tiktok        0.80      0.79    0.77      0.44 3.9   0.0087 0.0098  0.44
-
- Item statistics 
-            n raw.r std.r r.cor r.drop mean  sd
-fb       1377  0.73  0.73  0.67   0.59  3.0 1.6
-insta    1377  0.76  0.76  0.70   0.63  2.9 1.6
-twitter  1377  0.62  0.62  0.50   0.45  2.4 1.6
-whatsapp 1377  0.77  0.77  0.72   0.64  2.9 1.6
-youtube  1377  0.75  0.75  0.68   0.61  2.5 1.5
-tiktok   1377  0.69  0.69  0.59   0.54  2.2 1.5
-
-Non missing response frequency for each item
-            1    2    3    4    5 miss
-fb       0.26 0.14 0.18 0.16 0.27    0
-insta    0.31 0.14 0.17 0.15 0.23    0
-twitter  0.45 0.11 0.15 0.12 0.17    0
-whatsapp 0.32 0.13 0.16 0.11 0.27    0
-youtube  0.40 0.14 0.15 0.14 0.17    0
-tiktok   0.52 0.11 0.14 0.09 0.14    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cronbach_interest <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"polint"</span>, <span class="st">"procint"</span>, <span class="st">"plebint"</span>)]))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cronbach_interest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("polint", "procint", "plebint")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N    ase mean  sd median_r
-      0.88      0.88    0.84       0.7 7.1 0.0047  3.3 1.3     0.65
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.87  0.88  0.89
-Duhachek  0.87  0.88  0.89
-
- Reliability if an item is dropped:
-        raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-polint       0.91      0.91    0.83      0.83 9.7   0.0040    NA  0.83
-procint      0.77      0.77    0.63      0.63 3.3   0.0100    NA  0.63
-plebint      0.79      0.79    0.65      0.65 3.8   0.0091    NA  0.65
-
- Item statistics 
-           n raw.r std.r r.cor r.drop mean  sd
-polint  2117  0.84  0.85  0.70   0.67  2.9 1.4
-procint 2117  0.93  0.92  0.89   0.83  3.4 1.5
-plebint 2117  0.92  0.91  0.87   0.80  3.6 1.5
-
-Non missing response frequency for each item
-           1    2    3    4    5 miss
-polint  0.25 0.11 0.25 0.20 0.18    0
-procint 0.18 0.09 0.19 0.21 0.33    0
-plebint 0.16 0.08 0.16 0.18 0.42    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cronbach_under <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"under1"</span>, <span class="st">"under2"</span>, <span class="st">"under3"</span>, <span class="st">"under4"</span>)]))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cronbach_under</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("under1", "under2", "under3", "under4")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N    ase mean   sd median_r
-      0.74      0.74     0.7      0.42 2.9 0.0091  3.6 0.92     0.43
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.72  0.74  0.76
-Duhachek  0.72  0.74  0.76
-
- Reliability if an item is dropped:
-       raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-under1      0.71      0.71    0.62      0.45 2.4    0.011 0.0029  0.43
-under2      0.67      0.66    0.59      0.40 2.0    0.012 0.0165  0.43
-under3      0.71      0.71    0.62      0.45 2.4    0.011 0.0010  0.43
-under4      0.65      0.65    0.57      0.38 1.8    0.013 0.0133  0.40
-
- Item statistics 
-          n raw.r std.r r.cor r.drop mean  sd
-under1 2117  0.71  0.72  0.58   0.49  4.2 1.1
-under2 2117  0.78  0.77  0.66   0.56  3.7 1.3
-under3 2117  0.73  0.72  0.58   0.49  3.0 1.2
-under4 2117  0.79  0.79  0.69   0.59  3.6 1.2
-
-Non missing response frequency for each item
-          1    2    3    4    5 miss
-under1 0.05 0.03 0.18 0.16 0.58    0
-under2 0.09 0.07 0.25 0.19 0.40    0
-under3 0.16 0.11 0.40 0.18 0.15    0
-under4 0.09 0.07 0.33 0.21 0.30    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cronbach_strate <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"strate1"</span>, <span class="st">"strate2"</span>, <span class="st">"strate3"</span>, <span class="st">"strate4"</span>)]))</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cronbach_strate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(data_w1[c("strate1", "strate2", "strate3", 
-    "strate4")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
-      0.58      0.58    0.52      0.26 1.4 0.015  2.5 0.87     0.25
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.55  0.58  0.61
-Duhachek  0.55  0.58  0.61
-
- Reliability if an item is dropped:
-        raw_alpha std.alpha G6(smc) average_r  S/N alpha se  var.r med.r
-strate1      0.53      0.53    0.43      0.27 1.13    0.018 0.0012  0.26
-strate2      0.50      0.49    0.40      0.25 0.98    0.019 0.0048  0.25
-strate3      0.53      0.53    0.43      0.27 1.12    0.018 0.0010  0.26
-strate4      0.49      0.49    0.40      0.25 0.97    0.019 0.0045  0.25
-
- Item statistics 
-           n raw.r std.r r.cor r.drop mean  sd
-strate1 2117  0.62  0.65  0.45   0.34  1.9 1.2
-strate2 2117  0.68  0.68  0.51   0.38  2.7 1.3
-strate3 2117  0.68  0.65  0.45   0.35  2.9 1.4
-strate4 2117  0.69  0.68  0.51   0.39  2.4 1.3
-
-Non missing response frequency for each item
-           1    2    3    4    5 miss
-strate1 0.58 0.13 0.20 0.05 0.05    0
-strate2 0.26 0.15 0.35 0.12 0.13    0
-strate3 0.26 0.12 0.29 0.15 0.18    0
-strate4 0.38 0.13 0.31 0.08 0.10    0</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data_w1_na <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data_w1[<span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"polint"</span>, <span class="st">"procint"</span>, <span class="st">"plebint"</span>, <span class="st">"ope1"</span>, <span class="st">"ope2"</span>, <span class="st">"ope3"</span>, <span class="st">"ope4"</span>, <span class="st">"intef1"</span>, <span class="st">"intef2"</span>, <span class="st">"intef3"</span>, <span class="st">"extef1"</span>, <span class="st">"extef2"</span>, <span class="st">"extef3"</span>, <span class="st">"intercon"</span>, <span class="st">"tv"</span>, <span class="st">"cable"</span>, <span class="st">"newspaper"</span>, <span class="st">"radio"</span>, <span class="st">"tradonline"</span>, <span class="st">"online"</span>, <span class="st">"podcast"</span>, <span class="st">"officialsm"</span>,<span class="st">"fb"</span>, <span class="st">"insta"</span>, <span class="st">"twitter"</span>, <span class="st">"whatsapp"</span>, <span class="st">"youtube"</span>, <span class="st">"tiktok"</span>, <span class="st">"discord"</span>, <span class="st">"twitch"</span>, <span class="st">"franja"</span>, <span class="st">"use1"</span>, <span class="st">"use2"</span>, <span class="st">"use3"</span>, <span class="st">"use4"</span>, <span class="st">"use5"</span>, <span class="st">"use6"</span>, <span class="st">"use7"</span>, <span class="st">"age_num"</span>, <span class="st">"ses"</span>, <span class="st">"sex"</span>, <span class="st">"educ"</span>, <span class="st">"under1"</span>, <span class="st">"under2"</span>, <span class="st">"under3"</span>, <span class="st">"under4"</span>, <span class="st">"strate1"</span>, <span class="st">"strate2"</span>, <span class="st">"strate3"</span>, <span class="st">"strate4"</span>)])</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data_w1_na))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data_w1_na <span class="ot">&lt;-</span> data_w1_na <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as.numeric))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>cfa.model1 <span class="ot">&lt;-</span> <span class="st">'ope =~ ope1 + ope2 + ope3 + ope4</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">              intef =~ intef1 + intef2 + intef3</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">              extef =~ extef1 + extef2 + extef3</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">              interest =~ polint + procint + plebint'</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>cfa.model2 <span class="ot">&lt;-</span> <span class="st">'media =~ tv + cable + newspaper + radio</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="st">              digital =~ tradonline + online + podcast + officialsm</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="st">              social =~ fb + insta + twitter + whatsapp + youtube + tiktok'</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>cfa.model3 <span class="ot">&lt;-</span> <span class="st">'under =~ under1 + under2 + under3 + under4</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="st">              strate =~ strate1 + strate2 + strate3 + strate4'</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>fit_cfa1 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model1, <span class="at">data =</span> data_w1_na)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>latent_scores1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa1)</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>fit_cfa2 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model2, <span class="at">data =</span> data_w1_na)</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>latent_scores2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa2)</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>fit_cfa3 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model3, <span class="at">data =</span> data_w1_na)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>latent_scores3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa3)</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>data_w1_scores <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data_w1_na, latent_scores1, latent_scores2, latent_scores3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="measurement-model" class="level4">
-<h4 class="anchored" data-anchor-id="measurement-model">Measurement Model</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fit_cfa1, <span class="st">"std"</span>, <span class="at">layout =</span> <span class="st">"tree"</span>, <span class="at">rotation =</span> <span class="dv">2</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">whatLabels =</span> <span class="st">"std"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizeMan =</span> <span class="dv">3</span>, <span class="at">sizeLat =</span> <span class="dv">7</span>, <span class="at">title =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fit_cfa2, <span class="st">"std"</span>, <span class="at">layout =</span> <span class="st">"tree"</span>, <span class="at">rotation =</span> <span class="dv">2</span>,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">whatLabels =</span> <span class="st">"std"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizeMan =</span> <span class="dv">3</span>, <span class="at">sizeLat =</span> <span class="dv">7</span>, <span class="at">title =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fit_cfa3, <span class="st">"std"</span>, <span class="at">layout =</span> <span class="st">"tree"</span>, <span class="at">rotation =</span> <span class="dv">2</span>,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">whatLabels =</span> <span class="st">"std"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">sizeMan =</span> <span class="dv">3</span>, <span class="at">sizeLat =</span> <span class="dv">7</span>, <span class="at">title =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section>
-</section>
-<section id="regressions" class="level3">
-<h3 class="anchored" data-anchor-id="regressions">Regressions</h3>
+<section id="analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-1">Analysis</h3>
+<p>To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, and 3 present the measurement models for the nine factors we developed.</p>
+<p><strong>Figure 1</strong> Measurement Model for Political Efficacies</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(under <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = under ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.57506 -0.36864  0.04248  0.41366  1.94858 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.087487   0.088665  -0.987  0.32400    
-ses         -0.004347   0.015511  -0.280  0.77935    
-sex          0.019027   0.035465   0.536  0.59172    
-age_num      0.001898   0.001298   1.462  0.14406    
-media        0.071103   0.046712   1.522  0.12825    
-digital      0.029378   0.043650   0.673  0.50107    
-social      -0.003512   0.026384  -0.133  0.89414    
-interest     0.197635   0.023025   8.583  &lt; 2e-16 ***
-intercon     0.079834   0.053756   1.485  0.13779    
-extef       -0.080243   0.029336  -2.735  0.00633 ** 
-intef        0.079503   0.047217   1.684  0.09251 .  
-ope          0.114554   0.020611   5.558 3.41e-08 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.5846 on 1122 degrees of freedom
-Multiple R-squared:  0.2613,    Adjusted R-squared:  0.2541 
-F-statistic: 36.09 on 11 and 1122 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Note: Own elaboration.</p>
+<p><strong>Figure 2</strong> Measurment model for Media Exposure</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = strate ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.18926 -0.30265  0.02782  0.27132  1.55976 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.0651310  0.0641358  -1.016  0.31008    
-ses          0.0298459  0.0112195   2.660  0.00792 ** 
-sex          0.0143851  0.0256534   0.561  0.57508    
-age_num     -0.0005613  0.0009392  -0.598  0.55018    
-media        0.0737409  0.0337888   2.182  0.02929 *  
-digital      0.0048618  0.0315739   0.154  0.87765    
-social       0.0155346  0.0190848   0.814  0.41583    
-interest    -0.0148682  0.0166552  -0.893  0.37221    
-intercon    -0.1082104  0.0388845  -2.783  0.00548 ** 
-extef       -0.0467365  0.0212203  -2.202  0.02784 *  
-intef       -0.0470204  0.0341546  -1.377  0.16888    
-ope          0.0755189  0.0149087   5.065 4.76e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4229 on 1122 degrees of freedom
-Multiple R-squared:  0.07092,   Adjusted R-squared:  0.06181 
-F-statistic: 7.785 on 11 and 1122 DF,  p-value: 4.123e-13</code></pre>
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Note: Own elaboration.</p>
+<p><strong>Figure 3</strong> Measurment model for understanding and strategic orientations</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming coef_df is already prepared as per previous instructions</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the extraction function to avoid spaces in names</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>get_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, model_name) {</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Term =</span> <span class="fu">rownames</span>(coefs),</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Estimate =</span> coefs[, <span class="st">"Estimate"</span>],</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Std_Error =</span> coefs[, <span class="st">"Std. Error"</span>],  <span class="co"># Rename to 'Std_Error'</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> model_name</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>coef_df1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model1, <span class="st">"Model 1"</span>)</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>coef_df2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2, <span class="st">"Model 2"</span>)</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df1, coef_df2)</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df[coef_df<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)  </span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping of old variable names to new names</span></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>name_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">ses =</span> <span class="st">"Socioeconomic Status"</span>,</span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_num =</span> <span class="st">"Age"</span>,</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">media =</span> <span class="st">"Media Expo."</span>,</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">digital =</span> <span class="st">"Dig, Media Expo."</span>,</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">social =</span> <span class="st">"Soc. Media Expo."</span>,</span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">interest =</span> <span class="st">"Pol. Interest"</span>,</span>
-<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercon =</span> <span class="st">"Interp. Conf."</span>,</span>
-<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">extef =</span> <span class="st">"Ext. Efficacy"</span>,</span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">intef =</span> <span class="st">"Int. Efficacy"</span>,</span>
-<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">ope =</span> <span class="st">"Onl. Efficacy"</span></span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> coef_df <span class="sc">%&gt;%</span></span>
-<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width), <span class="fu">aes</span>(<span class="at">size =</span> Significant)) <span class="sc">+</span></span>
-<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
-<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
-<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
-<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Understanding"</span>, <span class="st">"Strategic"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
-<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
-<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,  <span class="co"># Hide the legend for line size</span></span>
-<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
-<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in
-ggplot2 3.3.4.
-ℹ Please use "none" instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Note: Own elaboration.</p>
+<p>The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. To ensure the robustness of our results, we also applied SEM for two of the orientations. These results, which are presented in the appendix, are consistent with the findings described in the following section.</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p><strong>Table 1</strong> OLS Regression for Understanding Orientation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model2_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate1 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = strate1 ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.8078 -0.8611 -0.4065  0.8093  3.6162 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.024671   0.172995  11.704  &lt; 2e-16 ***
-ses          0.088309   0.030263   2.918  0.00359 ** 
-sex         -0.157543   0.069196  -2.277  0.02299 *  
-age_num     -0.007486   0.002533  -2.955  0.00319 ** 
-media        0.236788   0.091140   2.598  0.00950 ** 
-digital     -0.095501   0.085165  -1.121  0.26237    
-social       0.049481   0.051478   0.961  0.33666    
-interest    -0.104875   0.044925  -2.334  0.01975 *  
-intercon    -0.015691   0.104884  -0.150  0.88111    
-extef        0.102832   0.057238   1.797  0.07267 .  
-intef       -0.127700   0.092126  -1.386  0.16598    
-ope          0.175655   0.040214   4.368 1.37e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.141 on 1122 degrees of freedom
-Multiple R-squared:  0.0797,    Adjusted R-squared:  0.07068 
-F-statistic: 8.834 on 11 and 1122 DF,  p-value: 3.331e-15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model2_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate2 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = strate2 ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--2.6595 -1.0918  0.1060  0.7258  3.2237 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.750595   0.192185  14.312  &lt; 2e-16 ***
-ses          0.040685   0.033620   1.210   0.2265    
-sex          0.079711   0.076871   1.037   0.3000    
-age_num     -0.004419   0.002814  -1.570   0.1166    
-media        0.184645   0.101249   1.824   0.0685 .  
-digital     -0.036421   0.094612  -0.385   0.7003    
-social       0.062293   0.057188   1.089   0.2763    
-interest    -0.009673   0.049908  -0.194   0.8464    
-intercon    -0.232256   0.116519  -1.993   0.0465 *  
-extef       -0.139695   0.063587  -2.197   0.0282 *  
-intef       -0.031669   0.102345  -0.309   0.7571    
-ope          0.199520   0.044674   4.466 8.77e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.267 on 1122 degrees of freedom
-Multiple R-squared:  0.0559,    Adjusted R-squared:  0.04665 
-F-statistic:  6.04 on 11 and 1122 DF,  p-value: 1.173e-09</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model2_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = strate3 ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+lm(formula = under ~ ses + sex + age_num + media + digital + 
+    social + interest + intercon + extef + intef + ope, data = merged_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--2.55167 -1.18015  0.07474  1.07228  2.83517 
+-1.77865 -0.31052  0.03956  0.35621  1.21686 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.512255   0.207300  12.119  &lt; 2e-16 ***
-ses          0.060994   0.036264   1.682 0.092859 .  
-sex          0.108827   0.082917   1.312 0.189628    
-age_num      0.003122   0.003036   1.029 0.303918    
-media        0.012810   0.109213   0.117 0.906647    
-digital      0.187510   0.102053   1.837 0.066419 .  
-social      -0.061888   0.061686  -1.003 0.315944    
-interest    -0.052043   0.053833  -0.967 0.333877    
-intercon    -0.446935   0.125683  -3.556 0.000392 ***
-extef       -0.170322   0.068588  -2.483 0.013164 *  
-intef       -0.159619   0.110395  -1.446 0.148488    
-ope          0.050513   0.048188   1.048 0.294756    
+             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) -0.177903   0.109009  -1.632  0.10324   
+ses         -0.006956   0.018314  -0.380  0.70421   
+sex         -0.010693   0.043162  -0.248  0.80442   
+age_num      0.004015   0.001643   2.444  0.01483 * 
+media        0.019171   0.053607   0.358  0.72077   
+digital      0.007140   0.046609   0.153  0.87831   
+social       0.057963   0.028449   2.037  0.04207 * 
+interest     0.065331   0.027790   2.351  0.01907 * 
+intercon     0.193120   0.064848   2.978  0.00303 **
+extef        0.002854   0.037890   0.075  0.93998   
+intef        0.135245   0.059487   2.274  0.02337 * 
+ope          0.052075   0.023551   2.211  0.02743 * 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.367 on 1122 degrees of freedom
-Multiple R-squared:  0.0354,    Adjusted R-squared:  0.02594 
-F-statistic: 3.743 on 11 and 1122 DF,  p-value: 2.822e-05</code></pre>
+Residual standard error: 0.4996 on 560 degrees of freedom
+Multiple R-squared:  0.1744,    Adjusted R-squared:  0.1582 
+F-statistic: 10.76 on 11 and 560 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model2_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate4 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media <span class="sc">+</span> digital <span class="sc">+</span> social <span class="sc">+</span> interest <span class="sc">+</span> intercon <span class="sc">+</span> extef <span class="sc">+</span> intef <span class="sc">+</span> ope, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Table 2</strong> OLS Regression for Strategic Orientation.</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = strate4 ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+lm(formula = strate ~ ses + sex + age_num + media + digital + 
+    social + interest + intercon + extef + intef + ope, data = merged_data)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.1903 -1.2713  0.2060  0.6673  3.0888 
+     Min       1Q   Median       3Q      Max 
+-1.62600 -0.35308  0.02019  0.30218  1.96623 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.054059   0.198245  10.361   &lt;2e-16 ***
-ses          0.076373   0.034680   2.202   0.0279 *  
-sex          0.046446   0.079295   0.586   0.5582    
-age_num      0.004312   0.002903   1.485   0.1378    
-media        0.128086   0.104442   1.226   0.2203    
-digital     -0.011806   0.097596  -0.121   0.9037    
-social       0.067790   0.058992   1.149   0.2507    
-interest    -0.098500   0.051482  -1.913   0.0560 .  
-intercon    -0.258985   0.120193  -2.155   0.0314 *  
-extef       -0.107280   0.065592  -1.636   0.1022    
-intef       -0.163686   0.105573  -1.550   0.1213    
-ope          0.116130   0.046083   2.520   0.0119 *  
+(Intercept)  0.131761   0.115549   1.140 0.254645    
+ses          0.040941   0.019413   2.109 0.035391 *  
+sex         -0.106134   0.045751  -2.320 0.020710 *  
+age_num     -0.004426   0.001741  -2.542 0.011302 *  
+media        0.218610   0.056823   3.847 0.000133 ***
+digital     -0.098328   0.049405  -1.990 0.047050 *  
+social       0.070146   0.030155   2.326 0.020367 *  
+interest    -0.025639   0.029457  -0.870 0.384471    
+intercon    -0.121941   0.068739  -1.774 0.076610 .  
+extef       -0.045799   0.040164  -1.140 0.254646    
+intef       -0.143806   0.063056  -2.281 0.022947 *  
+ope          0.077746   0.024964   3.114 0.001938 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.307 on 1122 degrees of freedom
-Multiple R-squared:  0.03437,   Adjusted R-squared:  0.0249 
-F-statistic:  3.63 on 11 and 1122 DF,  p-value: 4.539e-05</code></pre>
+Residual standard error: 0.5296 on 560 degrees of freedom
+Multiple R-squared:  0.1197,    Adjusted R-squared:  0.1024 
+F-statistic: 6.922 on 11 and 560 DF,  p-value: 0.00000000005173</code></pre>
 </div>
 </div>
+<p><strong>Figure 4</strong> Coefplot for understanding orientation and strategic orientation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>coef_strate1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_1, <span class="st">"Model S1"</span>)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>coef_strate2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_2, <span class="st">"Model S2"</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>coef_strate3 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_3, <span class="st">"Model S3"</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>coef_strate4 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model2_4, <span class="st">"Model S4"</span>)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_strate1, coef_strate2, coef_strate3, coef_strate4)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate[coef_strate<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
-<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>coef_strate <span class="ot">&lt;-</span> coef_strate <span class="sc">%&gt;%</span></span>
-<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping), <span class="at">labels =</span> name_mapping))</span>
-<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
-<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
-<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_strate, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
-<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width)) <span class="sc">+</span></span>
-<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
-<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
-<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>,<span class="st">"darkgreen"</span>, <span class="st">"purple"</span>),</span>
-<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Talk if I win"</span>, <span class="st">"Form is more important"</span>, <span class="st">"Not express what I think"</span>, <span class="st">"Agreements waste of time"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
-<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
-<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
-<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>```</p>
 </section>
-<section id="alternative-models" class="level3">
-<h3 class="anchored" data-anchor-id="alternative-models">Alternative models</h3>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<p><strong>Appendix 1</strong> SEM for Understanding Orientation</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>undersum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>under1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>under4)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>stratesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>strate1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>strate4)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>mediasum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>tv<span class="sc">+</span>data_w1_scores<span class="sc">$</span>cable<span class="sc">+</span>data_w1_scores<span class="sc">$</span>newspaper<span class="sc">+</span>data_w1_scores<span class="sc">$</span>radio)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>digitalsum <span class="ot">&lt;-</span>(data_w1_scores<span class="sc">$</span>tradonline<span class="sc">+</span>data_w1_scores<span class="sc">$</span>online<span class="sc">+</span>data_w1_scores<span class="sc">$</span>podcast<span class="sc">+</span>data_w1_scores<span class="sc">$</span>officialsm)<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>socialsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>fb<span class="sc">+</span>data_w1_scores<span class="sc">$</span>insta<span class="sc">+</span>data_w1_scores<span class="sc">$</span>twitter<span class="sc">+</span>data_w1_scores<span class="sc">$</span>whatsapp<span class="sc">+</span>data_w1_scores<span class="sc">$</span>youtube<span class="sc">+</span>data_w1_scores<span class="sc">$</span>tiktok)<span class="sc">/</span><span class="dv">6</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>extefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>extef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>extef3)<span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>intefsum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>intef1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>intef3)<span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>data_w1_scores<span class="sc">$</span>opesum <span class="ot">&lt;-</span> (data_w1_scores<span class="sc">$</span>ope1<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope2<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope3<span class="sc">+</span>data_w1_scores<span class="sc">$</span>ope4)<span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lavaan 0.6.16 ended normally after 69 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                       102
+
+  Number of observations                           572
+
+Model Test User Model:
+                                                      
+  Test statistic                              1991.961
+  Degrees of freedom                               668
+  P-value (Chi-square)                           0.000
+
+Model Test Baseline Model:
+
+  Test statistic                              9457.615
+  Degrees of freedom                               735
+  P-value                                        0.000
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.848
+  Tucker-Lewis Index (TLI)                       0.833
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)             -30419.686
+  Loglikelihood unrestricted model (H1)     -29423.706
+                                                      
+  Akaike (AIC)                               61043.372
+  Bayesian (BIC)                             61486.984
+  Sample-size adjusted Bayesian (SABIC)      61163.179
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.059
+  90 Percent confidence interval - lower         0.056
+  90 Percent confidence interval - upper         0.062
+  P-value H_0: RMSEA &lt;= 0.050                    0.000
+  P-value H_0: RMSEA &gt;= 0.080                    0.000
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.063
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  ope_a1 =~                                                             
+    ope1              1.000                               1.109    0.854
+    ope2              1.001    0.045   22.234    0.000    1.110    0.854
+    ope3              0.758    0.047   16.143    0.000    0.841    0.645
+    ope4              0.774    0.045   17.068    0.000    0.858    0.674
+  intef_a1 =~                                                           
+    intef1            1.000                               0.676    0.548
+    intef2            1.391    0.118   11.791    0.000    0.941    0.744
+    intef3            1.473    0.122   12.109    0.000    0.996    0.826
+  extef_a1 =~                                                           
+    extef1            1.000                               0.916    0.725
+    extef2            0.984    0.076   13.010    0.000    0.901    0.737
+    extef3            0.943    0.077   12.214    0.000    0.864    0.639
+  interest_a1 =~                                                        
+    polint            1.000                               1.003    0.686
+    procint           1.360    0.070   19.441    0.000    1.364    0.909
+    plebint           1.401    0.072   19.530    0.000    1.405    0.932
+  media_a1 =~                                                           
+    tv                1.000                               0.805    0.541
+    cable             1.201    0.114   10.506    0.000    0.966    0.662
+    newspaper         1.137    0.106   10.778    0.000    0.915    0.699
+    radio             1.178    0.112   10.511    0.000    0.948    0.662
+  digital_a1 =~                                                         
+    tradonline        1.000                               1.013    0.734
+    online            1.026    0.067   15.397    0.000    1.039    0.744
+    podcast           0.694    0.055   12.625    0.000    0.703    0.593
+    officialsm        0.888    0.068   13.014    0.000    0.899    0.612
+  social_a1 =~                                                          
+    fb                1.000                               1.111    0.705
+    insta             1.035    0.066   15.746    0.000    1.150    0.740
+    twitter           0.827    0.065   12.676    0.000    0.919    0.585
+    whatsapp          1.099    0.070   15.777    0.000    1.222    0.741
+    youtube           0.970    0.064   15.065    0.000    1.077    0.704
+    tiktok            0.852    0.063   13.614    0.000    0.947    0.631
+  under_a1 =~                                                           
+    under_w3_1        1.000                               0.571    0.562
+    under_w3_2        1.046    0.107    9.741    0.000    0.598    0.494
+    under_w3_3        1.152    0.100   11.480    0.000    0.658    0.620
+    under_w3_4        1.432    0.119   12.054    0.000    0.818    0.668
+    under_w3_5        1.154    0.108   10.676    0.000    0.659    0.559
+    under_w3_6        1.566    0.120   13.047    0.000    0.894    0.761
+    under_w3_7        1.637    0.122   13.431    0.000    0.935    0.803
+    under_w3_8        1.586    0.120   13.189    0.000    0.906    0.776
+
+Regressions:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  under_a1 ~                                                            
+    ses              -0.008    0.020   -0.420    0.674   -0.015   -0.018
+    sex              -0.011    0.048   -0.233    0.816   -0.019   -0.010
+    age_num           0.005    0.002    2.631    0.009    0.008    0.114
+    media_a1          0.020    0.058    0.342    0.733    0.028    0.028
+    digital_a1        0.002    0.052    0.038    0.969    0.004    0.004
+    social_a1         0.067    0.032    2.060    0.039    0.130    0.130
+    interest_a1       0.074    0.031    2.359    0.018    0.130    0.130
+    intercon          0.221    0.072    3.064    0.002    0.387    0.129
+    extef_a1          0.002    0.042    0.042    0.966    0.003    0.003
+    intef_a1          0.158    0.069    2.291    0.022    0.187    0.187
+    ope_a1            0.057    0.027    2.089    0.037    0.111    0.111
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  ope_a1 ~~                                                             
+    intef_a1          0.272    0.044    6.170    0.000    0.363    0.363
+    extef_a1         -0.083    0.053   -1.565    0.118   -0.081   -0.081
+    interest_a1       0.325    0.056    5.801    0.000    0.292    0.292
+    media_a1          0.090    0.047    1.921    0.055    0.101    0.101
+    digital_a1        0.304    0.060    5.070    0.000    0.270    0.270
+    social_a1         0.349    0.064    5.461    0.000    0.283    0.283
+  intef_a1 ~~                                                           
+    extef_a1         -0.339    0.046   -7.419    0.000   -0.547   -0.547
+    interest_a1       0.309    0.044    7.059    0.000    0.455    0.455
+    media_a1          0.087    0.031    2.792    0.005    0.159    0.159
+    digital_a1        0.162    0.039    4.144    0.000    0.237    0.237
+    social_a1         0.061    0.039    1.578    0.114    0.081    0.081
+  extef_a1 ~~                                                           
+    interest_a1      -0.072    0.046   -1.560    0.119   -0.079   -0.079
+    media_a1          0.036    0.041    0.858    0.391    0.048    0.048
+    digital_a1        0.004    0.051    0.076    0.939    0.004    0.004
+    social_a1         0.134    0.054    2.461    0.014    0.131    0.131
+  interest_a1 ~~                                                        
+    media_a1          0.144    0.043    3.365    0.001    0.179    0.179
+    digital_a1        0.298    0.054    5.477    0.000    0.293    0.293
+    social_a1         0.250    0.056    4.480    0.000    0.224    0.224
+  media_a1 ~~                                                           
+    digital_a1        0.570    0.068    8.354    0.000    0.699    0.699
+    social_a1         0.402    0.060    6.703    0.000    0.449    0.449
+  digital_a1 ~~                                                         
+    social_a1         0.658    0.074    8.864    0.000    0.584    0.584
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .ope1              0.458    0.047    9.845    0.000    0.458    0.271
+   .ope2              0.458    0.047    9.830    0.000    0.458    0.271
+   .ope3              0.995    0.066   15.187    0.000    0.995    0.584
+   .ope4              0.884    0.059   14.879    0.000    0.884    0.545
+   .intef1            1.065    0.070   15.294    0.000    1.065    0.700
+   .intef2            0.716    0.061   11.808    0.000    0.716    0.447
+   .intef3            0.462    0.054    8.509    0.000    0.462    0.318
+   .extef1            0.756    0.070   10.852    0.000    0.756    0.474
+   .extef2            0.685    0.065   10.466    0.000    0.685    0.458
+   .extef3            1.083    0.082   13.251    0.000    1.083    0.592
+   .polint            1.132    0.072   15.664    0.000    1.132    0.529
+   .procint           0.390    0.050    7.765    0.000    0.390    0.173
+   .plebint           0.297    0.050    5.893    0.000    0.297    0.131
+   .tv                1.566    0.105   14.948    0.000    1.566    0.707
+   .cable             1.198    0.091   13.156    0.000    1.198    0.562
+   .newspaper         0.877    0.071   12.302    0.000    0.877    0.512
+   .radio             1.149    0.087   13.143    0.000    1.149    0.561
+   .tradonline        0.881    0.071   12.480    0.000    0.881    0.462
+   .online            0.869    0.071   12.185    0.000    0.869    0.446
+   .podcast           0.911    0.061   14.889    0.000    0.911    0.648
+   .officialsm        1.347    0.092   14.668    0.000    1.347    0.625
+   .fb                1.246    0.088   14.116    0.000    1.246    0.502
+   .insta             1.095    0.081   13.494    0.000    1.095    0.453
+   .twitter           1.626    0.105   15.456    0.000    1.626    0.658
+   .whatsapp          1.222    0.091   13.459    0.000    1.222    0.450
+   .youtube           1.183    0.084   14.142    0.000    1.183    0.505
+   .tiktok            1.358    0.090   15.058    0.000    1.358    0.602
+   .under_w3_1        0.706    0.044   15.875    0.000    0.706    0.684
+   .under_w3_2        1.106    0.068   16.189    0.000    1.106    0.756
+   .under_w3_3        0.694    0.045   15.509    0.000    0.694    0.616
+   .under_w3_4        0.832    0.055   15.099    0.000    0.832    0.554
+   .under_w3_5        0.957    0.060   15.894    0.000    0.957    0.688
+   .under_w3_6        0.580    0.042   13.782    0.000    0.580    0.420
+   .under_w3_7        0.481    0.038   12.778    0.000    0.481    0.355
+   .under_w3_8        0.542    0.040   13.467    0.000    0.542    0.397
+    ope_a1            1.231    0.103   11.916    0.000    1.000    1.000
+    intef_a1          0.457    0.071    6.455    0.000    1.000    1.000
+    extef_a1          0.839    0.099    8.498    0.000    1.000    1.000
+    interest_a1       1.006    0.111    9.092    0.000    1.000    1.000
+    media_a1          0.648    0.105    6.185    0.000    1.000    1.000
+    digital_a1        1.027    0.111    9.267    0.000    1.000    1.000
+    social_a1         1.235    0.136    9.089    0.000    1.000    1.000
+   .under_a1          0.265    0.039    6.863    0.000    0.812    0.812</code></pre>
 </div>
-<section id="regressions-1" class="level4">
-<h4 class="anchored" data-anchor-id="regressions-1">Regressions</h4>
+</div>
+<p><strong>Appendix 2</strong> SEM for Strategic Orientation</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model_a1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(undersum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lavaan 0.6.16 ended normally after 65 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                       102
+
+  Number of observations                           572
+
+Model Test User Model:
+                                                      
+  Test statistic                              1977.587
+  Degrees of freedom                               668
+  P-value (Chi-square)                           0.000
+
+Model Test Baseline Model:
+
+  Test statistic                              8440.118
+  Degrees of freedom                               735
+  P-value                                        0.000
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.830
+  Tucker-Lewis Index (TLI)                       0.813
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)             -31514.243
+  Loglikelihood unrestricted model (H1)     -30525.449
+                                                      
+  Akaike (AIC)                               63232.485
+  Bayesian (BIC)                             63676.098
+  Sample-size adjusted Bayesian (SABIC)      63352.292
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.059
+  90 Percent confidence interval - lower         0.056
+  90 Percent confidence interval - upper         0.062
+  P-value H_0: RMSEA &lt;= 0.050                    0.000
+  P-value H_0: RMSEA &gt;= 0.080                    0.000
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.065
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  ope_a2 =~                                                             
+    ope1              1.000                               1.110    0.854
+    ope2              0.999    0.045   22.209    0.000    1.108    0.853
+    ope3              0.758    0.047   16.131    0.000    0.841    0.644
+    ope4              0.776    0.045   17.141    0.000    0.861    0.677
+  intef_a2 =~                                                           
+    intef1            1.000                               0.680    0.551
+    intef2            1.388    0.117   11.843    0.000    0.944    0.746
+    intef3            1.458    0.120   12.142    0.000    0.991    0.822
+  extef_a2 =~                                                           
+    extef1            1.000                               0.918    0.727
+    extef2            0.978    0.075   13.008    0.000    0.898    0.734
+    extef3            0.944    0.077   12.239    0.000    0.866    0.640
+  interest_a2 =~                                                        
+    polint            1.000                               1.002    0.685
+    procint           1.361    0.070   19.402    0.000    1.363    0.909
+    plebint           1.403    0.072   19.486    0.000    1.406    0.933
+  media_a2 =~                                                           
+    tv                1.000                               0.809    0.543
+    cable             1.205    0.113   10.642    0.000    0.974    0.667
+    newspaper         1.131    0.104   10.878    0.000    0.914    0.698
+    radio             1.163    0.110   10.559    0.000    0.940    0.657
+  digital_a2 =~                                                         
+    tradonline        1.000                               1.013    0.733
+    online            1.024    0.067   15.361    0.000    1.037    0.743
+    podcast           0.694    0.055   12.606    0.000    0.702    0.592
+    officialsm        0.892    0.068   13.055    0.000    0.903    0.615
+  social_a2 =~                                                          
+    fb                1.000                               1.114    0.707
+    insta             1.030    0.065   15.741    0.000    1.147    0.737
+    twitter           0.823    0.065   12.663    0.000    0.917    0.583
+    whatsapp          1.098    0.069   15.833    0.000    1.223    0.742
+    youtube           0.968    0.064   15.108    0.000    1.078    0.704
+    tiktok            0.851    0.062   13.651    0.000    0.948    0.631
+  strate_a2 =~                                                          
+    strate_w3_1       1.000                               0.647    0.510
+    strate_w3_2       1.082    0.119    9.073    0.000    0.700    0.564
+    strate_w3_3       0.987    0.121    8.128    0.000    0.639    0.472
+    strate_w3_4       1.042    0.123    8.452    0.000    0.674    0.501
+    strate_w3_5       0.646    0.103    6.291    0.000    0.418    0.334
+    strate_w3_6       1.234    0.132    9.343    0.000    0.799    0.594
+    strate_w3_7       1.020    0.123    8.270    0.000    0.660    0.484
+    strate_w3_8       1.363    0.139    9.810    0.000    0.882    0.656
+
+Regressions:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  strate_a2 ~                                                           
+    ses               0.054    0.025    2.157    0.031    0.084    0.102
+    sex              -0.148    0.061   -2.440    0.015   -0.229   -0.114
+    age_num          -0.006    0.002   -2.840    0.005   -0.010   -0.137
+    media_a2          0.301    0.081    3.737    0.000    0.376    0.376
+    digital_a2       -0.135    0.068   -1.983    0.047   -0.211   -0.211
+    social_a2         0.087    0.041    2.110    0.035    0.150    0.150
+    interest_a2      -0.034    0.039   -0.861    0.389   -0.052   -0.052
+    intercon         -0.167    0.089   -1.875    0.061   -0.258   -0.086
+    extef_a2         -0.069    0.054   -1.285    0.199   -0.098   -0.098
+    intef_a2         -0.205    0.088   -2.330    0.020   -0.215   -0.215
+    ope_a2            0.115    0.036    3.207    0.001    0.197    0.197
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  ope_a2 ~~                                                             
+    intef_a2          0.274    0.044    6.173    0.000    0.363    0.363
+    extef_a2         -0.083    0.053   -1.564    0.118   -0.081   -0.081
+    interest_a2       0.325    0.056    5.799    0.000    0.292    0.292
+    media_a2          0.091    0.047    1.928    0.054    0.101    0.101
+    digital_a2        0.304    0.060    5.070    0.000    0.270    0.270
+    social_a2         0.350    0.064    5.462    0.000    0.283    0.283
+  intef_a2 ~~                                                           
+    extef_a2         -0.342    0.046   -7.443    0.000   -0.549   -0.549
+    interest_a2       0.310    0.044    7.076    0.000    0.456    0.456
+    media_a2          0.088    0.031    2.809    0.005    0.160    0.160
+    digital_a2        0.163    0.039    4.146    0.000    0.237    0.237
+    social_a2         0.061    0.039    1.566    0.117    0.081    0.081
+  extef_a2 ~~                                                           
+    interest_a2      -0.073    0.047   -1.564    0.118   -0.079   -0.079
+    media_a2          0.036    0.042    0.864    0.388    0.048    0.048
+    digital_a2        0.004    0.051    0.078    0.937    0.004    0.004
+    social_a2         0.134    0.055    2.458    0.014    0.131    0.131
+  interest_a2 ~~                                                        
+    media_a2          0.145    0.043    3.374    0.001    0.179    0.179
+    digital_a2        0.298    0.054    5.475    0.000    0.293    0.293
+    social_a2         0.250    0.056    4.476    0.000    0.224    0.224
+  media_a2 ~~                                                           
+    digital_a2        0.571    0.068    8.377    0.000    0.697    0.697
+    social_a2         0.406    0.060    6.734    0.000    0.450    0.450
+  digital_a2 ~~                                                         
+    social_a2         0.659    0.074    8.873    0.000    0.585    0.585
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .ope1              0.457    0.046    9.833    0.000    0.457    0.271
+   .ope2              0.462    0.047    9.911    0.000    0.462    0.273
+   .ope3              0.996    0.066   15.187    0.000    0.996    0.585
+   .ope4              0.879    0.059   14.848    0.000    0.879    0.542
+   .intef1            1.060    0.070   15.254    0.000    1.060    0.696
+   .intef2            0.711    0.061   11.711    0.000    0.711    0.444
+   .intef3            0.471    0.054    8.668    0.000    0.471    0.324
+   .extef1            0.752    0.070   10.806    0.000    0.752    0.472
+   .extef2            0.691    0.065   10.571    0.000    0.691    0.462
+   .extef3            1.079    0.082   13.217    0.000    1.079    0.590
+   .polint            1.134    0.072   15.670    0.000    1.134    0.531
+   .procint           0.392    0.051    7.753    0.000    0.392    0.174
+   .plebint           0.294    0.051    5.790    0.000    0.294    0.129
+   .tv                1.560    0.104   14.969    0.000    1.560    0.705
+   .cable             1.183    0.090   13.142    0.000    1.183    0.555
+   .newspaper         0.879    0.071   12.429    0.000    0.879    0.513
+   .radio             1.163    0.087   13.345    0.000    1.163    0.568
+   .tradonline        0.882    0.071   12.487    0.000    0.882    0.462
+   .online            0.873    0.071   12.220    0.000    0.873    0.448
+   .podcast           0.912    0.061   14.892    0.000    0.912    0.649
+   .officialsm        1.341    0.092   14.635    0.000    1.341    0.622
+   .fb                1.241    0.088   14.092    0.000    1.241    0.500
+   .insta             1.103    0.081   13.543    0.000    1.103    0.456
+   .twitter           1.630    0.105   15.470    0.000    1.630    0.660
+   .whatsapp          1.218    0.091   13.440    0.000    1.218    0.449
+   .youtube           1.181    0.084   14.136    0.000    1.181    0.504
+   .tiktok            1.356    0.090   15.053    0.000    1.356    0.601
+   .strate_w3_1       1.191    0.079   15.124    0.000    1.191    0.740
+   .strate_w3_2       1.054    0.073   14.539    0.000    1.054    0.682
+   .strate_w3_3       1.424    0.092   15.457    0.000    1.424    0.777
+   .strate_w3_4       1.356    0.089   15.207    0.000    1.356    0.749
+   .strate_w3_5       1.395    0.086   16.278    0.000    1.395    0.889
+   .strate_w3_6       1.169    0.083   14.123    0.000    1.169    0.647
+   .strate_w3_7       1.421    0.093   15.354    0.000    1.421    0.765
+   .strate_w3_8       1.029    0.079   13.048    0.000    1.029    0.570
+    ope_a2            1.232    0.103   11.923    0.000    1.000    1.000
+    intef_a2          0.462    0.071    6.488    0.000    1.000    1.000
+    extef_a2          0.842    0.099    8.518    0.000    1.000    1.000
+    interest_a2       1.004    0.111    9.078    0.000    1.000    1.000
+    media_a2          0.654    0.105    6.240    0.000    1.000    1.000
+    digital_a2        1.025    0.111    9.257    0.000    1.000    1.000
+    social_a2         1.241    0.136    9.117    0.000    1.000    1.000
+   .strate_a2         0.334    0.060    5.562    0.000    0.798    0.798</code></pre>
+</div>
+</div>
+<section id="working-with-w1" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-w1">Working with W1</h3>
+<p><strong>Appendix 1</strong>. OLS for Understanding Orientation just using W1.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = under_1 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.49417 -0.36644  0.04804  0.40449  1.86981 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept) -0.112761   0.078035  -1.445              0.14869    
+ses         -0.007048   0.013548  -0.520              0.60299    
+sex          0.010200   0.030837   0.331              0.74086    
+age_num      0.002752   0.001143   2.408              0.01617 *  
+media_1      0.034251   0.038221   0.896              0.37034    
+digital_1    0.056332   0.035766   1.575              0.11549    
+social_1    -0.004627   0.023972  -0.193              0.84699    
+interest_1   0.197071   0.020292   9.712 &lt; 0.0000000000000002 ***
+intercon     0.084182   0.047030   1.790              0.07368 .  
+extef_1     -0.074802   0.025581  -2.924              0.00351 ** 
+intef_1      0.081919   0.042773   1.915              0.05567 .  
+ope_1        0.099274   0.018039   5.503         0.0000000445 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5604 on 1365 degrees of freedom
+Multiple R-squared:  0.2616,    Adjusted R-squared:  0.2556 
+F-statistic: 43.96 on 11 and 1365 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+</div>
+<p><strong>Appendix 2</strong>. OLS for Strategic Orientation just using W1.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate_1 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.13516 -0.30497  0.02747  0.27601  1.54873 
+
+Coefficients:
+              Estimate Std. Error t value     Pr(&gt;|t|)    
+(Intercept) -0.0752466  0.0588454  -1.279     0.201214    
+ses          0.0299412  0.0102160   2.931     0.003437 ** 
+sex          0.0064777  0.0232537   0.279     0.780620    
+age_num     -0.0002269  0.0008618  -0.263     0.792387    
+media_1      0.0723703  0.0288224   2.511     0.012157 *  
+digital_1   -0.0015713  0.0269711  -0.058     0.953551    
+social_1     0.0218022  0.0180770   1.206     0.227999    
+interest_1  -0.0198537  0.0153017  -1.297     0.194684    
+intercon    -0.1190581  0.0354647  -3.357     0.000809 ***
+extef_1     -0.0489088  0.0192902  -2.535     0.011342 *  
+intef_1     -0.0623574  0.0322543  -1.933     0.053405 .  
+ope_1        0.0752496  0.0136028   5.532 0.0000000379 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4226 on 1365 degrees of freedom
+Multiple R-squared:  0.06843,   Adjusted R-squared:  0.06092 
+F-statistic: 9.115 on 11 and 1365 DF,  p-value: 0.0000000000000006786</code></pre>
+</div>
+</div>
+<p><strong>Appendix 3</strong>. OLS for Strategic Orientation just using W1, no factor.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate1 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7723 -0.8411 -0.4247  0.7983  3.6886 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.021428   0.159284  12.691 &lt; 0.0000000000000002 ***
+ses          0.073236   0.027653   2.648              0.00818 ** 
+sex         -0.182289   0.062943  -2.896              0.00384 ** 
+age_num     -0.006388   0.002333  -2.738              0.00626 ** 
+media_1      0.207450   0.078017   2.659              0.00793 ** 
+digital_1   -0.075383   0.073006  -1.033              0.30199    
+social_1     0.052556   0.048931   1.074              0.28298    
+interest_1  -0.106521   0.041419  -2.572              0.01022 *  
+intercon    -0.038388   0.095996  -0.400              0.68930    
+extef_1      0.129939   0.052215   2.489              0.01295 *  
+intef_1     -0.110383   0.087306  -1.264              0.20633    
+ope_1        0.193417   0.036820   5.253          0.000000173 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.144 on 1365 degrees of freedom
+Multiple R-squared:  0.07612,   Adjusted R-squared:  0.06867 
+F-statistic: 10.22 on 11 and 1365 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate2 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6277 -1.1027  0.1110  0.7694  3.2126 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.729928   0.177930  15.343 &lt; 0.0000000000000002 ***
+ses          0.035149   0.030890   1.138              0.25537    
+sex          0.073360   0.070312   1.043              0.29697    
+age_num     -0.003071   0.002606  -1.178              0.23884    
+media_1      0.138490   0.087150   1.589              0.11227    
+digital_1   -0.005785   0.081552  -0.071              0.94346    
+social_1     0.069923   0.054659   1.279              0.20103    
+interest_1  -0.002738   0.046268  -0.059              0.95282    
+intercon    -0.227711   0.107234  -2.123              0.03389 *  
+extef_1     -0.176242   0.058327  -3.022              0.00256 ** 
+intef_1     -0.100461   0.097527  -1.030              0.30315    
+ope_1        0.197286   0.041131   4.797           0.00000179 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.278 on 1365 degrees of freedom
+Multiple R-squared:  0.05068,   Adjusted R-squared:  0.04303 
+F-statistic: 6.625 on 11 and 1365 DF,  p-value: 0.00000000007123</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate3 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.52100 -1.22181  0.06647  1.07819  2.87355 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.483483   0.191686  12.956 &lt; 0.0000000000000002 ***
+ses          0.079257   0.033278   2.382             0.017372 *  
+sex          0.094929   0.075748   1.253             0.210338    
+age_num      0.002498   0.002807   0.890             0.373719    
+media_1      0.084965   0.093887   0.905             0.365640    
+digital_1    0.053219   0.087857   0.606             0.544784    
+social_1    -0.002932   0.058885  -0.050             0.960302    
+interest_1  -0.036705   0.049845  -0.736             0.461623    
+intercon    -0.457867   0.115524  -3.963            0.0000777 ***
+extef_1     -0.224895   0.062837  -3.579             0.000357 ***
+intef_1     -0.225144   0.105067  -2.143             0.032300 *  
+ope_1        0.067779   0.044311   1.530             0.126338    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.377 on 1365 degrees of freedom
+Multiple R-squared:  0.03809,   Adjusted R-squared:  0.03034 
+F-statistic: 4.914 on 11 and 1365 DF,  p-value: 0.0000001663</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate4 ~ ses + sex + age_num + media_1 + digital_1 + 
+    social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, 
+    data = data_justw1_na)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1544 -1.2661  0.1892  0.6979  3.1543 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.035952   0.182648  11.147 &lt; 0.0000000000000002 ***
+ses          0.074693   0.031709   2.356              0.01864 *  
+sex          0.035224   0.072176   0.488              0.62561    
+age_num      0.004519   0.002675   1.689              0.09138 .  
+media_1      0.159179   0.089461   1.779              0.07541 .  
+digital_1   -0.010405   0.083715  -0.124              0.90110    
+social_1     0.053166   0.056109   0.948              0.34352    
+interest_1  -0.121590   0.047495  -2.560              0.01057 *  
+intercon    -0.305882   0.110078  -2.779              0.00553 ** 
+extef_1     -0.069278   0.059874  -1.157              0.24745    
+intef_1     -0.131184   0.100113  -1.310              0.19029    
+ope_1        0.107057   0.042221   2.536              0.01134 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.312 on 1365 degrees of freedom
+Multiple R-squared:  0.03572,   Adjusted R-squared:  0.02795 
+F-statistic: 4.597 on 11 and 1365 DF,  p-value: 0.0000006762</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="alternative-models-by-adding-observable-variables." class="level3">
+<h3 class="anchored" data-anchor-id="alternative-models-by-adding-observable-variables.">Alternative models, by adding observable variables.</h3>
+<p><strong>Appendix 4</strong>. OLS for Understanding Orientation and Strategic Orientation just using W1 and by adding observable variebles (not CFA).</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = undersum ~ ses + sex + age_num + mediasum + digitalsum + 
     socialsum + polint + intercon + extefsum + intefsum + opesum, 
-    data = data_w1_scores)
+    data = data_justw1_na)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.7442 -0.5240  0.0544  0.6268  2.5909 
+-3.7224 -0.5300  0.0645  0.6093  2.5387 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.030579   0.191775  10.588  &lt; 2e-16 ***
-ses         -0.032749   0.022025  -1.487 0.137323    
-sex          0.023171   0.050892   0.455 0.648976    
-age_num      0.003904   0.001886   2.070 0.038658 *  
-mediasum     0.072964   0.027529   2.650 0.008152 ** 
-digitalsum   0.044280   0.033217   1.333 0.182794    
-socialsum   -0.003325   0.027952  -0.119 0.905347    
-polint       0.159450   0.020231   7.881 7.62e-15 ***
-intercon     0.132121   0.077396   1.707 0.088086 .  
-extefsum    -0.093423   0.026991  -3.461 0.000558 ***
-intefsum     0.110869   0.031466   3.523 0.000443 ***
-opesum       0.179158   0.026154   6.850 1.21e-11 ***
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.031871   0.173197  11.732 &lt; 0.0000000000000002 ***
+ses         -0.032482   0.019858  -1.636             0.102139    
+sex          0.021778   0.045585   0.478             0.632907    
+age_num      0.005033   0.001706   2.950             0.003237 ** 
+mediasum     0.051037   0.024502   2.083             0.037437 *  
+digitalsum   0.071047   0.029310   2.424             0.015479 *  
+socialsum   -0.001829   0.025080  -0.073             0.941880    
+polint       0.165386   0.018309   9.033 &lt; 0.0000000000000002 ***
+intercon     0.151221   0.069699   2.170             0.030208 *  
+extefsum    -0.088821   0.024367  -3.645             0.000277 ***
+intefsum     0.104214   0.028288   3.684             0.000239 ***
+opesum       0.160797   0.023436   6.861      0.0000000000103 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.8403 on 1122 degrees of freedom
-Multiple R-squared:  0.2523,    Adjusted R-squared:  0.245 
-F-statistic: 34.42 on 11 and 1122 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.8301 on 1365 degrees of freedom
+Multiple R-squared:   0.25, Adjusted R-squared:  0.244 
+F-statistic: 41.37 on 11 and 1365 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model_a2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(stratesum <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> mediasum <span class="sc">+</span> digitalsum <span class="sc">+</span> socialsum <span class="sc">+</span> polint <span class="sc">+</span> intercon <span class="sc">+</span> extefsum <span class="sc">+</span> intefsum <span class="sc">+</span> opesum, <span class="at">data =</span> data_w1_scores)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_a2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = stratesum ~ ses + sex + age_num + mediasum + digitalsum + 
     socialsum + polint + intercon + extefsum + intefsum + opesum, 
-    data = data_w1_scores)
+    data = data_justw1_na)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--2.09354 -0.63014  0.05855  0.56001  3.00885 
+-2.06854 -0.63264  0.04264  0.56253  3.05127 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.013568   0.195005  10.326  &lt; 2e-16 ***
-ses          0.070481   0.022396   3.147  0.00169 ** 
-sex          0.019065   0.051749   0.368  0.71264    
-age_num     -0.001469   0.001918  -0.766  0.44381    
-mediasum     0.091536   0.027993   3.270  0.00111 ** 
-digitalsum   0.028691   0.033777   0.849  0.39583    
-socialsum    0.014811   0.028423   0.521  0.60240    
-polint      -0.046889   0.020572  -2.279  0.02284 *  
-intercon    -0.243804   0.078700  -3.098  0.00200 ** 
-extefsum    -0.044184   0.027446  -1.610  0.10771    
-intefsum    -0.048129   0.031996  -1.504  0.13281    
-opesum       0.137534   0.026594   5.172 2.75e-07 ***
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)  2.023230   0.179134  11.294 &lt; 0.0000000000000002 ***
+ses          0.070436   0.020539   3.429             0.000623 ***
+sex          0.003422   0.047148   0.073             0.942158    
+age_num     -0.001025   0.001765  -0.581             0.561427    
+mediasum     0.089545   0.025342   3.534             0.000424 ***
+digitalsum   0.014408   0.030314   0.475             0.634656    
+socialsum    0.025342   0.025940   0.977             0.328763    
+polint      -0.039613   0.018936  -2.092             0.036632 *  
+intercon    -0.267352   0.072089  -3.709             0.000217 ***
+extefsum    -0.048023   0.025202  -1.905             0.056926 .  
+intefsum    -0.050356   0.029258  -1.721             0.085456 .  
+opesum       0.129347   0.024239   5.336          0.000000111 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.8545 on 1122 degrees of freedom
-Multiple R-squared:  0.07398,   Adjusted R-squared:  0.0649 
-F-statistic: 8.149 on 11 and 1122 DF,  p-value: 7.779e-14</code></pre>
+Residual standard error: 0.8585 on 1365 degrees of freedom
+Multiple R-squared:  0.06881,   Adjusted R-squared:  0.06131 
+F-statistic:  9.17 on 11 and 1365 DF,  p-value: 0.0000000000000005238</code></pre>
 </div>
 </div>
 </section>
 </section>
-</section>
-</section>
-<section id="replicating-with-wave-3" class="level1">
-<h1>Replicating with wave 3</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Data</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data_w3 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"Data_W3.sav"</span>)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ID</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>id <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>CodPanelista</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Understanding orientation</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_1 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_1</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_2 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_2</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_3 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_3</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_4 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_4</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_5 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_5</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_6 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_6</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_7 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_7</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>under_w3_8 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P48_8</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Strategic orientation</span></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_1 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_1</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_2 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_2</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_3 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_3</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_4 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_4</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_5 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_5</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_6 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_6</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_7 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_7</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>data_w3<span class="sc">$</span>strate_w3_8 <span class="ot">&lt;-</span> data_w3<span class="sc">$</span>P49_8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'id' is your key variable for merging</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>data_w3_selected <span class="ot">&lt;-</span> data_w3 <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, <span class="fu">starts_with</span>(<span class="st">"strate_w3_"</span>), <span class="fu">starts_with</span>(<span class="st">"under_w3_"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge dataframes</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> data_w1_scores <span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data_w3_selected, <span class="at">by =</span> <span class="st">"id"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cronbach_ope_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"ope1"</span>, <span class="st">"ope2"</span>, <span class="st">"ope3"</span>, <span class="st">"ope4"</span>)]))</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>cronbach_ope_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
-      0.85      0.85    0.82      0.59 5.7 0.011  2.7 1.1     0.56
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.83  0.85  0.87
-Duhachek  0.83  0.85  0.87
-
- Reliability if an item is dropped:
-     raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-ope1      0.79      0.79    0.71      0.55 3.7    0.017 0.0021  0.57
-ope2      0.77      0.77    0.69      0.53 3.4    0.018 0.0008  0.54
-ope3      0.84      0.84    0.79      0.63 5.1    0.013 0.0140  0.57
-ope4      0.84      0.84    0.79      0.63 5.1    0.013 0.0143  0.58
-
- Item statistics 
-       n raw.r std.r r.cor r.drop mean  sd
-ope1 486  0.86  0.86  0.82   0.74  2.5 1.3
-ope2 486  0.88  0.88  0.85   0.77  2.8 1.3
-ope3 486  0.79  0.79  0.67   0.62  3.0 1.3
-ope4 486  0.79  0.79  0.67   0.62  2.4 1.3
-
-Non missing response frequency for each item
-        1    2    3    4    5 miss
-ope1 0.30 0.17 0.32 0.11 0.10    0
-ope2 0.23 0.17 0.33 0.14 0.12    0
-ope3 0.18 0.13 0.33 0.20 0.17    0
-ope4 0.33 0.18 0.30 0.11 0.08    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>cronbach_intef_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"intef1"</span>, <span class="st">"intef2"</span>, <span class="st">"intef3"</span>)]))</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>cronbach_intef_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("intef1", "intef2", "intef3")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean sd median_r
-      0.74      0.74    0.68      0.49 2.9 0.021  3.5  1     0.42
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt      0.7  0.74  0.78
-Duhachek   0.7  0.74  0.78
-
- Reliability if an item is dropped:
-       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-intef1      0.78      0.78    0.64      0.64 3.6    0.020    NA  0.64
-intef2      0.59      0.59    0.42      0.42 1.5    0.037    NA  0.42
-intef3      0.57      0.57    0.40      0.40 1.4    0.039    NA  0.40
-
- Item statistics 
-         n raw.r std.r r.cor r.drop mean  sd
-intef1 486  0.75  0.75  0.52   0.46  3.4 1.2
-intef2 486  0.84  0.84  0.74   0.62  3.3 1.3
-intef3 486  0.84  0.85  0.75   0.64  3.6 1.2
-
-Non missing response frequency for each item
-          1    2    3    4    5 miss
-intef1 0.09 0.09 0.35 0.19 0.27    0
-intef2 0.12 0.10 0.34 0.21 0.23    0
-intef3 0.07 0.08 0.30 0.22 0.32    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cronbach_extef_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"extef1"</span>, <span class="st">"extef2"</span>, <span class="st">"extef3"</span>)]))</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>cronbach_extef_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("extef1", "extef2", "extef3")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
-      0.75      0.75    0.67      0.51 3.1 0.019  2.1 1.1     0.49
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.71  0.75  0.79
-Duhachek  0.71  0.75  0.79
-
- Reliability if an item is dropped:
-       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-extef1      0.65      0.65    0.49      0.49 1.9    0.031    NA  0.49
-extef2      0.65      0.65    0.48      0.48 1.9    0.032    NA  0.48
-extef3      0.71      0.71    0.55      0.55 2.4    0.026    NA  0.55
-
- Item statistics 
-         n raw.r std.r r.cor r.drop mean  sd
-extef1 486  0.82  0.83  0.69   0.60  2.2 1.3
-extef2 486  0.82  0.83  0.70   0.60  2.0 1.3
-extef3 486  0.81  0.80  0.63   0.55  2.2 1.4
-
-Non missing response frequency for each item
-          1    2    3    4    5 miss
-extef1 0.44 0.16 0.23 0.09 0.08    0
-extef2 0.55 0.14 0.17 0.06 0.07    0
-extef3 0.48 0.12 0.20 0.10 0.09    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cronbach_media_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"tv"</span>, <span class="st">"cable"</span>, <span class="st">"newspaper"</span>, <span class="st">"radio"</span>)]))</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>cronbach_media_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("tv", "cable", "newspaper", "radio")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N  ase mean  sd median_r
-      0.73      0.74    0.69      0.41 2.8 0.02  2.7 1.1     0.39
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.69  0.73  0.77
-Duhachek  0.69  0.73  0.77
-
- Reliability if an item is dropped:
-          raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-tv             0.69      0.69    0.61      0.43 2.3    0.025 0.0046  0.42
-cable          0.65      0.65    0.57      0.39 1.9    0.028 0.0112  0.36
-newspaper      0.66      0.66    0.58      0.39 1.9    0.027 0.0129  0.37
-radio          0.70      0.69    0.61      0.43 2.3    0.024 0.0064  0.42
-
- Item statistics 
-            n raw.r std.r r.cor r.drop mean  sd
-tv        486  0.74  0.73  0.59   0.50  3.4 1.5
-cable     486  0.78  0.77  0.66   0.57  2.6 1.5
-newspaper 486  0.75  0.76  0.65   0.55  2.1 1.3
-radio     486  0.72  0.72  0.58   0.49  2.5 1.4
-
-Non missing response frequency for each item
-             1    2    3    4    5 miss
-tv        0.19 0.11 0.18 0.19 0.33    0
-cable     0.34 0.16 0.19 0.16 0.15    0
-newspaper 0.48 0.16 0.19 0.10 0.07    0
-radio     0.37 0.16 0.19 0.16 0.12    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>cronbach_digital_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"tradonline"</span>, <span class="st">"online"</span>, <span class="st">"podcast"</span>, <span class="st">"officialsm"</span>)]))</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>cronbach_digital_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("tradonline", "online", "podcast", 
-    "officialsm")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean sd median_r
-      0.76      0.76    0.72      0.45 3.3 0.018  2.3  1     0.42
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.73  0.76   0.8
-Duhachek  0.73  0.76   0.8
-
- Reliability if an item is dropped:
-           raw_alpha std.alpha G6(smc) average_r S/N alpha se   var.r med.r
-tradonline      0.70      0.70    0.62      0.44 2.4    0.024 0.00556  0.43
-online          0.65      0.66    0.56      0.39 1.9    0.027 0.00019  0.38
-podcast         0.72      0.73    0.65      0.47 2.6    0.022 0.00837  0.43
-officialsm      0.75      0.75    0.67      0.49 2.9    0.020 0.00969  0.52
-
- Item statistics 
-             n raw.r std.r r.cor r.drop mean  sd
-tradonline 486  0.78  0.77  0.66   0.58  2.4 1.4
-online     486  0.82  0.82  0.76   0.65  2.3 1.4
-podcast    486  0.72  0.75  0.61   0.53  1.8 1.2
-officialsm 486  0.74  0.72  0.56   0.50  2.7 1.4
-
-Non missing response frequency for each item
-              1    2    3    4    5 miss
-tradonline 0.36 0.17 0.21 0.16 0.09    0
-online     0.40 0.19 0.17 0.14 0.09    0
-podcast    0.60 0.15 0.13 0.08 0.03    0
-officialsm 0.32 0.14 0.21 0.18 0.14    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>cronbach_social_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"fb"</span>, <span class="st">"insta"</span>, <span class="st">"twitter"</span>, <span class="st">"whatsapp"</span>, <span class="st">"youtube"</span>, <span class="st">"tiktok"</span>)]))</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>cronbach_social_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("fb", "insta", "twitter", "whatsapp", 
-    "youtube", "tiktok")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
-      0.85      0.85    0.83      0.48 5.5 0.011  2.6 1.2     0.48
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.83  0.85  0.87
-Duhachek  0.83  0.85  0.87
-
- Reliability if an item is dropped:
-         raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-fb            0.82      0.82    0.80      0.48 4.6    0.013 0.0060  0.50
-insta         0.81      0.81    0.78      0.46 4.3    0.014 0.0082  0.45
-twitter       0.84      0.84    0.82      0.52 5.4    0.011 0.0034  0.52
-whatsapp      0.81      0.81    0.78      0.46 4.2    0.014 0.0063  0.48
-youtube       0.82      0.82    0.80      0.47 4.5    0.013 0.0074  0.50
-tiktok        0.83      0.83    0.81      0.49 4.9    0.012 0.0074  0.50
-
- Item statistics 
-           n raw.r std.r r.cor r.drop mean  sd
-fb       486  0.75  0.75  0.69   0.63  3.0 1.6
-insta    486  0.80  0.80  0.75   0.69  2.8 1.6
-twitter  486  0.67  0.67  0.57   0.52  2.4 1.6
-whatsapp 486  0.81  0.81  0.77   0.70  2.9 1.7
-youtube  486  0.76  0.77  0.70   0.65  2.5 1.5
-tiktok   486  0.72  0.73  0.64   0.59  2.1 1.5
-
-Non missing response frequency for each item
-            1    2    3    4    5 miss
-fb       0.28 0.11 0.16 0.18 0.27    0
-insta    0.33 0.13 0.17 0.16 0.21    0
-twitter  0.48 0.09 0.13 0.14 0.15    0
-whatsapp 0.36 0.11 0.14 0.11 0.28    0
-youtube  0.41 0.14 0.14 0.15 0.16    0
-tiktok   0.59 0.09 0.09 0.09 0.13    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>cronbach_interest_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"polint"</span>, <span class="st">"procint"</span>, <span class="st">"plebint"</span>)]))</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>cronbach_interest_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("polint", "procint", "plebint")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N  ase mean  sd median_r
-      0.87      0.87    0.84       0.7 6.9 0.01  3.2 1.4     0.63
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.85  0.87  0.89
-Duhachek  0.85  0.87  0.89
-
- Reliability if an item is dropped:
-        raw_alpha std.alpha G6(smc) average_r  S/N alpha se var.r med.r
-polint       0.92      0.92    0.85      0.85 11.0   0.0076    NA  0.85
-procint      0.77      0.77    0.63      0.63  3.4   0.0207    NA  0.63
-plebint      0.76      0.76    0.61      0.61  3.2   0.0216    NA  0.61
-
- Item statistics 
-          n raw.r std.r r.cor r.drop mean  sd
-polint  486  0.83  0.84  0.68   0.65  2.9 1.5
-procint 486  0.92  0.92  0.89   0.81  3.3 1.5
-plebint 486  0.93  0.92  0.90   0.82  3.5 1.5
-
-Non missing response frequency for each item
-           1    2    3    4    5 miss
-polint  0.30 0.10 0.22 0.20 0.18    0
-procint 0.21 0.09 0.19 0.20 0.31    0
-plebint 0.19 0.08 0.14 0.18 0.40    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>cronbach_under_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"under_w3_1"</span>, <span class="st">"under_w3_2"</span>, <span class="st">"under_w3_3"</span>, <span class="st">"under_w3_4"</span>, <span class="st">"under_w3_5"</span>, <span class="st">"under_w3_6"</span>, <span class="st">"under_w3_7"</span>, <span class="st">"under_w3_8"</span>)]))</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>cronbach_under_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("under_w3_1", "under_w3_2", "under_w3_3", 
-    "under_w3_4", "under_w3_5", "under_w3_6", "under_w3_7", "under_w3_8")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N    ase mean   sd median_r
-      0.86      0.86    0.86      0.44 6.4 0.0093  3.7 0.83     0.44
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.85  0.86  0.88
-Duhachek  0.85  0.86  0.88
-
- Reliability if an item is dropped:
-           raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-under_w3_1      0.85      0.86    0.85      0.46 5.9   0.0100 0.0119  0.46
-under_w3_2      0.86      0.86    0.86      0.47 6.2   0.0094 0.0114  0.46
-under_w3_3      0.85      0.85    0.84      0.45 5.6   0.0104 0.0152  0.43
-under_w3_4      0.84      0.85    0.84      0.44 5.5   0.0107 0.0140  0.45
-under_w3_5      0.86      0.86    0.85      0.47 6.1   0.0097 0.0088  0.45
-under_w3_6      0.84      0.84    0.84      0.43 5.2   0.0113 0.0116  0.43
-under_w3_7      0.83      0.84    0.83      0.42 5.1   0.0115 0.0095  0.43
-under_w3_8      0.84      0.84    0.83      0.43 5.2   0.0112 0.0107  0.43
-
- Item statistics 
-             n raw.r std.r r.cor r.drop mean  sd
-under_w3_1 486  0.65  0.67  0.60   0.55  4.3 1.0
-under_w3_2 486  0.62  0.62  0.53   0.49  3.7 1.2
-under_w3_3 486  0.70  0.71  0.65   0.60  3.9 1.1
-under_w3_4 486  0.74  0.74  0.68   0.64  3.8 1.2
-under_w3_5 486  0.64  0.63  0.56   0.51  3.1 1.2
-under_w3_6 486  0.79  0.79  0.76   0.71  3.7 1.2
-under_w3_7 486  0.81  0.80  0.79   0.73  3.6 1.2
-under_w3_8 486  0.78  0.78  0.75   0.70  3.6 1.2
-
-Non missing response frequency for each item
-              1    2    3    4    5 miss
-under_w3_1 0.03 0.02 0.19 0.18 0.58    0
-under_w3_2 0.08 0.05 0.29 0.22 0.36    0
-under_w3_3 0.04 0.04 0.29 0.28 0.36    0
-under_w3_4 0.08 0.04 0.27 0.23 0.38    0
-under_w3_5 0.13 0.11 0.42 0.19 0.15    0
-under_w3_6 0.07 0.08 0.30 0.24 0.32    0
-under_w3_7 0.08 0.06 0.31 0.25 0.30    0
-under_w3_8 0.07 0.06 0.38 0.20 0.29    0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cronbach_strate_m <span class="ot">&lt;-</span> <span class="fu">alpha</span>(<span class="fu">na.omit</span>(merged_data[<span class="fu">c</span>(<span class="st">"strate_w3_1"</span>, <span class="st">"strate_w3_2"</span>, <span class="st">"strate_w3_3"</span>, <span class="st">"strate_w3_4"</span>, <span class="st">"strate_w3_5"</span>, <span class="st">"strate_w3_6"</span>, <span class="st">"strate_w3_7"</span>, <span class="st">"strate_w3_8"</span>)]))</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>cronbach_strate_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Reliability analysis   
-Call: alpha(x = na.omit(merged_data[c("strate_w3_1", "strate_w3_2", 
-    "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", 
-    "strate_w3_7", "strate_w3_8")]))
-
-  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
-      0.76      0.76    0.76      0.29 3.2 0.016  2.7 0.8      0.3
-
-    95% confidence boundaries 
-         lower alpha upper
-Feldt     0.73  0.76  0.79
-Duhachek  0.73  0.76  0.79
-
- Reliability if an item is dropped:
-            raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
-strate_w3_1      0.74      0.74    0.73      0.29 2.8    0.018 0.0099  0.31
-strate_w3_2      0.74      0.74    0.73      0.28 2.8    0.018 0.0081  0.29
-strate_w3_3      0.74      0.74    0.73      0.29 2.8    0.018 0.0105  0.31
-strate_w3_4      0.73      0.73    0.72      0.28 2.7    0.019 0.0116  0.29
-strate_w3_5      0.76      0.76    0.74      0.31 3.1    0.017 0.0067  0.31
-strate_w3_6      0.73      0.73    0.72      0.28 2.7    0.019 0.0088  0.29
-strate_w3_7      0.74      0.74    0.73      0.29 2.9    0.018 0.0093  0.31
-strate_w3_8      0.72      0.72    0.71      0.27 2.6    0.019 0.0084  0.30
-
- Item statistics 
-              n raw.r std.r r.cor r.drop mean  sd
-strate_w3_1 486  0.60  0.60  0.52   0.45  2.6 1.2
-strate_w3_2 486  0.61  0.62  0.54   0.47  2.1 1.3
-strate_w3_3 486  0.61  0.61  0.52   0.45  2.8 1.3
-strate_w3_4 486  0.65  0.65  0.57   0.50  2.8 1.3
-strate_w3_5 486  0.51  0.51  0.40   0.34  3.5 1.3
-strate_w3_6 486  0.64  0.64  0.58   0.50  2.2 1.3
-strate_w3_7 486  0.59  0.59  0.51   0.43  3.3 1.4
-strate_w3_8 486  0.69  0.68  0.63   0.55  2.4 1.3
-
-Non missing response frequency for each item
-               1    2    3    4    5 miss
-strate_w3_1 0.29 0.13 0.38 0.10 0.09    0
-strate_w3_2 0.51 0.12 0.25 0.07 0.06    0
-strate_w3_3 0.25 0.14 0.36 0.10 0.15    0
-strate_w3_4 0.23 0.14 0.35 0.14 0.14    0
-strate_w3_5 0.10 0.08 0.34 0.19 0.30    0
-strate_w3_6 0.44 0.14 0.24 0.09 0.08    0
-strate_w3_7 0.15 0.09 0.34 0.15 0.27    0
-strate_w3_8 0.38 0.12 0.29 0.11 0.09    0</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as.numeric))</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_1 <span class="ot">&lt;-</span> <span class="st">'ope_w3 =~ ope1 + ope2 + ope3 + ope4</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="st">              intef_w3 =~ intef1 + intef2 + intef3</span></span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="st">              extef_w3 =~ extef1 + extef2 + extef3</span></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="st">              interest_w3 =~ polint + procint + plebint'</span></span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_2 <span class="ot">&lt;-</span> <span class="st">'media_w3 =~ tv + cable + newspaper + radio</span></span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="st">              digital_w3 =~ tradonline + online + podcast + officialsm</span></span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="st">              social_w3 =~ fb + insta + twitter + whatsapp + youtube + tiktok'</span></span>
-<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>cfa.model_w3_3 <span class="ot">&lt;-</span> <span class="st">'under_w3 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8</span></span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="st">              strate_w3 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'</span></span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_1 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_1, <span class="at">data =</span> merged_data)</span>
-<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_1)</span>
-<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-17"><a href="#cb70-17" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_2 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_2, <span class="at">data =</span> merged_data)</span>
-<span id="cb70-18"><a href="#cb70-18" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_2)</span>
-<span id="cb70-19"><a href="#cb70-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-20"><a href="#cb70-20" aria-hidden="true" tabindex="-1"></a>fit_cfa_w3_3 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(cfa.model_w3_3, <span class="at">data =</span> merged_data)</span>
-<span id="cb70-21"><a href="#cb70-21" aria-hidden="true" tabindex="-1"></a>latent_scores_w3_3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_cfa_w3_3)</span>
-<span id="cb70-22"><a href="#cb70-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-23"><a href="#cb70-23" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(merged_data, latent_scores_w3_1, latent_scores_w3_2, latent_scores_w3_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>model_w3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(under_w3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media_w3 <span class="sc">+</span> digital_w3 <span class="sc">+</span> social_w3 <span class="sc">+</span> interest_w3 <span class="sc">+</span> intercon <span class="sc">+</span> extef_w3 <span class="sc">+</span> intef_w3 <span class="sc">+</span> ope_w3, <span class="at">data =</span> merged_data)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_w3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = under_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + 
-    social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + 
-    ope_w3, data = merged_data)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.75970 -0.33250  0.03831  0.35806  1.27286 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept) -0.162455   0.117364  -1.384  0.16695   
-ses         -0.011682   0.020023  -0.583  0.55988   
-sex         -0.043346   0.047668  -0.909  0.36364   
-age_num      0.004513   0.001779   2.537  0.01151 * 
-media_w3    -0.001889   0.061104  -0.031  0.97535   
-digital_w3   0.022543   0.053595   0.421  0.67423   
-social_w3    0.039046   0.030793   1.268  0.20541   
-interest_w3  0.060523   0.030755   1.968  0.04966 * 
-intercon     0.132380   0.073052   1.812  0.07060 . 
-extef_w3     0.037030   0.041461   0.893  0.37224   
-intef_w3     0.187589   0.065574   2.861  0.00441 **
-ope_w3       0.053559   0.025935   2.065  0.03945 * 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.5057 on 474 degrees of freedom
-Multiple R-squared:  0.177, Adjusted R-squared:  0.1579 
-F-statistic: 9.265 on 11 and 474 DF,  p-value: 3.971e-15</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>model_w3_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(strate_w3 <span class="sc">~</span> ses <span class="sc">+</span> sex <span class="sc">+</span> age_num <span class="sc">+</span> media_w3 <span class="sc">+</span> digital_w3 <span class="sc">+</span> social_w3 <span class="sc">+</span> interest_w3 <span class="sc">+</span> intercon <span class="sc">+</span> extef_w3 <span class="sc">+</span> intef_w3 <span class="sc">+</span> ope_w3, <span class="at">data =</span> merged_data)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_w3_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = strate_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + 
-    social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + 
-    ope_w3, data = merged_data)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.71343 -0.35332  0.02565  0.31123  1.66757 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.095511   0.125466   0.761   0.4469    
-ses          0.051044   0.021406   2.385   0.0175 *  
-sex         -0.122222   0.050959  -2.398   0.0169 *  
-age_num     -0.004348   0.001902  -2.286   0.0227 *  
-media_w3     0.275902   0.065323   4.224 2.88e-05 ***
-digital_w3  -0.116575   0.057295  -2.035   0.0424 *  
-social_w3    0.067353   0.032918   2.046   0.0413 *  
-interest_w3 -0.020140   0.032878  -0.613   0.5405    
-intercon    -0.092104   0.078096  -1.179   0.2388    
-extef_w3    -0.050013   0.044323  -1.128   0.2597    
-intef_w3    -0.142436   0.070101  -2.032   0.0427 *  
-ope_w3       0.063258   0.027725   2.282   0.0230 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.5406 on 474 degrees of freedom
-Multiple R-squared:  0.1352,    Adjusted R-squared:  0.1151 
-F-statistic: 6.736 on 11 and 474 DF,  p-value: 1.528e-10</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to both models</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>coef_df_w3_1 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model_w3_1, <span class="st">"Model w3_1"</span>)</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>coef_df_w3_2 <span class="ot">&lt;-</span> <span class="fu">get_coef</span>(model_w3_2, <span class="st">"Model w3_2"</span>)</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data frames and remove the intercept</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_df_w3_1, coef_df_w3_2)</span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3[coef_df_w3<span class="sc">$</span>Term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>, ]</span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95% confidence intervals and determine significance</span></span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3 <span class="sc">%&gt;%</span></span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower_CI =</span> Estimate <span class="sc">-</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Lower bound of the CI</span></span>
-<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper_CI =</span> Estimate <span class="sc">+</span> <span class="fl">1.645</span> <span class="sc">*</span> Std_Error,  <span class="co"># Upper bound of the CI</span></span>
-<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significant =</span> <span class="fu">if_else</span>(Lower_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> Lower_CI <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> Upper_CI <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)  </span>
-<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping of old variable names to new names</span></span>
-<span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a>name_mapping_w3 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ses =</span> <span class="st">"Socioeconomic Status"</span>,</span>
-<span id="cb75-20"><a href="#cb75-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb75-21"><a href="#cb75-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_num =</span> <span class="st">"Age"</span>,</span>
-<span id="cb75-22"><a href="#cb75-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_w3 =</span> <span class="st">"Media Expo."</span>,</span>
-<span id="cb75-23"><a href="#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">digital_w3 =</span> <span class="st">"Dig, Media Expo."</span>,</span>
-<span id="cb75-24"><a href="#cb75-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">social_w3 =</span> <span class="st">"Soc. Media Expo."</span>,</span>
-<span id="cb75-25"><a href="#cb75-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">interest_w3 =</span> <span class="st">"Pol. Interest"</span>,</span>
-<span id="cb75-26"><a href="#cb75-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercon =</span> <span class="st">"Interp. Conf."</span>,</span>
-<span id="cb75-27"><a href="#cb75-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">extef_w3 =</span> <span class="st">"Ext. Efficacy"</span>,</span>
-<span id="cb75-28"><a href="#cb75-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">intef_w3 =</span> <span class="st">"Int. Efficacy"</span>,</span>
-<span id="cb75-29"><a href="#cb75-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">ope_w3 =</span> <span class="st">"Onl. Efficacy"</span></span>
-<span id="cb75-30"><a href="#cb75-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb75-31"><a href="#cb75-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-32"><a href="#cb75-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mapping to the dataframe</span></span>
-<span id="cb75-33"><a href="#cb75-33" aria-hidden="true" tabindex="-1"></a>coef_df_w3 <span class="ot">&lt;-</span> coef_df_w3 <span class="sc">%&gt;%</span></span>
-<span id="cb75-34"><a href="#cb75-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> <span class="fu">factor</span>(Term, <span class="at">levels =</span> <span class="fu">names</span>(name_mapping_w3), <span class="at">labels =</span> name_mapping_w3))</span>
-<span id="cb75-35"><a href="#cb75-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-36"><a href="#cb75-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dodge width for better separation</span></span>
-<span id="cb75-37"><a href="#cb75-37" aria-hidden="true" tabindex="-1"></a>dodge_width <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb75-38"><a href="#cb75-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-39"><a href="#cb75-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with updated names</span></span>
-<span id="cb75-40"><a href="#cb75-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df_w3, <span class="fu">aes</span>(<span class="at">x =</span> Term, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Lower_CI, <span class="at">ymax =</span> Upper_CI, <span class="at">color =</span> Model, <span class="at">group =</span> Model)) <span class="sc">+</span></span>
-<span id="cb75-41"><a href="#cb75-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> dodge_width), <span class="fu">aes</span>(<span class="at">size =</span> Significant)) <span class="sc">+</span></span>
-<span id="cb75-42"><a href="#cb75-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb75-43"><a href="#cb75-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb75-44"><a href="#cb75-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Estimated Coefficients"</span>) <span class="sc">+</span></span>
-<span id="cb75-45"><a href="#cb75-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Flips the axes for better visualization of terms</span></span>
-<span id="cb75-46"><a href="#cb75-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
-<span id="cb75-47"><a href="#cb75-47" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Understanding"</span>, <span class="st">"Strategic"</span>)) <span class="sc">+</span>  <span class="co"># Set custom colors for each model</span></span>
-<span id="cb75-48"><a href="#cb75-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Adjust line width based on significance</span></span>
-<span id="cb75-49"><a href="#cb75-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb75-50"><a href="#cb75-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,  <span class="co"># Hide the legend for line size</span></span>
-<span id="cb75-51"><a href="#cb75-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)  <span class="co"># Adjust text size if needed</span></span>
-<span id="cb75-52"><a href="#cb75-52" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section>
 
 </main>

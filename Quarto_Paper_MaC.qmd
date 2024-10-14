@@ -22,9 +22,20 @@ This study analyzes the role of traditional news media and social media in publi
 
 ### Data
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+The data for this study was obtained from a national survey conducted in Chile under the supervision of the Millennium Nucleus for the Study of Politics, Public Opinion, and Media in Chile (Nucleo MEPOP). The complete survey consisted of three waves, but this study only utilizes data from the first and third waves. Wave 1 was conducted between August 25 and September 8, while Wave 3 was conducted between \[insert dates\]. The total sample size for this analysis was 950 individuals, specifically those who participated in both Wave 1 and Wave 3.
 
-```{r results='hide', message=FALSE, warning=FALSE}
+It is important to note that the survey instrument did not necessarily include the same questions across all three waves. As a result, the analyses presented in this paper are cross-sectional in nature. While the dependent variable was constructed from responses in Wave 3, all independent variables were drawn from Wave 1. The survey design employed quotas based on gender, age, and socioeconomic level, ensuring alignment with national distributions.
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+
+# clean workspace
+rm(list=ls())
+
+options(scipen=999, # avoid scientific notation
+        stringsAsFactors = FALSE, digits = 2)
+
+options(digits = 7)
+
 library(haven)
 library(knitr)
 library(lattice)
@@ -43,17 +54,108 @@ library(semPlot)
 library(coefplot)
 ```
 
-```{r results='hide', message=FALSE, warning=FALSE}
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 #Import Data
 data_w1 <- read_sav("Data_W1.sav")
 
 # ID
 data_w1$id <- data_w1$CodPanelista
+
+#Import Data
+data_w3 <- read_sav("Data_W3.sav")
+
+# ID
+data_w3$id <- data_w3$CodPanelista
+
 ```
 
 ### Variables
 
-```{r results='hide', message=FALSE, warning=FALSE}
+#### Understanding orientation:
+
+Following the previously mentioned literature, understanding orientation was measured by asking respondents to indicate how much they agree or disagree with the following statements:
+
+Under1: "In political conversations, it is essential to listen carefully to what others have to say."
+
+Under2: "When I talk about politics, learning is more important to me than convincing."
+
+Under3: "Through my conversations, I promote solidarity with others."
+
+Under4: "At its core, politics aims to reach agreements through conversation."
+
+Under5: "When I talk about politics, I feel connected to the people I talk with."
+
+Under6: "Through conversation, political interests can be directed toward the common good."
+
+Under7: "Talking about politics allows me to understand why others see things differently."
+
+Under8: "Political conversations are important for protecting people's rights."
+
+All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.86).
+
+#### Strategic Orientation
+
+Similarly, to measure strategic orientations, all respondents were asked to indicate how much they agree or disagree with the following statements:
+
+Strate1: "Saying one thing while thinking another is fundamental when talking about politics."
+
+Strate2: "I talk about politics if I gain something from it."
+
+Strate3: "In political conversations, form is more important than content."
+
+Strate4: "When talking about politics, it is sometimes better not to express what you truly think."
+
+Strate5: "People are tired of being asked to talk in order to reach political agreements."
+
+Strate6: "The head of the household decides and does not need to reach an agreement with other family members."
+
+Strate7: "Instead of so much discussion, it's better for someone to just say how things are."
+
+Strate8: "Trying to reach agreements through conversation is a waste of time; it's better if someone decides what to do and gets it done."
+
+All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.75).
+
+#### Political Efficacy
+
+In line with the literature, political efficacy was divided into three distinct dimensions. First, external efficacy---i.e., beliefs about system responsiveness---was measured using the following statements:
+
+extef1: "Politicians don't really care about what voters think."
+
+extef2: "Politicians waste a lot of taxpayers' money."
+
+extef3: "People like me have no influence over what is decided in parliament or government."
+
+Similarly, internal efficacy---self-competence beliefs---was measured with the following statements:
+
+intef1: "In general, I don't find it difficult to take a stance on political issues."
+
+intef2: "People like me are qualified to participate in political discussions."
+
+intef3: "People like me have political opinions that are worth listening to."
+
+Finally, following recent literature, an additional set of questions was used to measure online political efficacy---i.e., the belief that, because of the Internet, it is possible to have more influence on politics and public issues:
+
+ope1: "Using the internet, people like me have more political power."
+
+ope2: "Using the internet, I can have more say over what the government does."
+
+ope3: "Using the internet, it is easier for me to understand politics."
+
+ope4: "Using the internet, public officials care more about what I think."
+
+All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was created for each of the dimensions (external efficacy: α = 0.74; internal efficacy: α = 0.74; online political efficacy: α = 0.84).
+
+#### Political Interest
+
+To measure political efficacy respondents were asked to .... 
+
+#### Media Exposure
+
+#### Sociodemographic Variables
+
+Additionally, we controlled the models by incorporating various sociodemographic variables. These included education level, sex (mean = 0.45, where 0 = male and 1 = female), socioeconomic status (range: 1 to 5, mean = 3.2), and age (range: 18 to 84, mean = 44.91).
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Age
 data_w1$age_num <- data_w1$age
 
@@ -145,57 +247,86 @@ data_w1$strate2 <- data_w1$P49_3
 data_w1$strate3 <- data_w1$P49_4
 data_w1$strate4 <- data_w1$P49_8
 
+##### Data from wave 3
+
+#Understanding orientation
+data_w3$under_w3_1 <- data_w3$P48_1
+data_w3$under_w3_2 <- data_w3$P48_2
+data_w3$under_w3_3 <- data_w3$P48_3
+data_w3$under_w3_4 <- data_w3$P48_4
+data_w3$under_w3_5 <- data_w3$P48_5
+data_w3$under_w3_6 <- data_w3$P48_6
+data_w3$under_w3_7 <- data_w3$P48_7
+data_w3$under_w3_8 <- data_w3$P48_8
+
+#Strategic orientation
+data_w3$strate_w3_1 <- data_w3$P49_1
+data_w3$strate_w3_2 <- data_w3$P49_2
+data_w3$strate_w3_3 <- data_w3$P49_3
+data_w3$strate_w3_4 <- data_w3$P49_4
+data_w3$strate_w3_5 <- data_w3$P49_5
+data_w3$strate_w3_6 <- data_w3$P49_6
+data_w3$strate_w3_7 <- data_w3$P49_7
+data_w3$strate_w3_8 <- data_w3$P49_8
+
 ```
 
-#### Understanding Orientation
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Assuming 'id' is your key variable for merging
+data_w3_selected <- data_w3 %>%
+  select(id, starts_with("strate_w3_"), starts_with("under_w3_")) %>%
+  drop_na()
 
-#### Strategic Orientation
+data_w1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "age_num", "ses", "sex", "educ")])
+sum(is.na(data_w1_na))
 
-#### Political Efficacy
+# Merge dataframes
+merged_data <- data_w1_na %>%
+  left_join(data_w3_selected, by = "id") %>%
+  drop_na()
 
-#### Political Interest
+```
 
-#### Media Exposure
-
-#### Sociodemographic Variables
 
 ### Analysis
 
-```{r}
-cronbach_ope <- alpha(na.omit(data_w1[c("ope1", "ope2", "ope3", "ope4")]))
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+cronbach_ope <- alpha(na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
 cronbach_ope
 
-cronbach_intef <- alpha(na.omit(data_w1[c("intef1", "intef2", "intef3")]))
+cronbach_intef <- alpha(na.omit(merged_data[c("intef1", "intef2", "intef3")]))
 cronbach_intef
 
-cronbach_extef <- alpha(na.omit(data_w1[c("extef1", "extef2", "extef3")]))
+cronbach_extef <- alpha(na.omit(merged_data[c("extef1", "extef2", "extef3")]))
 cronbach_extef
 
-cronbach_media <- alpha(na.omit(data_w1[c("tv", "cable", "newspaper", "radio")]))
+cronbach_media <- alpha(na.omit(merged_data[c("tv", "cable", "newspaper", "radio")]))
 cronbach_media
 
-cronbach_digital <- alpha(na.omit(data_w1[c("tradonline", "online", "podcast", "officialsm")]))
+cronbach_digital <- alpha(na.omit(merged_data[c("tradonline", "online", "podcast", "officialsm")]))
 cronbach_digital
 
-cronbach_social <- alpha(na.omit(data_w1[c("fb", "insta", "twitter", "whatsapp", "youtube", "tiktok")]))
+cronbach_social <- alpha(na.omit(merged_data[c("fb", "insta", "twitter", "whatsapp", "youtube", "tiktok")]))
 cronbach_social
 
-cronbach_interest <- alpha(na.omit(data_w1[c("polint", "procint", "plebint")]))
+cronbach_interest <- alpha(na.omit(merged_data[c("polint", "procint", "plebint")]))
 cronbach_interest
 
-cronbach_under <- alpha(na.omit(data_w1[c("under1", "under2", "under3", "under4")]))
+cronbach_under <- alpha(na.omit(merged_data[c("under_w3_1", "under_w3_2", "under_w3_3", "under_w3_4", "under_w3_5", "under_w3_6", "under_w3_7", "under_w3_8")]))
 cronbach_under
 
-cronbach_strate <- alpha(na.omit(data_w1[c("strate1", "strate2", "strate3", "strate4")]))
+cronbach_strate <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
 cronbach_strate
 
 ```
 
-```{r}
-data_w1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "discord", "twitch", "franja", "use1", "use2", "use3", "use4", "use5", "use6", "use7", "age_num", "ses", "sex", "educ", "under1", "under2", "under3", "under4", "strate1", "strate2", "strate3", "strate4")])
-sum(is.na(data_w1_na))
+### Analysis
 
-data_w1_na <- data_w1_na %>%
+To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, and 3 present the measurement models for the nine factors we developed.
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+
+merged_data <- merged_data %>%
   mutate(across(where(is.labelled), as.numeric))
 
 cfa.model1 <- 'ope =~ ope1 + ope2 + ope3 + ope4
@@ -205,50 +336,67 @@ cfa.model1 <- 'ope =~ ope1 + ope2 + ope3 + ope4
 cfa.model2 <- 'media =~ tv + cable + newspaper + radio
               digital =~ tradonline + online + podcast + officialsm
               social =~ fb + insta + twitter + whatsapp + youtube + tiktok'
-cfa.model3 <- 'under =~ under1 + under2 + under3 + under4
-              strate =~ strate1 + strate2 + strate3 + strate4'
+cfa.model3 <- 'under =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
+              strate =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
 
-fit_cfa1 <- cfa(cfa.model1, data = data_w1_na)
+fit_cfa1 <- cfa(cfa.model1, data = merged_data)
 latent_scores1 <- predict(fit_cfa1)
 
-fit_cfa2 <- cfa(cfa.model2, data = data_w1_na)
+fit_cfa2 <- cfa(cfa.model2, data = merged_data)
 latent_scores2 <- predict(fit_cfa2)
 
-fit_cfa3 <- cfa(cfa.model3, data = data_w1_na)
+fit_cfa3 <- cfa(cfa.model3, data = merged_data)
 latent_scores3 <- predict(fit_cfa3)
 
-data_w1_scores <- cbind(data_w1_na, latent_scores1, latent_scores2, latent_scores3)
+merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3)
 ```
 
-#### Measurement Model
+**Figure 1** Measurement Model for Political Efficacies
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 semPaths(fit_cfa1, "std", layout = "tree", rotation = 2,
          whatLabels = "std", edge.label.cex = 0.8,
          sizeMan = 3, sizeLat = 7, title = TRUE)
+```
+Note: Own elaboration.
+
+**Figure 2** Measurment model for Media Exposure
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 semPaths(fit_cfa2, "std", layout = "tree", rotation = 2,
          whatLabels = "std", edge.label.cex = 0.8,
          sizeMan = 3, sizeLat = 7, title = TRUE)
+```
+Note: Own elaboration.
+
+**Figure 3** Measurment model for understanding and strategic orientations
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
 semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
          whatLabels = "std", edge.label.cex = 0.8,
          sizeMan = 3, sizeLat = 7, title = TRUE)
-
 ```
+Note: Own elaboration.
 
-### Regressions
+The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. To ensure the robustness of our results, we also applied SEM for two of the orientations. These results, which are presented in the appendix, are consistent with the findings described in the following section.
 
-```{r}
-model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+### Results
+
+**Table 1** OLS Regression for Understanding Orientation.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
 summary(model1)
 ```
 
-```{r}
-model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+**Table 2** OLS Regression for Strategic Orientation.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
 summary(model2)
 ```
+**Figure 4** Coefplot for understanding orientation and strategic orientation.
 
-
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Assuming coef_df is already prepared as per previous instructions
 
 # Update the extraction function to avoid spaces in names
@@ -316,20 +464,105 @@ ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, co
   )
 ```
 
-```{r}
+## Appendix
 
-model2_1 <- lm(strate1 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+**Appendix 1** SEM for Understanding Orientation
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+sem1 <- 'ope_a1 =~ ope1 + ope2 + ope3 + ope4
+          intef_a1 =~ intef1 + intef2 + intef3
+          extef_a1 =~ extef1 + extef2 + extef3
+          interest_a1 =~ polint + procint + plebint
+          media_a1 =~ tv + cable + newspaper + radio
+          digital_a1 =~ tradonline + online + podcast + officialsm
+          social_a1 =~ fb + insta + twitter + whatsapp + youtube + tiktok
+          under_a1 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
+          under_a1 ~ ses + sex + age_num + media_a1 + digital_a1 + social_a1 + interest_a1 + intercon + extef_a1 + intef_a1 + ope_a1'
+
+fit_sem1 <- sem(sem1, data = merged_data)
+
+summary(fit_sem1, fit.measures = TRUE, standardized = TRUE)
+
+```
+**Appendix 2** SEM for Strategic Orientation
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+sem2 <- 'ope_a2 =~ ope1 + ope2 + ope3 + ope4
+          intef_a2 =~ intef1 + intef2 + intef3
+          extef_a2 =~ extef1 + extef2 + extef3
+          interest_a2 =~ polint + procint + plebint
+          media_a2 =~ tv + cable + newspaper + radio
+          digital_a2 =~ tradonline + online + podcast + officialsm
+          social_a2 =~ fb + insta + twitter + whatsapp + youtube + tiktok
+          strate_a2 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8
+          strate_a2 ~ ses + sex + age_num + media_a2 + digital_a2 + social_a2 + interest_a2 + intercon + extef_a2 + intef_a2 + ope_a2'
+
+fit_sem2 <- sem(sem2, data = merged_data)
+
+summary(fit_sem2, fit.measures = TRUE, standardized = TRUE)
+```
+
+
+### Working with W1
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+
+data_justw1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "age_num", "ses", "sex", "educ", "under1", "under2", "under3", "under4", "strate1", "strate2", "strate3", "strate4")])
+sum(is.na(data_justw1_na))
+
+data_justw1_na <- data_justw1_na %>%
+  mutate(across(where(is.labelled), as.numeric))
+
+cfa.model_w1_1 <- 'ope_1 =~ ope1 + ope2 + ope3 + ope4
+              intef_1 =~ intef1 + intef2 + intef3
+              extef_1 =~ extef1 + extef2 + extef3
+              interest_1 =~ polint + procint + plebint'
+cfa.model_w1_2 <- 'media_1 =~ tv + cable + newspaper + radio
+              digital_1 =~ tradonline + online + podcast + officialsm
+              social_1 =~ fb + insta + twitter + whatsapp + youtube + tiktok'
+cfa.model_w1_3 <- 'under_1 =~ under1 + under2 + under3 + under4
+              strate_1 =~ strate1 + strate2 + strate3 + strate4'
+
+fit_cfa_w1_1 <- cfa(cfa.model_w1_1, data = data_justw1_na)
+latent_scores_w1_1 <- predict(fit_cfa_w1_1)
+
+fit_cfa_w1_2 <- cfa(cfa.model_w1_2, data = data_justw1_na)
+latent_scores_w1_2 <- predict(fit_cfa_w1_2)
+
+fit_cfa_w1_3 <- cfa(cfa.model_w1_3, data = data_justw1_na)
+latent_scores_w1_3 <- predict(fit_cfa_w1_3)
+
+data_justw1_na <- cbind(data_justw1_na, latent_scores_w1_1, latent_scores_w1_2, latent_scores_w1_3)
+```
+
+**Appendix 1**. OLS for Understanding Orientation just using W1.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model1_w1 <- lm(under_1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
+summary(model1_w1)
+```
+
+**Appendix 2**. OLS for Strategic Orientation just using W1.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model2_w1 <- lm(strate_1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
+summary(model2_w1)
+```
+
+**Appendix 3**. OLS for Strategic Orientation just using W1, no factor.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+model2_1 <- lm(strate1 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model2_1)
-model2_2 <- lm(strate2 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+model2_2 <- lm(strate2 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model2_2)
-model2_3 <- lm(strate3 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+model2_3 <- lm(strate3 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model2_3)
-model2_4 <- lm(strate4 ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = data_w1_scores)
+model2_4 <- lm(strate4 ~ ses + sex + age_num + media_1 + digital_1 + social_1 + interest_1 + intercon + extef_1 + intef_1 + ope_1, data = data_justw1_na)
 summary(model2_4)
 
 ```
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # Apply the function to both models
 coef_strate1 <- get_coef(model2_1, "Model S1")
@@ -349,10 +582,24 @@ coef_strate <- coef_strate %>%
     Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)
   )
 
+# Create a mapping of old variable names to new names
+name_mapping_1 <- c(
+  ses = "Socioeconomic Status",
+  sex = "Gender",
+  age_num = "Age",
+  media_1 = "Media Expo.",
+  digital_1 = "Dig, Media Expo.",
+  social_1 = "Soc. Media Expo.",
+  interest_1 = "Pol. Interest",
+  intercon = "Interp. Conf.",
+  extef_1 = "Ext. Efficacy",
+  intef_1 = "Int. Efficacy",
+  ope_1 = "Onl. Efficacy"
+)
 
 # Apply the mapping to the dataframe
 coef_strate <- coef_strate %>%
-  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
+  mutate(Term = factor(Term, levels = names(name_mapping_1), labels = name_mapping_1))
 
 # Define a dodge width for better separation
 dodge_width <- 0.5
@@ -374,202 +621,29 @@ ggplot(coef_strate, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI
   )
 ```
 
-\`\`\`
+### Alternative models, by adding observable variables.
 
-### Alternative models
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data_justw1_na$undersum <- (data_justw1_na$under1+data_justw1_na$under2+data_justw1_na$under3+data_justw1_na$under4)/4
+data_justw1_na$stratesum <- (data_justw1_na$strate1+data_justw1_na$strate2+data_justw1_na$strate3+data_justw1_na$strate4)/4
 
-```{r}
-data_w1_scores$undersum <- (data_w1_scores$under1+data_w1_scores$under2+data_w1_scores$under3+data_w1_scores$under4)/4
-data_w1_scores$stratesum <- (data_w1_scores$strate1+data_w1_scores$strate2+data_w1_scores$strate3+data_w1_scores$strate4)/4
+data_justw1_na$mediasum <- (data_justw1_na$tv+data_justw1_na$cable+data_justw1_na$newspaper+data_justw1_na$radio)/4
+data_justw1_na$digitalsum <-(data_justw1_na$tradonline+data_justw1_na$online+data_justw1_na$podcast+data_justw1_na$officialsm)/4
+data_justw1_na$socialsum <- (data_justw1_na$fb+data_justw1_na$insta+data_justw1_na$twitter+data_justw1_na$whatsapp+data_justw1_na$youtube+data_justw1_na$tiktok)/6
 
-data_w1_scores$mediasum <- (data_w1_scores$tv+data_w1_scores$cable+data_w1_scores$newspaper+data_w1_scores$radio)/4
-data_w1_scores$digitalsum <-(data_w1_scores$tradonline+data_w1_scores$online+data_w1_scores$podcast+data_w1_scores$officialsm)/4
-data_w1_scores$socialsum <- (data_w1_scores$fb+data_w1_scores$insta+data_w1_scores$twitter+data_w1_scores$whatsapp+data_w1_scores$youtube+data_w1_scores$tiktok)/6
-
-data_w1_scores$extefsum <- (data_w1_scores$extef1+data_w1_scores$extef2+data_w1_scores$extef3)/3
-data_w1_scores$intefsum <- (data_w1_scores$intef1+data_w1_scores$intef2+data_w1_scores$intef3)/3
-data_w1_scores$opesum <- (data_w1_scores$ope1+data_w1_scores$ope2+data_w1_scores$ope3+data_w1_scores$ope4)/4
+data_justw1_na$extefsum <- (data_justw1_na$extef1+data_justw1_na$extef2+data_justw1_na$extef3)/3
+data_justw1_na$intefsum <- (data_justw1_na$intef1+data_justw1_na$intef2+data_justw1_na$intef3)/3
+data_justw1_na$opesum <- (data_justw1_na$ope1+data_justw1_na$ope2+data_justw1_na$ope3+data_justw1_na$ope4)/4
 
 ```
 
-#### Regressions
+**Appendix 4**. OLS for Understanding Orientation and Strategic Orientation just using W1 and by adding observable variebles (not CFA).
 
-```{r}
-model_a1 <- lm(undersum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_w1_scores)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model_a1 <- lm(undersum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_justw1_na)
 summary(model_a1)
 
-model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_w1_scores)
+model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_justw1_na)
 summary(model_a2)
-```
-
-# Replicating with wave 3
-
-```{r}
-#Import Data
-data_w3 <- read_sav("Data_W3.sav")
-
-# ID
-data_w3$id <- data_w3$CodPanelista
-```
-
-```{r}
-
-#Understanding orientation
-data_w3$under_w3_1 <- data_w3$P48_1
-data_w3$under_w3_2 <- data_w3$P48_2
-data_w3$under_w3_3 <- data_w3$P48_3
-data_w3$under_w3_4 <- data_w3$P48_4
-data_w3$under_w3_5 <- data_w3$P48_5
-data_w3$under_w3_6 <- data_w3$P48_6
-data_w3$under_w3_7 <- data_w3$P48_7
-data_w3$under_w3_8 <- data_w3$P48_8
-
-#Strategic orientation
-data_w3$strate_w3_1 <- data_w3$P49_1
-data_w3$strate_w3_2 <- data_w3$P49_2
-data_w3$strate_w3_3 <- data_w3$P49_3
-data_w3$strate_w3_4 <- data_w3$P49_4
-data_w3$strate_w3_5 <- data_w3$P49_5
-data_w3$strate_w3_6 <- data_w3$P49_6
-data_w3$strate_w3_7 <- data_w3$P49_7
-data_w3$strate_w3_8 <- data_w3$P49_8
-
-```
-
-```{r}
-# Assuming 'id' is your key variable for merging
-data_w3_selected <- data_w3 %>%
-  select(id, starts_with("strate_w3_"), starts_with("under_w3_")) %>%
-  drop_na()
-```
-
-```{r}
-# Merge dataframes
-merged_data <- data_w1_scores %>%
-  left_join(data_w3_selected, by = "id") %>%
-  drop_na()
-```
-
-
-```{r}
-cronbach_ope_m <- alpha(na.omit(merged_data[c("ope1", "ope2", "ope3", "ope4")]))
-cronbach_ope_m
-
-cronbach_intef_m <- alpha(na.omit(merged_data[c("intef1", "intef2", "intef3")]))
-cronbach_intef_m
-
-cronbach_extef_m <- alpha(na.omit(merged_data[c("extef1", "extef2", "extef3")]))
-cronbach_extef_m
-
-cronbach_media_m <- alpha(na.omit(merged_data[c("tv", "cable", "newspaper", "radio")]))
-cronbach_media_m
-
-cronbach_digital_m <- alpha(na.omit(merged_data[c("tradonline", "online", "podcast", "officialsm")]))
-cronbach_digital_m
-
-cronbach_social_m <- alpha(na.omit(merged_data[c("fb", "insta", "twitter", "whatsapp", "youtube", "tiktok")]))
-cronbach_social_m
-
-cronbach_interest_m <- alpha(na.omit(merged_data[c("polint", "procint", "plebint")]))
-cronbach_interest_m
-
-cronbach_under_m <- alpha(na.omit(merged_data[c("under_w3_1", "under_w3_2", "under_w3_3", "under_w3_4", "under_w3_5", "under_w3_6", "under_w3_7", "under_w3_8")]))
-cronbach_under_m
-
-cronbach_strate_m <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
-cronbach_strate_m
-```
-
-
-```{r}
-merged_data <- merged_data %>%
-  mutate(across(where(is.labelled), as.numeric))
-
-cfa.model_w3_1 <- 'ope_w3 =~ ope1 + ope2 + ope3 + ope4
-              intef_w3 =~ intef1 + intef2 + intef3
-              extef_w3 =~ extef1 + extef2 + extef3
-              interest_w3 =~ polint + procint + plebint'
-cfa.model_w3_2 <- 'media_w3 =~ tv + cable + newspaper + radio
-              digital_w3 =~ tradonline + online + podcast + officialsm
-              social_w3 =~ fb + insta + twitter + whatsapp + youtube + tiktok'
-cfa.model_w3_3 <- 'under_w3 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
-              strate_w3 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
-
-fit_cfa_w3_1 <- cfa(cfa.model_w3_1, data = merged_data)
-latent_scores_w3_1 <- predict(fit_cfa_w3_1)
-
-fit_cfa_w3_2 <- cfa(cfa.model_w3_2, data = merged_data)
-latent_scores_w3_2 <- predict(fit_cfa_w3_2)
-
-fit_cfa_w3_3 <- cfa(cfa.model_w3_3, data = merged_data)
-latent_scores_w3_3 <- predict(fit_cfa_w3_3)
-
-merged_data <- cbind(merged_data, latent_scores_w3_1, latent_scores_w3_2, latent_scores_w3_3)
-```
-
-```{r}
-model_w3_1 <- lm(under_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + ope_w3, data = merged_data)
-summary(model_w3_1)
-```
-
-```{r}
-model_w3_2 <- lm(strate_w3 ~ ses + sex + age_num + media_w3 + digital_w3 + social_w3 + interest_w3 + intercon + extef_w3 + intef_w3 + ope_w3, data = merged_data)
-summary(model_w3_2)
-```
-
-```{r}
-
-# Apply the function to both models
-coef_df_w3_1 <- get_coef(model_w3_1, "Model w3_1")
-coef_df_w3_2 <- get_coef(model_w3_2, "Model w3_2")
-
-# Combine the data frames and remove the intercept
-coef_df_w3 <- rbind(coef_df_w3_1, coef_df_w3_2)
-coef_df_w3 <- coef_df_w3[coef_df_w3$Term != "(Intercept)", ]
-
-# Calculate 95% confidence intervals and determine significance
-coef_df_w3 <- coef_df_w3 %>%
-  mutate(
-    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
-    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
-    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
-    )
-
-# Create a mapping of old variable names to new names
-name_mapping_w3 <- c(
-  ses = "Socioeconomic Status",
-  sex = "Gender",
-  age_num = "Age",
-  media_w3 = "Media Expo.",
-  digital_w3 = "Dig, Media Expo.",
-  social_w3 = "Soc. Media Expo.",
-  interest_w3 = "Pol. Interest",
-  intercon = "Interp. Conf.",
-  extef_w3 = "Ext. Efficacy",
-  intef_w3 = "Int. Efficacy",
-  ope_w3 = "Onl. Efficacy"
-)
-
-# Apply the mapping to the dataframe
-coef_df_w3 <- coef_df_w3 %>%
-  mutate(Term = factor(Term, levels = names(name_mapping_w3), labels = name_mapping_w3))
-
-# Define a dodge width for better separation
-dodge_width <- 0.5
-
-# Create the plot with updated names
-ggplot(coef_df_w3, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
-  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
-  theme_minimal() +
-  labs(x = "Variables", y = "Estimated Coefficients") +
-  coord_flip() +  # Flips the axes for better visualization of terms
-  scale_color_manual(values = c("darkblue", "darkred"),
-                     labels = c("Understanding", "Strategic")) +  # Set custom colors for each model
-  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
-  theme(
-    legend.position = "right",  # Hide the legend for line size
-    axis.text.y = element_text(size = 8)  # Adjust text size if needed
-  )
 ```
 
