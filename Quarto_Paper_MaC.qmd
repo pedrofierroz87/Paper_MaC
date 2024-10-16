@@ -524,7 +524,9 @@ The second part of the analysis explored which variables might be related to the
 
 ### Results
 
-**Table 1** OLS Regression for Orientations.
+Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and political engagement—in this case, informal political participation.
+
+**Table 1** OLS Regression for Political Participation
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model0 <- lm(part ~ under + ses + sex + age_num, data = merged_data)
@@ -535,6 +537,7 @@ summary(model00)
 
 ```
 
+Tables 2, 3 and Figure 5 show the models for understanding and political orientations.
 
 **Table 2** OLS Regression for Understanding Orientation.
 
