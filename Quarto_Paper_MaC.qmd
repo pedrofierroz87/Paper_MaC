@@ -18,6 +18,83 @@ Andrés Scherman^1^, Pedro Fierro^2^ and Leo Yuanliang Shan^3^
 
 This study analyzes the role of traditional news media and social media in public deliberation within democratic systems. Using the concepts of Understanding Orientation (consensus-oriented, communicative rationality) and Strategic Orientation (goal-oriented, instrumental rationality), proposed by Jürgen Habermas, this study looks at the public space in a digital context to explore how the news media can either contribute to the existence of rational communication in the public debate or, conversely, promote interventions of a strategic nature. To estimate the influence of traditional news media and social media on the orientation to engage in dialogue with others within a framework of rationality and equality, this study relies on a two-wave online panel survey conducted in Chile before and after the constitutional referendum, held on September 4, 2022, a period of intense political polarization. The first wave (T1) received 2,117 responses, and the second wave (T2) received 903 responses. Results show that Understanding Orientation is a predictor of political situations linked to public deliberation, such as Political Participation and Political Interest. However, news consumption in both traditional news outlets and social media is not associated with the presence of Understanding Orientation, but rather with Strategic Orientation. These results support a more pessimistic view of the contribution of the news media and social media to creating a rational public sphere, where reason should predominate in interactions between citizens to strengthen democracy.
 
+## Literature Review
+
+In recent decades, the concept of deliberative democracy has increasingly appeared in theoretical discussions (Dahl, 1989; Delli Carpini and Jacobs, 2004; Habermas, 1996; Rawls, 1971) and empirical studies on the formation of public opinion (Fishkin, 2005). As Page (1996) stated, “public deliberation is essential to democracy.”
+
+The expansion of the deliberative democracy concept broadens the idea of political participation, which for decades was restricted to electoral participation. The vote-centric view of politics considers the political system a mere aggregator of individual preferences, assuming that citizens form opinions in isolation and express them periodically in elections to determine majority positions (Delli Carpini and Jacobs, 2004). In contrast, deliberative democracy processes opinions before voting occurs in democratic systems (Delli Carpini and Jacobs, 2004). Through dialogue and reasoning, citizens can build agreements. However, this facet of citizenship does not compete with electoral democracy; rather, they complement each other.
+
+Fishkin (2005), who has conducted both theoretical reflection and extensive empirical research, argues that deliberative democracy must reconcile deliberation with democratic values, political equity, and avoid majority dictatorship. This requires an attitude of listening to others (Burkhalter et al., 2002). Listening is central, but so is the ability to speak and argue in the public sphere under equal conditions.
+
+Regarding the characteristics of deliberation, Moy and Gastil (2006) assert that for deliberation to occur, certain conditions must be met: openness to political conflict, absence of conventional forms of domination, clear and responsible arguments, and mutual understanding. They argue that not all media stimulate democratic deliberation; for example, written media facilitate it through face-to-face interactions, while television complicates it by making rational arguments harder to present and for recipients to grasp as intended.
+
+Not all conversations, however, constitute democratic deliberation. Many face-to-face conversations are merely social interactions without a clear objective or problem to resolve (Moy and Gastil, 2006; Schudson, 1997). The key difference between democratic deliberation and other forms of conversation lies in its conflictual nature, the use of rational arguments, and the goal of reaching a consensus (Moy and Gastil, 2006).
+
+Since the mid-20th century, research has demonstrated the relationship between democratic deliberation and interpersonal conversations. Interpersonal conversation is a privileged space for dialogue, where several characteristics converge to facilitate reaching agreements, such as: a) participants being in the same spatiotemporal context, b) use of multiple symbolic signals, c) specific orientation toward others, and d) the possibility of feedback (Thompson, 1998).
+The importance of interpersonal communication in deliberation was first found in research by the Columbia School, which analyzed the role of personal conversations in shaping undecided voters' choices. These findings were later extended by other authors who have continued studying the importance of interpersonal communication (Delli-Carpini, Cook, & Jacobs, 2004; Habermas, 1962; Rawls, 1971; Rojas et al., 2005).
+
+Alongside interpersonal conversation, the relationship between deliberation and the media has also been intensely studied (Habermas, 1962; Moy and Gastil, 2006; Page, 1998). The debate began with Katz and Lazarsfeld (1955), who measured how the media influenced personal conversations and found that the effect varied according to audience characteristics. Later, Habermas gave a central role to the media—particularly the press—in constructing the public sphere, stating that the media fueled rational debate among private individuals, constituting a public sphere for discussing issues of common interest (1962). This debate, now including digital media and social media, continues to evolve. Moy and Gastil (2006) argue that consuming news through the media opens up political conflicts that are part of deliberation, and Mais (XXX) claims that the media can promote deliberation, despite skepticism about their impact.
+
+Digitalization, especially the emergence of social media, has renewed interest in political deliberation studies, raising questions about differences between the effects of traditional media and new digital platforms. Social media have significant potential to boost political participation by reducing organization time, lowering economic costs of participation, helping build collective identities (Dalton, Sickle, and Weldon, 2009), reaching critical masses, forming groups with common interests, accessing vast amounts of information, and increasing social capital (Ellison et al., 2014; Valenzuela, Park, and Kee, 2009). These characteristics make social media a space of constant interaction, though these interactions do not necessarily lead to political deliberation and may also foster other forms of personal interaction.
+Since 2016, doubts have increased about the beneficial effects of social media on public deliberation. The proliferation of fake news, echo chambers, election campaigns using micro-targeting techniques to understand voters, and opaque algorithms have heightened skepticism about these platforms' contribution to democracy (Chambers, 2023).
+In this context, Volker (2019) explains that the quality of deliberation on social media depends on various factors and their interaction: a) infrastructure quality, b) political context, c) legal framework, and d) discourse participants.
+
+### Public Sphere and Action Orientations
+
+One of the most important authors on the relationship between public opinion, deliberation, and democracy is Jürgen Habermas. In 1962, he published The Structural Transformation of the Public Sphere, a seminal text in the debate on this topic. One of Habermas’ central concepts is the “public sphere.”
+
+In this work, Habermas describes the public sphere as a space where individuals use reason to discuss public issues in accessible places. His research focuses on three European countries—France, Germany, and England—and highlights a new social structure that emerged in the 18th century in bourgeois gathering places, where debates were fueled mainly by print media publications (Habermas, 1991).
+The public sphere not only allows individuals to use reason to debate public issues but also acts as a hinge between the public sphere (where state action occurs) and the private sphere (where work, intimate relationships, and family life reside) (Habermas, 1991).
+
+One of the most significant consequences of the public sphere’s emergence is the equality it creates between people, transcending origin and economic status. When differences are addressed through reason, only the strength of arguments and persuasion matters. Social differences tend to fade in the public sphere, where the principle of equality is affirmed through the use of reason.
+In his work, Habermas takes a critical view of the public sphere’s evolution since the late 19th century. He argues that public space is no longer driven by reason but has become dominated by manipulation and the public representation of interests, a phenomenon he calls “representative publicity.” He also criticizes the media for no longer fostering rational dialogue among citizens, having instead succumbed to commercial logic, interest defense, and cultural consumption (Habermas, 1991; Thompson, 1998).
+
+Despite his pessimistic view of the public sphere’s function in the 20th century, Habermas later revised and modified some of his initial positions (Calhoun, 1992; Habermas 2006, 2022, 2023). In these later works, he reexamines various aspects of his proposal, most notably reassessing the idea of the public sphere’s decline throughout the 20th century and the media’s role in this process. He argues that two key actors are necessary for the public sphere to function: media professionals who generate mediated public opinion and politicians who occupy the center of the public sphere. Additionally, he asserts that the public sphere can function properly as long as media professionals maintain independence from surrounding actors and feedback occurs between media publications and civil society (Habermas, 2006).
+
+In his most recent writings, Habermas (2022, 2023) further explores the media’s role, stating that one of their tasks is to generate "competing public opinions" (p.157) to meet the standards of public deliberation. He argues that the media’s space is the only venue where effective opinions can reach a broad audience (Habermas, 2022). He also highlights that political messages’ effectiveness varies depending on individuals’ interest, education, and economic situation.
+
+Social media’s influence on the public sphere is also analyzed. Habermas takes a pessimistic view of these platforms, arguing that they lack the editorial and professional controls that journalists face, leading to an unregulated process with a centrifugal effect that drives citizens apart rather than fostering consensus (Habermas, 2022).
+
+Consistent with his description of the public sphere, Habermas proposed two orientations for social interactions: a) strategic (goal-oriented) and b) communicative (understanding-oriented). The first seeks to manipulate others to achieve predefined objectives, while the second seeks to establish relationships through language and reason, aiming to reach consensus, which all actors in the situation deem legitimate.
+
+Habermas’s proposal contrasts with a long-standing tradition that views reason as operating solely instrumentally—or strategically—in social life (Coleman, XXX; Dewey, 1988; Weber, XXX). Habermas offers a counterproposal, suggesting that face-to-face interactions can involve reason and achieve significant levels of understanding. Achieving agreements, according to Habermas, is essential for societies’ symbolic and normative interactions. His proposal underscores the importance of rationally established decision-making processes, as adherence to norms shaped by collective participation leads to final decisions being considered legitimate by all affected parties.
+
+Strategic and understanding-oriented interactions play roles in different moments of social life. Strategic orientation is appropriate for decisions emphasizing technical efficiency, while understanding orientation is essential in situations involving normative aspects or when actors seek to harmonize their objectives with others in a shared definition of from the situation in which they find themselves (Habermas, 2003).
+
+As in his proposal of the public sphere, in the description of the orientations of conversation, the use of reason—or its absence—plays a fundamental role. In his work, Habermas seeks to expand the instrumental action or rational action oriented towards ends, as defined by Max Weber, by incorporating a rational action in which language plays a central role, which he calls communicative action (Habermas, 2003). Although both actions have a basis in rationality, their differences are significant. Instrumental action is non-social—it does not involve other actors—and aims to use means as rationally as possible to achieve a desired state of affairs in the world. Finally, Habermas argues that there are social actions that are not instrumental, which occur when actors are not driven by selfish calculations but seek, through language, to reach a consensus with others. In this way, success orientation is typical of strategic actions, and understanding orientation happens in communicative actions (Habermas, 2003).
+
+This proposal by Habermas has undergone few empirical tests. One of them is the work of Rojas (2008), who studied how the orientations of conversations impact relevant variables of the democratic system, such as political interest and political efficacy, in addition to establishing the determining variables of strategic orientation and understanding orientation (Rojas, 2008). In this latter analysis, the influence of news consumption in traditional media—TV, newspapers, and radio—on the two described forms of orientation was studied.
+
+Although it has its differences, Habermas’s proposal brings him closer to other authors who have also highlighted the importance of deliberation in democratic life (Dahl, 1989; Delli Carpini and Jacobs, 2004; Fishkin, xxxx; Page, 1996).
+
+Incorporating the effect of traditional media and social media in the current public debate
+Considering the relationship established by previous research between deliberation and the characteristics of Jürgen Habermas’s concept of understanding orientation, our first research hypothesis is:
+
+**H1:** Understanding orientation is positively related to political participation.
+
+Regarding the relationship between media consumption and the previous findings on the link between traditional media and social media with different forms of democratic deliberation, we propose:
+
+**H2a:** News consumption in traditional media is positively related to understanding orientation.
+
+**H2b:** Exposure to news on social media is negatively related to understanding orientation.
+
+### Social Capital and Political Variables
+
+In addition to media and social media, there are other variables that the literature shows influence democratic deliberation processes, such as political interest and the perception of political efficacy.
+
+For Bourdieu and Wacquant (1992, p. 14), social capital is "the sum of the resources, actual or virtual, that accrue to an individual or a group by virtue of possessing a durable network of more or less institutionalized relationships of mutual acquaintance and recognition." Other authors consider social capital as a form of “investment” that allows maintaining good relations with others (Lin, 2001). And different research shows a positive and strong link between social capital and political participation (Gil de Zúñiga, Jung, and Valenzuela, 2012; Putnam, 2000; Scherman, Arriagada, and Valenzuela, 2015; Valenzuela, Park, and Kee, 2009). Social capital increases levels of coordination and facilitates different forms of political participation. For these reasons, our third research hypothesis is:
+
+**H3:** Social capital is positively related to understanding orientation.
+
+Political interest is considered the basis for holding democratic political beliefs (Rebenstorf, 2004) and one of the central variables for explaining political participation (Sherrod et al., 2010; Torney-Purta, 2001). "Political interest is a necessary precondition for the desired characteristics of a responsible and democratic citizen" (Rebenstorf, 2004). In the same vein, Gil de Zúñiga and Diehl (2018). Unlike the civic obligations imposed by the state—which are normative in nature—high levels of social capital are associated with voluntary political engagement behaviors (Delli Carpini and Keeter, 1996). Moreover, members of audiences with lower social capital tend to avoid news consumption more frequently (Prior, 2007), while high levels of social capital are related to high news consumption (Boulainne and Shehata, 2022). Given the precondition status that political interest holds for the development of civic behaviors, we propose:
+
+**H4:** Political interest is positively related to understanding orientation.
+
+Political efficacy is another key variable for understanding the level of commitment to the political system and participation. It is understood as the perception of individuals' abilities to understand the political process and the influence they have on authorities’ decisions (Prats and Meunier, 2021). Political efficacy creates a self-selection effect, where individuals' perceptions influence their willingness to participate politically (Gamson, 1968; Prats and Meunier, 2021; Schulz, 2005).
+Efficacy has two distinct dimensions: external efficacy and internal efficacy. External efficacy refers to individuals' perception of their ability to influence authorities’ decisions through various methods, such as elections or public protests. Meanwhile, internal efficacy studies individuals' perception of their competence in understanding the functioning of the political system (Parent, Vandebeek, and Gemino, 2005). Considering the background on the behavior of efficacy and its relationship with participation, we propose the following hypothesis:
+
+**H5:** Political efficacy (internal and external) is positively related to understanding orientation.
+
 ## Methodology
 
 ### Data
@@ -115,6 +192,34 @@ Strate8: "Trying to reach agreements through conversation is a waste of time; it
 
 All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.75).
 
+#### Political Participation
+
+To measure political participation, respondents were asked to indicate how often they engage in the following activities:
+
+part1: Signing or sharing an online petition addressed to an authority
+
+part2: Signing up online as a volunteer to support a political or social cause
+
+part3: Attending an online meeting to support a political party, candidate, or social cause
+
+part4: Donating/transferring money to a political or social cause
+
+part5: Discussing politics or social issues on social media or WhatsApp
+
+part6: Liking or following a political group or activist group on Facebook or Twitter
+
+part7: Liking a political call-out (funa) on social media for political reasons
+
+part8: Changing your profile picture or status on social media or WhatsApp to support a political or social cause
+
+part9: Using WhatsApp or social media to share photos or videos of news related to politics or public issues
+
+part10: Joining political, public, or civic causes on social media
+
+part11: Expressing an opinion on topics or public events of interest on a website or social media
+
+All answer were measured in a 5-point likert scale (α = 0.92).
+
 #### Political Efficacy
 
 In line with the literature, political efficacy was divided into three distinct dimensions. First, external efficacy---i.e., beliefs about system responsiveness---was measured using the following statements:
@@ -147,9 +252,19 @@ All responses were measured on a 5-point Likert scale, where 1 indicated strong 
 
 #### Political Interest
 
-To measure political efficacy respondents were asked to .... 
+To measure political efficacy, respondents were asked to indicate their level of interest in the following areas:
+
+polint1: Politics
+
+polint2: The constituent process
+
+polint3: The exit plebiscite
+
+All responses were measured on a 5-point Likert scale, where 1 indicated low interest and 5 indicated high interest (α = 0.88).
 
 #### Media Exposure
+
+To measure media exposure, respondents were asked to indicate how frequently they informed themselves using different channels. Specifically, we used three sets of questions: one related to traditional media, i.e., broadcast TV, cable TV, print media, and radio (α = 0.74); another focused on digital media, i.e., online versions of traditional media, digital-only outlets, news podcasts, and social media platforms of digital media (α = 0.76); and a third set focused solely on social media, i.e., Facebook, Twitter, Instagram, WhatsApp, YouTube, and TikTok (α = 0.84). All questions were measured on a 5-point Likert scale, where 1 indicated low frequency and 5 indicated high frequency.
 
 #### Sociodemographic Variables
 
@@ -269,12 +384,25 @@ data_w3$strate_w3_6 <- data_w3$P49_6
 data_w3$strate_w3_7 <- data_w3$P49_7
 data_w3$strate_w3_8 <- data_w3$P49_8
 
+#Informal Participation
+data_w3$part_w3_1 <- data_w3$P25_1
+data_w3$part_w3_2 <- data_w3$P25_2
+data_w3$part_w3_3 <- data_w3$P25_3
+data_w3$part_w3_4 <- data_w3$P25_4
+data_w3$part_w3_5 <- data_w3$P25_5
+data_w3$part_w3_6 <- data_w3$P25_6
+data_w3$part_w3_7 <- data_w3$P25_7
+data_w3$part_w3_8 <- data_w3$P25_8
+data_w3$part_w3_9 <- data_w3$P25_9
+data_w3$part_w3_10 <- data_w3$P25_10
+data_w3$part_w3_11 <- data_w3$P25_11
+
 ```
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Assuming 'id' is your key variable for merging
 data_w3_selected <- data_w3 %>%
-  select(id, starts_with("strate_w3_"), starts_with("under_w3_")) %>%
+  select(id, starts_with("strate_w3_"), starts_with("under_w3_"), starts_with("part_w3_")) %>%
   drop_na()
 
 data_w1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "age_num", "ses", "sex", "educ")])
@@ -316,11 +444,15 @@ cronbach_under
 cronbach_strate <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
 cronbach_strate
 
+cronbach_part <- alpha(na.omit(merged_data[c("part_w3_1", "part_w3_2", "part_w3_3", "part_w3_4", "part_w3_5", "part_w3_6", "part_w3_7", "part_w3_8", "part_w3_9", "part_w3_10", "part_w3_11")]))
+cronbach_part
+
 ```
 
 ### Analysis
 
-To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, and 3 present the measurement models for the nine factors we developed.
+To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, 3 and 4 present the measurement models for the ten factors we developed.
+
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 
@@ -336,6 +468,7 @@ cfa.model2 <- 'media =~ tv + cable + newspaper + radio
               social =~ fb + insta + twitter + whatsapp + youtube + tiktok'
 cfa.model3 <- 'under =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
               strate =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
+cfa.model4 <- 'part =~ part_w3_1 + part_w3_2 + part_w3_3 + part_w3_4 + part_w3_5 + part_w3_6 + part_w3_7 + part_w3_8 + part_w3_9 + part_w3_10 + part_w3_11'
 
 fit_cfa1 <- cfa(cfa.model1, data = merged_data)
 latent_scores1 <- predict(fit_cfa1)
@@ -346,7 +479,10 @@ latent_scores2 <- predict(fit_cfa2)
 fit_cfa3 <- cfa(cfa.model3, data = merged_data)
 latent_scores3 <- predict(fit_cfa3)
 
-merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3)
+fit_cfa4 <- cfa(cfa.model4, data = merged_data)
+latent_scores4 <- predict(fit_cfa4)
+
+merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3, latent_scores4)
 ```
 
 **Figure 1** Measurement Model for Political Efficacies
@@ -375,24 +511,45 @@ semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
 ```
 Note: Own elaboration.
 
+**Figure 4** Measurment model for Political Participation
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+semPaths(fit_cfa4, "std", layout = "tree", rotation = 2,
+         whatLabels = "std", edge.label.cex = 0.8,
+         sizeMan = 3, sizeLat = 7, title = TRUE)
+```
+Note: Own elaboration.
+
 The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.
 
 ### Results
 
-**Table 1** OLS Regression for Understanding Orientation.
+**Table 1** OLS Regression for Orientations.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model0 <- lm(part ~ under + ses + sex + age_num, data = merged_data)
+summary(model0)
+
+model00 <- lm(part ~ strate + ses + sex + age_num, data = merged_data)
+summary(model00)
+
+```
+
+
+**Table 2** OLS Regression for Understanding Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
 summary(model1)
 ```
 
-**Table 2** OLS Regression for Strategic Orientation.
+**Table 3** OLS Regression for Strategic Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
 summary(model2)
 ```
-**Figure 4** Coefplot for understanding orientation and strategic orientation.
+**Figure 5** Coefplot for understanding orientation and strategic orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Assuming coef_df is already prepared as per previous instructions
@@ -461,6 +618,8 @@ ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, co
     axis.text.y = element_text(size = 8)  # Adjust text size if needed
   )
 ```
+
+
 
 ## Appendix
 
