@@ -85,12 +85,12 @@ In addition to media and social media, there are other variables that the litera
 
 Political interest is considered the basis for holding democratic political beliefs (Rebenstorf, 2004) and one of the central variables for explaining political participation (Sherrod et al., 2010; Torney-Purta, 2001). "Political interest is a necessary precondition for the desired characteristics of a responsible and democratic citizen" (Rebenstorf, 2004). In the same vein, Gil de Zúñiga and Diehl (2018). Unlike the civic obligations imposed by the state—which are normative in nature—high levels of social capital are associated with voluntary political engagement behaviors (Delli Carpini and Keeter, 1996). Moreover, members of audiences with lower social capital tend to avoid news consumption more frequently (Prior, 2007), while high levels of social capital are related to high news consumption (Boulainne and Shehata, 2022). Given the precondition status that political interest holds for the development of civic behaviors, we propose:
 
-**H4:** Political interest is positively related to understanding orientation.
+**H3:** Political interest is positively related to understanding orientation.
 
 Political efficacy is another key variable for understanding the level of commitment to the political system and participation. It is understood as the perception of individuals' abilities to understand the political process and the influence they have on authorities’ decisions (Prats and Meunier, 2021). Political efficacy creates a self-selection effect, where individuals' perceptions influence their willingness to participate politically (Gamson, 1968; Prats and Meunier, 2021; Schulz, 2005).
 Efficacy has two distinct dimensions: external efficacy and internal efficacy. External efficacy refers to individuals' perception of their ability to influence authorities’ decisions through various methods, such as elections or public protests. Meanwhile, internal efficacy studies individuals' perception of their competence in understanding the functioning of the political system (Parent, Vandebeek, and Gemino, 2005). Considering the background on the behavior of efficacy and its relationship with participation, we propose the following hypothesis:
 
-**H5:** Political efficacy (internal and external) is positively related to understanding orientation.
+**H4:** Political efficacy (internal and external) is positively related to understanding orientation.
 
 ## Methodology
 
