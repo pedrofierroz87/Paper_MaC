@@ -79,13 +79,9 @@ Regarding the relationship between media consumption and the previous findings o
 
 **H2b:** Exposure to news on social media is negatively related to understanding orientation.
 
-### Social Capital and Political Variables
+### Political Variables
 
 In addition to media and social media, there are other variables that the literature shows influence democratic deliberation processes, such as political interest and the perception of political efficacy.
-
-For Bourdieu and Wacquant (1992, p. 14), social capital is "the sum of the resources, actual or virtual, that accrue to an individual or a group by virtue of possessing a durable network of more or less institutionalized relationships of mutual acquaintance and recognition." Other authors consider social capital as a form of “investment” that allows maintaining good relations with others (Lin, 2001). And different research shows a positive and strong link between social capital and political participation (Gil de Zúñiga, Jung, and Valenzuela, 2012; Putnam, 2000; Scherman, Arriagada, and Valenzuela, 2015; Valenzuela, Park, and Kee, 2009). Social capital increases levels of coordination and facilitates different forms of political participation. For these reasons, our third research hypothesis is:
-
-**H3:** Social capital is positively related to understanding orientation.
 
 Political interest is considered the basis for holding democratic political beliefs (Rebenstorf, 2004) and one of the central variables for explaining political participation (Sherrod et al., 2010; Torney-Purta, 2001). "Political interest is a necessary precondition for the desired characteristics of a responsible and democratic citizen" (Rebenstorf, 2004). In the same vein, Gil de Zúñiga and Diehl (2018). Unlike the civic obligations imposed by the state—which are normative in nature—high levels of social capital are associated with voluntary political engagement behaviors (Delli Carpini and Keeter, 1996). Moreover, members of audiences with lower social capital tend to avoid news consumption more frequently (Prior, 2007), while high levels of social capital are related to high news consumption (Boulainne and Shehata, 2022). Given the precondition status that political interest holds for the development of civic behaviors, we propose:
 
