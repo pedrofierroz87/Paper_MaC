@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This proposal by Habermas has undergone few empirical tests. One of them is the work of Rojas (2008), who studied how the orientations of conversations impact relevant variables of the democratic system, such as political interest and political efficacy, in addition to establishing the determining variables of strategic orientation and understanding orientation (Rojas, 2008). In this latter analysis, the influence of news consumption in traditional media—TV, newspapers, and radio—on the two described forms of orientation was studied.</p>
 <p>Although it has its differences, Habermas’s proposal brings him closer to other authors who have also highlighted the importance of deliberation in democratic life (Dahl, 1989; Delli Carpini and Jacobs, 2004; Fishkin, xxxx; Page, 1996).</p>
 <p>Incorporating the effect of traditional media and social media in the current public debate Considering the relationship established by previous research between deliberation and the characteristics of Jürgen Habermas’s concept of understanding orientation, our first research hypothesis is:</p>
-<p><strong>H1:</strong> Understanding orientation is positively related to political participation.</p>
+<p><strong>This point needs to be correctly address</strong> <strong>H1:</strong> Understanding orientation is positively related to interpersonal confidence.</p>
 <p>Regarding the relationship between media consumption and the previous findings on the link between traditional media and social media with different forms of democratic deliberation, we propose:</p>
 <p><strong>H2a:</strong> News consumption in traditional media is positively related to understanding orientation.</p>
 <p><strong>H2b:</strong> Exposure to news on social media is negatively related to understanding orientation.</p>
@@ -146,21 +146,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Strate8: “Trying to reach agreements through conversation is a waste of time; it’s better if someone decides what to do and gets it done.”</p>
 <p>All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.75).</p>
 </section>
-<section id="political-participation" class="level4">
-<h4 class="anchored" data-anchor-id="political-participation">Political Participation</h4>
-<p>To measure political participation, respondents were asked to indicate how often they engage in the following activities:</p>
-<p>part1: Signing or sharing an online petition addressed to an authority</p>
-<p>part2: Signing up online as a volunteer to support a political or social cause</p>
-<p>part3: Attending an online meeting to support a political party, candidate, or social cause</p>
-<p>part4: Donating/transferring money to a political or social cause</p>
-<p>part5: Discussing politics or social issues on social media or WhatsApp</p>
-<p>part6: Liking or following a political group or activist group on Facebook or Twitter</p>
-<p>part7: Liking a political call-out (funa) on social media for political reasons</p>
-<p>part8: Changing your profile picture or status on social media or WhatsApp to support a political or social cause</p>
-<p>part9: Using WhatsApp or social media to share photos or videos of news related to politics or public issues</p>
-<p>part10: Joining political, public, or civic causes on social media</p>
-<p>part11: Expressing an opinion on topics or public events of interest on a website or social media</p>
-<p>All answer were measured in a 5-point likert scale (α = 0.92).</p>
+<section id="interpersonal-confidence" class="level4">
+<h4 class="anchored" data-anchor-id="interpersonal-confidence">Interpersonal Confidence</h4>
+<p>To measure interpersonal trust, respondents were asked: “Generally speaking, do you think most people can be trusted, or do you think you need to be careful when dealing with others?” Those who answered that most people can be trusted were coded as 1, and all others were coded as 0 (mean = 0.13).</p>
 </section>
 <section id="political-efficacy" class="level4">
 <h4 class="anchored" data-anchor-id="political-efficacy">Political Efficacy</h4>
@@ -198,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="analysis" class="level3">
 <h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
-<p>To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, 3 and 4 present the measurement models for the ten factors we developed.</p>
+<p>To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2 and 3 present the measurement models for the nine factors we developed.</p>
 <p><strong>Figure 1</strong> Measurement Model for Political Efficacies</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -220,100 +208,108 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Note: Own elaboration.</p>
-<p><strong>Figure 4</strong> Measurment model for Political Participation</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Note: Own elaboration.</p>
 <p>The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.</p>
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and political engagement—in this case, informal political participation.</p>
-<p><strong>Table 1</strong> OLS Regression for Political Participation</p>
+<p>Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and interpersonal confidence.</p>
+<p><strong>Table 1</strong> Logistic Regression for Interpersonal Confidence</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = part ~ under + ses + sex + age_num, data = merged_data)
+glm(formula = intercon ~ under + ses + sex + age_num, family = binomial, 
+    data = merged_data)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.2144 -0.6438 -0.3300  0.5509  2.7091 
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.9302  -0.5658  -0.4480  -0.3222   2.6612  
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)  0.568503   0.178409   3.187  0.00152 **
-under        0.214338   0.065822   3.256  0.00120 **
-ses         -0.043364   0.029878  -1.451  0.14723   
-sex         -0.117707   0.071711  -1.641  0.10127   
-age_num     -0.008381   0.002618  -3.201  0.00145 **
+              Estimate Std. Error z value  Pr(&gt;|z|)    
+(Intercept) -1.2708473  0.6405523  -1.984    0.0473 *  
+under        1.1124624  0.2806836   3.963 0.0000739 ***
+ses         -0.1676500  0.1085913  -1.544    0.1226    
+sex         -0.5656042  0.2735393  -2.068    0.0387 *  
+age_num     -0.0008476  0.0094649  -0.090    0.9286    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.8424 on 567 degrees of freedom
-Multiple R-squared:  0.03594,   Adjusted R-squared:  0.02914 
-F-statistic: 5.284 on 4 and 567 DF,  p-value: 0.0003486</code></pre>
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 436.83  on 571  degrees of freedom
+Residual deviance: 410.18  on 567  degrees of freedom
+AIC: 420.18
+
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = part ~ strate + ses + sex + age_num, data = merged_data)
+glm(formula = intercon ~ strate + ses + sex + age_num, family = binomial, 
+    data = merged_data)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.5166 -0.6242 -0.2520  0.5746  2.5705 
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.8008  -0.5626  -0.4777  -0.3828   2.5329  
 
 Coefficients:
-             Estimate Std. Error t value     Pr(&gt;|t|)    
-(Intercept)  0.519346   0.175344   2.962      0.00319 ** 
-strate       0.345190   0.063166   5.465 0.0000000695 ***
-ses         -0.068665   0.029516  -2.326      0.02035 *  
-sex         -0.092055   0.070764  -1.301      0.19383    
-age_num     -0.005746   0.002565  -2.240      0.02547 *  
+             Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) -1.389568   0.641570  -2.166   0.0303 *
+strate      -0.520942   0.242999  -2.144   0.0320 *
+ses         -0.140746   0.106699  -1.319   0.1871  
+sex         -0.633852   0.272466  -2.326   0.0200 *
+age_num      0.002727   0.009379   0.291   0.7712  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.8287 on 567 degrees of freedom
-Multiple R-squared:  0.06705,   Adjusted R-squared:  0.06047 
-F-statistic: 10.19 on 4 and 567 DF,  p-value: 0.00000005705</code></pre>
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 436.83  on 571  degrees of freedom
+Residual deviance: 423.26  on 567  degrees of freedom
+AIC: 433.26
+
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
-<p>Tables 2, 3 and Figure 5 show the models for understanding and political orientations.</p>
+<p><strong>Figure 5</strong> Coefplot for Interpersonal Confidence</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Tables 2, 3 and Figure 6 show the models for understanding and political orientations.</p>
 <p><strong>Table 2</strong> OLS Regression for Understanding Orientation.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = under ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = merged_data)
+    social + interest + extef + intef + ope, data = merged_data)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1.77865 -0.31052  0.03956  0.35621  1.21686 
+    Min      1Q  Median      3Q     Max 
+-1.7932 -0.3117  0.0253  0.3595  1.2029 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept) -0.177903   0.109009  -1.632  0.10324   
-ses         -0.006956   0.018314  -0.380  0.70421   
-sex         -0.010693   0.043162  -0.248  0.80442   
-age_num      0.004015   0.001643   2.444  0.01483 * 
-media        0.019171   0.053607   0.358  0.72077   
-digital      0.007140   0.046609   0.153  0.87831   
-social       0.057963   0.028449   2.037  0.04207 * 
-interest     0.065331   0.027790   2.351  0.01907 * 
-intercon     0.193120   0.064848   2.978  0.00303 **
-extef        0.002854   0.037890   0.075  0.93998   
-intef        0.135245   0.059487   2.274  0.02337 * 
-ope          0.052075   0.023551   2.211  0.02743 * 
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) -0.152832   0.109443  -1.396   0.1631  
+ses         -0.008877   0.018431  -0.482   0.6302  
+sex         -0.021132   0.043320  -0.488   0.6259  
+age_num      0.004248   0.001652   2.571   0.0104 *
+media        0.008075   0.053851   0.150   0.8809  
+digital      0.016813   0.046820   0.359   0.7197  
+social       0.054122   0.028618   1.891   0.0591 .
+interest     0.070605   0.027927   2.528   0.0117 *
+extef        0.019843   0.037720   0.526   0.5990  
+intef        0.152683   0.059612   2.561   0.0107 *
+ope          0.053846   0.023708   2.271   0.0235 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4996 on 560 degrees of freedom
-Multiple R-squared:  0.1744,    Adjusted R-squared:  0.1582 
-F-statistic: 10.76 on 11 and 560 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+Residual standard error: 0.5031 on 561 degrees of freedom
+Multiple R-squared:  0.1613,    Adjusted R-squared:  0.1464 
+F-statistic: 10.79 on 10 and 561 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
 </div>
 <p><strong>Table 3</strong> OLS Regression for Strategic Orientation.</p>
@@ -322,38 +318,37 @@ F-statistic: 10.76 on 11 and 560 DF,  p-value: &lt; 0.00000000000000022</code></
 <pre><code>
 Call:
 lm(formula = strate ~ ses + sex + age_num + media + digital + 
-    social + interest + intercon + extef + intef + ope, data = merged_data)
+    social + interest + extef + intef + ope, data = merged_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.62600 -0.35308  0.02019  0.30218  1.96623 
+-1.62487 -0.35016  0.02713  0.29937  1.86995 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.131761   0.115549   1.140 0.254645    
-ses          0.040941   0.019413   2.109 0.035391 *  
-sex         -0.106134   0.045751  -2.320 0.020710 *  
-age_num     -0.004426   0.001741  -2.542 0.011302 *  
-media        0.218610   0.056823   3.847 0.000133 ***
-digital     -0.098328   0.049405  -1.990 0.047050 *  
-social       0.070146   0.030155   2.326 0.020367 *  
-interest    -0.025639   0.029457  -0.870 0.384471    
-intercon    -0.121941   0.068739  -1.774 0.076610 .  
-extef       -0.045799   0.040164  -1.140 0.254646    
-intef       -0.143806   0.063056  -2.281 0.022947 *  
-ope          0.077746   0.024964   3.114 0.001938 ** 
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  0.115931   0.115424   1.004   0.31562    
+ses          0.042154   0.019438   2.169   0.03053 *  
+sex         -0.099543   0.045687  -2.179   0.02976 *  
+age_num     -0.004573   0.001743  -2.624   0.00893 ** 
+media        0.225616   0.056794   3.972 0.0000804 ***
+digital     -0.104436   0.049379  -2.115   0.03487 *  
+social       0.072571   0.030182   2.404   0.01652 *  
+interest    -0.028968   0.029453  -0.984   0.32577    
+extef       -0.056526   0.039782  -1.421   0.15590    
+intef       -0.154817   0.062870  -2.462   0.01410 *  
+ope          0.076627   0.025004   3.065   0.00228 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.5296 on 560 degrees of freedom
-Multiple R-squared:  0.1197,    Adjusted R-squared:  0.1024 
-F-statistic: 6.922 on 11 and 560 DF,  p-value: 0.00000000005173</code></pre>
+Residual standard error: 0.5306 on 561 degrees of freedom
+Multiple R-squared:  0.1147,    Adjusted R-squared:  0.09897 
+F-statistic: 7.272 on 10 and 561 DF,  p-value: 0.00000000007361</code></pre>
 </div>
 </div>
 <p><strong>Figure 5</strong> Coefplot for understanding orientation and strategic orientation.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -951,7 +946,7 @@ F-statistic: 4.597 on 11 and 1365 DF,  p-value: 0.0000006762</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

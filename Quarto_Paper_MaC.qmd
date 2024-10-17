@@ -70,7 +70,8 @@ Although it has its differences, Habermas’s proposal brings him closer to othe
 Incorporating the effect of traditional media and social media in the current public debate
 Considering the relationship established by previous research between deliberation and the characteristics of Jürgen Habermas’s concept of understanding orientation, our first research hypothesis is:
 
-**H1:** Understanding orientation is positively related to political participation.
+**This point needs to be correctly address**
+**H1:** Understanding orientation is positively related to interpersonal confidence.
 
 Regarding the relationship between media consumption and the previous findings on the link between traditional media and social media with different forms of democratic deliberation, we propose:
 
@@ -192,33 +193,9 @@ Strate8: "Trying to reach agreements through conversation is a waste of time; it
 
 All responses were measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement. A factor was constructed using the eight responses (α = 0.75).
 
-#### Political Participation
+#### Interpersonal Confidence
 
-To measure political participation, respondents were asked to indicate how often they engage in the following activities:
-
-part1: Signing or sharing an online petition addressed to an authority
-
-part2: Signing up online as a volunteer to support a political or social cause
-
-part3: Attending an online meeting to support a political party, candidate, or social cause
-
-part4: Donating/transferring money to a political or social cause
-
-part5: Discussing politics or social issues on social media or WhatsApp
-
-part6: Liking or following a political group or activist group on Facebook or Twitter
-
-part7: Liking a political call-out (funa) on social media for political reasons
-
-part8: Changing your profile picture or status on social media or WhatsApp to support a political or social cause
-
-part9: Using WhatsApp or social media to share photos or videos of news related to politics or public issues
-
-part10: Joining political, public, or civic causes on social media
-
-part11: Expressing an opinion on topics or public events of interest on a website or social media
-
-All answer were measured in a 5-point likert scale (α = 0.92).
+To measure interpersonal trust, respondents were asked: "Generally speaking, do you think most people can be trusted, or do you think you need to be careful when dealing with others?" Those who answered that most people can be trusted were coded as 1, and all others were coded as 0 (mean = 0.13).
 
 #### Political Efficacy
 
@@ -444,14 +421,12 @@ cronbach_under
 cronbach_strate <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
 cronbach_strate
 
-cronbach_part <- alpha(na.omit(merged_data[c("part_w3_1", "part_w3_2", "part_w3_3", "part_w3_4", "part_w3_5", "part_w3_6", "part_w3_7", "part_w3_8", "part_w3_9", "part_w3_10", "part_w3_11")]))
-cronbach_part
 
 ```
 
 ### Analysis
 
-To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2, 3 and 4 present the measurement models for the ten factors we developed.
+To test our hypothesis, the analysis was divided into two parts. First, different factors were created for the variables described in the previous section using Confirmatory Factor Analysis (CFA). We chose this technique because the selection of variables was theoretically grounded and supported by previous literature. Figures 1, 2 and 3 present the measurement models for the nine factors we developed.
 
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -468,7 +443,6 @@ cfa.model2 <- 'media =~ tv + cable + newspaper + radio
               social =~ fb + insta + twitter + whatsapp + youtube + tiktok'
 cfa.model3 <- 'under =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
               strate =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
-cfa.model4 <- 'part =~ part_w3_1 + part_w3_2 + part_w3_3 + part_w3_4 + part_w3_5 + part_w3_6 + part_w3_7 + part_w3_8 + part_w3_9 + part_w3_10 + part_w3_11'
 
 fit_cfa1 <- cfa(cfa.model1, data = merged_data)
 latent_scores1 <- predict(fit_cfa1)
@@ -479,10 +453,7 @@ latent_scores2 <- predict(fit_cfa2)
 fit_cfa3 <- cfa(cfa.model3, data = merged_data)
 latent_scores3 <- predict(fit_cfa3)
 
-fit_cfa4 <- cfa(cfa.model4, data = merged_data)
-latent_scores4 <- predict(fit_cfa4)
-
-merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3, latent_scores4)
+merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3)
 ```
 
 **Figure 1** Measurement Model for Political Efficacies
@@ -511,52 +482,24 @@ semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
 ```
 Note: Own elaboration.
 
-**Figure 4** Measurment model for Political Participation
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-semPaths(fit_cfa4, "std", layout = "tree", rotation = 2,
-         whatLabels = "std", edge.label.cex = 0.8,
-         sizeMan = 3, sizeLat = 7, title = TRUE)
-```
-Note: Own elaboration.
-
 The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.
 
 ### Results
 
-Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and political engagement—in this case, informal political participation.
+Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and interpersonal confidence.
 
-**Table 1** OLS Regression for Political Participation
+**Table 1** Logistic Regression for Interpersonal Confidence
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model0 <- lm(part ~ under + ses + sex + age_num, data = merged_data)
+model0 <- glm(intercon ~ under + ses + sex + age_num, data = merged_data, family = binomial)
 summary(model0)
 
-model00 <- lm(part ~ strate + ses + sex + age_num, data = merged_data)
+model00 <- glm(intercon ~ strate + ses + sex + age_num, data = merged_data, family = binomial)
 summary(model00)
 
 ```
 
-Tables 2, 3 and Figure 5 show the models for understanding and political orientations.
-
-**Table 2** OLS Regression for Understanding Orientation.
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
-summary(model1)
-```
-
-**Table 3** OLS Regression for Strategic Orientation.
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + intercon + extef + intef + ope, data = merged_data)
-summary(model2)
-```
-**Figure 5** Coefplot for understanding orientation and strategic orientation.
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Assuming coef_df is already prepared as per previous instructions
-
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Update the extraction function to avoid spaces in names
 get_coef <- function(model, model_name) {
   coefs <- summary(model)$coefficients
@@ -567,6 +510,92 @@ get_coef <- function(model, model_name) {
     Model = model_name
   )
 }
+
+# Create a mapping of old variable names to new names
+name_mapping <- c(
+  ses = "Socioeconomic Status",
+  sex = "Gender",
+  age_num = "Age",
+  media = "Media Expo.",
+  digital = "Dig, Media Expo.",
+  social = "Soc. Media Expo.",
+  interest = "Pol. Interest",
+  intercon = "Interp. Conf.",
+  extef = "Ext. Efficacy",
+  intef = "Int. Efficacy",
+  ope = "Onl. Efficacy",
+  under = "Orientation",
+  strate = "Orientation"
+)
+
+```
+
+**Figure 5** Coefplot for Interpersonal Confidence
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Assuming coef_df is already prepared as per previous instructions
+
+# Apply the function to both models
+coef_df0 <- get_coef(model0, "Model 0")
+coef_df00 <- get_coef(model00, "Model 00")
+
+
+# Combine the data frames and remove the intercept
+coef_dfprev <- rbind(coef_df0, coef_df00)
+coef_dfprev <- coef_dfprev[!coef_dfprev$Term %in% c("(Intercept)", "sex", "ses", "age_num"), ]
+
+
+# Calculate 95% confidence intervals and determine significance
+coef_dfprev <- coef_dfprev %>%
+  mutate(
+    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
+    )
+
+
+# Apply the mapping to the dataframe
+coef_dfprev <- coef_dfprev %>%
+  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
+
+# Define a dodge width for better separation
+dodge_width <- 0.5
+
+# Create the plot with updated names
+ggplot(coef_dfprev, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
+  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Estimated Coefficients") +
+  coord_flip() +  # Flips the axes for better visualization of terms
+  scale_color_manual(values = c("darkblue", "darkred"),
+                     labels = c("Understanding", "Strategic")) +  # Set custom colors for each model
+  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
+  theme(
+    legend.position = "right",  # Hide the legend for line size
+    axis.text.y = element_text(size = 8)  # Adjust text size if needed
+  )
+```
+
+Tables 2, 3 and Figure 6 show the models for understanding and political orientations.
+
+
+**Table 2** OLS Regression for Understanding Orientation.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope, data = merged_data)
+summary(model1)
+```
+
+**Table 3** OLS Regression for Strategic Orientation.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope, data = merged_data)
+summary(model2)
+```
+**Figure 5** Coefplot for understanding orientation and strategic orientation.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Assuming coef_df is already prepared as per previous instructions
 
 # Apply the function to both models
 coef_df1 <- get_coef(model1, "Model 1")
@@ -584,20 +613,6 @@ coef_df <- coef_df %>%
     Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
     )
 
-# Create a mapping of old variable names to new names
-name_mapping <- c(
-  ses = "Socioeconomic Status",
-  sex = "Gender",
-  age_num = "Age",
-  media = "Media Expo.",
-  digital = "Dig, Media Expo.",
-  social = "Soc. Media Expo.",
-  interest = "Pol. Interest",
-  intercon = "Interp. Conf.",
-  extef = "Ext. Efficacy",
-  intef = "Int. Efficacy",
-  ope = "Onl. Efficacy"
-)
 
 # Apply the mapping to the dataframe
 coef_df <- coef_df %>%
