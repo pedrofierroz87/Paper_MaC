@@ -239,6 +239,22 @@ All responses were measured on a 5-point Likert scale, where 1 indicated low int
 
 To measure media exposure, respondents were asked to indicate how frequently they informed themselves using different channels. Specifically, we used three sets of questions: one related to traditional media, i.e., broadcast TV, cable TV, print media, and radio (α = 0.74); another focused on digital media, i.e., online versions of traditional media, digital-only outlets, news podcasts, and social media platforms of digital media (α = 0.76); and a third set focused solely on social media, i.e., Facebook, Twitter, Instagram, WhatsApp, YouTube, and TikTok (α = 0.84). All questions were measured on a 5-point Likert scale, where 1 indicated low frequency and 5 indicated high frequency.
 
+#### Incidental Exposure in social media
+
+To measure incidental exposure on social media, respondents were asked to answer a set of questions, indicating how frequently they encounter the following:
+
+Do you come across opinions and/or messages with which you agree?
+
+Do you come across opinions and/or messages with which you disagree?
+
+Do you come across news/information about public or political matters even though you're not looking for current news?
+
+Do you come across political news or news about the plebiscite purely by accident?
+
+Do you come across posts and information about the elections simply because other people in your network shared the news?
+
+Each of these questions was measured using a 5-point Likert scale, where 1 represents "never" and 5 represents "very often." A scale was created using these questions (α = 0.75) through Confirmatory Factor Analysis (CFA).
+
 #### Sociodemographic Variables
 
 Additionally, we controlled the models by incorporating various sociodemographic variables. These included education level, sex (mean = 0.45, where 0 = male and 1 = female), socioeconomic status (range: 1 to 5, mean = 3.2), and age (range: 18 to 84, mean = 44.91).
@@ -370,12 +386,38 @@ data_w3$part_w3_9 <- data_w3$P25_9
 data_w3$part_w3_10 <- data_w3$P25_10
 data_w3$part_w3_11 <- data_w3$P25_11
 
+#incidental exposure
+data_w3$news_agree <- data_w3$P14_1
+data_w3$news_disagree <- data_w3$P14_2
+data_w3$news_pol <- data_w3$P14_3
+data_w3$news_pleb <- data_w3$P14_4
+data_w3$news_elec <- data_w3$P14_5
+
+#Affective polarisation
+
+data_w3$disapproval <- data_w3$P44_7
+data_w3$disreject <- data_w3$P44_8
+
+data_w3$polar1 <- ifelse(data_w3$disapproval == 0 | data_w3$disapproval == 10, 6,
+                         ifelse(data_w3$disapproval == 1 | data_w3$disapproval == 9, 5,
+                                ifelse(data_w3$disapproval == 2 | data_w3$disapproval == 8, 4,
+                                       ifelse(data_w3$disapproval == 3 | data_w3$disapproval == 7, 3,
+                                              ifelse(data_w3$disapproval == 4 | data_w3$disapproval == 6, 2,
+                                                     ifelse(data_w3$disapproval == 5, 1, NA))))))
+
+data_w3$polar2 <- ifelse(data_w3$disreject == 0 | data_w3$disreject == 10, 6,
+                         ifelse(data_w3$disreject == 1 | data_w3$disreject == 9, 5,
+                                ifelse(data_w3$disreject == 2 | data_w3$disreject == 8, 4,
+                                       ifelse(data_w3$disreject == 3 | data_w3$disreject == 7, 3,
+                                              ifelse(data_w3$disreject == 4 | data_w3$disreject == 6, 2,
+                                                     ifelse(data_w3$disreject == 5, 1, NA))))))
+
 ```
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Assuming 'id' is your key variable for merging
 data_w3_selected <- data_w3 %>%
-  select(id, starts_with("strate_w3_"), starts_with("under_w3_"), starts_with("part_w3_")) %>%
+  select(id, starts_with("strate_w3_"), starts_with("under_w3_"), starts_with("part_w3_"), starts_with("news_")) %>%
   drop_na()
 
 data_w1_na <- na.omit(data_w1[c("id", "polint", "procint", "plebint", "ope1", "ope2", "ope3", "ope4", "intef1", "intef2", "intef3", "extef1", "extef2", "extef3", "intercon", "tv", "cable", "newspaper", "radio", "tradonline", "online", "podcast", "officialsm","fb", "insta", "twitter", "whatsapp", "youtube", "tiktok", "age_num", "ses", "sex", "educ")])
@@ -417,6 +459,9 @@ cronbach_under
 cronbach_strate <- alpha(na.omit(merged_data[c("strate_w3_1", "strate_w3_2", "strate_w3_3", "strate_w3_4", "strate_w3_5", "strate_w3_6", "strate_w3_7", "strate_w3_8")]))
 cronbach_strate
 
+cronbach_incid <- alpha(na.omit(merged_data[c("news_agree", "news_disagree", "news_pol", "news_pleb", "news_elec")]))
+cronbach_incid
+
 
 ```
 
@@ -439,6 +484,8 @@ cfa.model2 <- 'media =~ tv + cable + newspaper + radio
               social =~ fb + insta + twitter + whatsapp + youtube + tiktok'
 cfa.model3 <- 'under =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
               strate =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8'
+cfa.model4 <- 'incidental =~ news_agree + news_disagree + news_pol + news_pleb + news_elec'
+
 
 fit_cfa1 <- cfa(cfa.model1, data = merged_data)
 latent_scores1 <- predict(fit_cfa1)
@@ -449,7 +496,12 @@ latent_scores2 <- predict(fit_cfa2)
 fit_cfa3 <- cfa(cfa.model3, data = merged_data)
 latent_scores3 <- predict(fit_cfa3)
 
-merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3)
+fit_cfa4 <- cfa(cfa.model4, data = merged_data)
+latent_scores4 <- predict(fit_cfa4)
+
+
+merged_data <- cbind(merged_data, latent_scores1, latent_scores2, latent_scores3, latent_scores4)
+
 ```
 
 **Figure 1** Measurement Model for Political Efficacies
@@ -477,6 +529,16 @@ semPaths(fit_cfa3, "std", layout = "tree", rotation = 2,
          sizeMan = 3, sizeLat = 7, title = TRUE)
 ```
 Note: Own elaboration.
+
+
+**Figure 4** Measurment model for incidental exposure
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+semPaths(fit_cfa4, "std", layout = "tree", rotation = 2,
+         whatLabels = "std", edge.label.cex = 0.8,
+         sizeMan = 3, sizeLat = 7, title = TRUE)
+
+```
+
 
 The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.
 
@@ -521,8 +583,9 @@ name_mapping <- c(
   intef = "Int. Efficacy",
   ope = "Onl. Efficacy",
   under = "Orientation",
-  strate = "Orientation"
-)
+  strate = "Orientation",
+  incidental = "Incidental Expo."
+  )
 
 ```
 
@@ -534,11 +597,9 @@ name_mapping <- c(
 coef_df0 <- get_coef(model0, "Model 0")
 coef_df00 <- get_coef(model00, "Model 00")
 
-
 # Combine the data frames and remove the intercept
 coef_dfprev <- rbind(coef_df0, coef_df00)
 coef_dfprev <- coef_dfprev[!coef_dfprev$Term %in% c("(Intercept)", "sex", "ses", "age_num"), ]
-
 
 # Calculate 95% confidence intervals and determine significance
 coef_dfprev <- coef_dfprev %>%
@@ -547,7 +608,6 @@ coef_dfprev <- coef_dfprev %>%
     Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
     Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
     )
-
 
 # Apply the mapping to the dataframe
 coef_dfprev <- coef_dfprev %>%
@@ -575,17 +635,18 @@ ggplot(coef_dfprev, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI
 Tables 2, 3 and Figure 6 show the models for understanding and political orientations.
 
 
+
 **Table 2** OLS Regression for Understanding Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope, data = merged_data)
+model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental, data = merged_data)
 summary(model1)
 ```
 
 **Table 3** OLS Regression for Strategic Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope, data = merged_data)
+model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental, data = merged_data)
 summary(model2)
 ```
 **Figure 5** Coefplot for understanding orientation and strategic orientation.

@@ -177,6 +177,16 @@ ul.task-list li input[type="checkbox"] {
 <h4 class="anchored" data-anchor-id="media-exposure">Media Exposure</h4>
 <p>To measure media exposure, respondents were asked to indicate how frequently they informed themselves using different channels. Specifically, we used three sets of questions: one related to traditional media, i.e., broadcast TV, cable TV, print media, and radio (α = 0.74); another focused on digital media, i.e., online versions of traditional media, digital-only outlets, news podcasts, and social media platforms of digital media (α = 0.76); and a third set focused solely on social media, i.e., Facebook, Twitter, Instagram, WhatsApp, YouTube, and TikTok (α = 0.84). All questions were measured on a 5-point Likert scale, where 1 indicated low frequency and 5 indicated high frequency.</p>
 </section>
+<section id="incidental-exposure-in-social-media" class="level4">
+<h4 class="anchored" data-anchor-id="incidental-exposure-in-social-media">Incidental Exposure in social media</h4>
+<p>To measure incidental exposure on social media, respondents were asked to answer a set of questions, indicating how frequently they encounter the following:</p>
+<p>Do you come across opinions and/or messages with which you agree?</p>
+<p>Do you come across opinions and/or messages with which you disagree?</p>
+<p>Do you come across news/information about public or political matters even though you’re not looking for current news?</p>
+<p>Do you come across political news or news about the plebiscite purely by accident?</p>
+<p>Do you come across posts and information about the elections simply because other people in your network shared the news?</p>
+<p>Each of these questions was measured using a 5-point Likert scale, where 1 represents “never” and 5 represents “very often.” A scale was created using these questions (α = 0.75) through Confirmatory Factor Analysis (CFA).</p>
+</section>
 <section id="sociodemographic-variables" class="level4">
 <h4 class="anchored" data-anchor-id="sociodemographic-variables">Sociodemographic Variables</h4>
 <p>Additionally, we controlled the models by incorporating various sociodemographic variables. These included education level, sex (mean = 0.45, where 0 = male and 1 = female), socioeconomic status (range: 1 to 5, mean = 3.2), and age (range: 18 to 84, mean = 44.91).</p>
@@ -206,6 +216,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Note: Own elaboration.</p>
+<p><strong>Figure 4</strong> Measurment model for incidental exposure</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p>The second part of the analysis explored which variables might be related to the propensity for having an understanding or strategic orientation toward political interactions, using traditional OLS regressions. We recognize that, given the nature of our data and the design of the analysis, Structural Equation Modeling (SEM) could be a more appropriate method to test these interactions. The advantage of SEM is that it allows us to create latent factors from observable variables—as we did—and simultaneously test the interactions between variables in the model. Thus, to ensure the robustness of our results, we also applied SEM for the two orientations under studied. These results, which are presented in the appendix, are consistent with the findings described in the following section.</p>
 </section>
 <section id="results" class="level3">
@@ -273,7 +289,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <p><strong>Figure 5</strong> Coefplot for Interpersonal Confidence</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Tables 2, 3 and Figure 6 show the models for understanding and political orientations.</p>
@@ -283,31 +299,32 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <pre><code>
 Call:
 lm(formula = under ~ ses + sex + age_num + media + digital + 
-    social + interest + extef + intef + ope, data = merged_data)
+    social + interest + extef + intef + ope + incidental, data = merged_data)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.7932 -0.3117  0.0253  0.3595  1.2029 
+     Min       1Q   Median       3Q      Max 
+-1.78379 -0.29384  0.04867  0.33979  1.19559 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept) -0.152832   0.109443  -1.396   0.1631  
-ses         -0.008877   0.018431  -0.482   0.6302  
-sex         -0.021132   0.043320  -0.488   0.6259  
-age_num      0.004248   0.001652   2.571   0.0104 *
-media        0.008075   0.053851   0.150   0.8809  
-digital      0.016813   0.046820   0.359   0.7197  
-social       0.054122   0.028618   1.891   0.0591 .
-interest     0.070605   0.027927   2.528   0.0117 *
-extef        0.019843   0.037720   0.526   0.5990  
-intef        0.152683   0.059612   2.561   0.0107 *
-ope          0.053846   0.023708   2.271   0.0235 *
+             Estimate Std. Error t value   Pr(&gt;|t|)    
+(Intercept) -0.086371   0.108125  -0.799     0.4247    
+ses         -0.013665   0.018091  -0.755     0.4504    
+sex         -0.050933   0.042894  -1.187     0.2356    
+age_num      0.003411   0.001629   2.094     0.0367 *  
+media       -0.009821   0.052908  -0.186     0.8528    
+digital      0.017643   0.045891   0.384     0.7008    
+social       0.043285   0.028137   1.538     0.1245    
+interest     0.065292   0.027394   2.383     0.0175 *  
+extef        0.048220   0.037423   1.289     0.1981    
+intef        0.148978   0.058433   2.550     0.0111 *  
+ope          0.041969   0.023363   1.796     0.0730 .  
+incidental   0.251125   0.051297   4.896 0.00000128 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.5031 on 561 degrees of freedom
-Multiple R-squared:  0.1613,    Adjusted R-squared:  0.1464 
-F-statistic: 10.79 on 10 and 561 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+Residual standard error: 0.4931 on 560 degrees of freedom
+Multiple R-squared:  0.1958,    Adjusted R-squared:   0.18 
+F-statistic: 12.39 on 11 and 560 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
 </div>
 <p><strong>Table 3</strong> OLS Regression for Strategic Orientation.</p>
@@ -316,37 +333,38 @@ F-statistic: 10.79 on 10 and 561 DF,  p-value: &lt; 0.00000000000000022</code></
 <pre><code>
 Call:
 lm(formula = strate ~ ses + sex + age_num + media + digital + 
-    social + interest + extef + intef + ope, data = merged_data)
+    social + interest + extef + intef + ope + incidental, data = merged_data)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1.62487 -0.35016  0.02713  0.29937  1.86995 
+    Min      1Q  Median      3Q     Max 
+-1.6727 -0.3588  0.0210  0.3034  1.8245 
 
 Coefficients:
-             Estimate Std. Error t value  Pr(&gt;|t|)    
-(Intercept)  0.115931   0.115424   1.004   0.31562    
-ses          0.042154   0.019438   2.169   0.03053 *  
-sex         -0.099543   0.045687  -2.179   0.02976 *  
-age_num     -0.004573   0.001743  -2.624   0.00893 ** 
-media        0.225616   0.056794   3.972 0.0000804 ***
-digital     -0.104436   0.049379  -2.115   0.03487 *  
-social       0.072571   0.030182   2.404   0.01652 *  
-interest    -0.028968   0.029453  -0.984   0.32577    
-extef       -0.056526   0.039782  -1.421   0.15590    
-intef       -0.154817   0.062870  -2.462   0.01410 *  
-ope          0.076627   0.025004   3.065   0.00228 ** 
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.134204   0.116286   1.154 0.248956    
+ses          0.040838   0.019457   2.099 0.036272 *  
+sex         -0.107736   0.046131  -2.335 0.019873 *  
+age_num     -0.004803   0.001752  -2.742 0.006296 ** 
+media        0.220695   0.056902   3.879 0.000118 ***
+digital     -0.104208   0.049355  -2.111 0.035180 *  
+social       0.069591   0.030261   2.300 0.021831 *  
+interest    -0.030429   0.029462  -1.033 0.302124    
+extef       -0.048724   0.040247  -1.211 0.226554    
+intef       -0.155836   0.062844  -2.480 0.013441 *  
+ope          0.073361   0.025127   2.920 0.003645 ** 
+incidental   0.069046   0.055168   1.252 0.211255    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.5306 on 561 degrees of freedom
-Multiple R-squared:  0.1147,    Adjusted R-squared:  0.09897 
-F-statistic: 7.272 on 10 and 561 DF,  p-value: 0.00000000007361</code></pre>
+Residual standard error: 0.5303 on 560 degrees of freedom
+Multiple R-squared:  0.1172,    Adjusted R-squared:  0.09988 
+F-statistic:  6.76 on 11 and 560 DF,  p-value: 0.0000000001037</code></pre>
 </div>
 </div>
 <p><strong>Figure 5</strong> Coefplot for understanding orientation and strategic orientation.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -944,7 +962,7 @@ F-statistic: 4.597 on 11 and 1365 DF,  p-value: 0.0000006762</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
