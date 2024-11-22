@@ -408,6 +408,108 @@ Residual standard error: 0.4869 on 558 degrees of freedom
 Multiple R-squared:  0.2187,    Adjusted R-squared:  0.2005 
 F-statistic: 12.01 on 13 and 558 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * media, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.72391 -0.35602  0.03556  0.29801  1.93525 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       0.146468   0.116439   1.258 0.208957    
+ses               0.038921   0.019427   2.003 0.045608 *  
+sex              -0.113218   0.046202  -2.450 0.014572 *  
+age_num          -0.004661   0.001749  -2.665 0.007916 ** 
+media             0.209612   0.056980   3.679 0.000257 ***
+digital          -0.102398   0.049481  -2.069 0.038965 *  
+social            0.067402   0.030221   2.230 0.026123 *  
+interest         -0.022455   0.029680  -0.757 0.449629    
+extef            -0.040942   0.040734  -1.005 0.315277    
+intef            -0.145480   0.062992  -2.309 0.021280 *  
+ope               0.074036   0.025070   2.953 0.003278 ** 
+incidental        0.081219   0.055512   1.463 0.144006    
+intercon         -0.119274   0.068857  -1.732 0.083792 .  
+media:incidental  0.087398   0.070487   1.240 0.215524    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.529 on 558 degrees of freedom
+Multiple R-squared:  0.1248,    Adjusted R-squared:  0.1044 
+F-statistic: 6.122 on 13 and 558 DF,  p-value: 0.00000000009037</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * digital, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.69957 -0.36268  0.02803  0.29959  1.91512 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         0.147706   0.116442   1.268 0.205153    
+ses                 0.039586   0.019425   2.038 0.042032 *  
+sex                -0.113884   0.046201  -2.465 0.014003 *  
+age_num            -0.004705   0.001750  -2.689 0.007372 ** 
+media               0.212037   0.056927   3.725 0.000215 ***
+digital            -0.103223   0.049580  -2.082 0.037802 *  
+social              0.066819   0.030226   2.211 0.027464 *  
+interest           -0.023630   0.029608  -0.798 0.425155    
+extef              -0.039242   0.040673  -0.965 0.335061    
+intef              -0.142433   0.063031  -2.260 0.024222 *  
+ope                 0.073475   0.025086   2.929 0.003541 ** 
+incidental          0.080723   0.055551   1.453 0.146749    
+intercon           -0.124970   0.068716  -1.819 0.069501 .  
+digital:incidental  0.060874   0.053570   1.136 0.256302    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5291 on 558 degrees of freedom
+Multiple R-squared:  0.1244,    Adjusted R-squared:  0.104 
+F-statistic:   6.1 on 13 and 558 DF,  p-value: 0.0000000001005</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = strate ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * social, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.73527 -0.35640  0.03003  0.30304  1.92117 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        0.138819   0.116435   1.192 0.233672    
+ses                0.040598   0.019404   2.092 0.036867 *  
+sex               -0.108820   0.046250  -2.353 0.018976 *  
+age_num           -0.004697   0.001747  -2.689 0.007373 ** 
+media              0.213855   0.056828   3.763 0.000186 ***
+digital           -0.099660   0.049293  -2.022 0.043674 *  
+social             0.061697   0.030327   2.034 0.042385 *  
+interest          -0.025360   0.029421  -0.862 0.389079    
+extef             -0.038003   0.040576  -0.937 0.349385    
+intef             -0.144194   0.062903  -2.292 0.022258 *  
+ope                0.071695   0.025081   2.859 0.004415 ** 
+incidental         0.081692   0.055239   1.479 0.139734    
+intercon          -0.122004   0.068629  -1.778 0.075994 .  
+social:incidental  0.086681   0.049547   1.749 0.080759 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5283 on 558 degrees of freedom
+Multiple R-squared:  0.1272,    Adjusted R-squared:  0.1069 
+F-statistic: 6.255 on 13 and 558 DF,  p-value: 0.0000000000468</code></pre>
+</div>
 </div>
 <p><strong>Figure 6</strong> Interactions between incidental exposure and news consumption</p>
 <div class="cell">
@@ -1090,9 +1192,6 @@ F-statistic:  9.17 on 11 and 1365 DF,  p-value: 0.0000000000000005238</code></pr
 </div>
 </div>
 </section>
-</section>
-<section id="interactions" class="level2">
-<h2 class="anchored" data-anchor-id="interactions">Interactions</h2>
 </section>
 </section>
 

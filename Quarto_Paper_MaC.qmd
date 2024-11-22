@@ -649,6 +649,18 @@ summary(model1_int2)
 
 model1_int3 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*social, data = merged_data)
 summary(model1_int3)
+
+# For strate
+model2_int1 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*media, data = merged_data)
+summary(model2_int1)
+
+model2_int2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*digital, data = merged_data)
+summary(model2_int2)
+
+model2_int3 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*social, data = merged_data)
+summary(model2_int3)
+
+
 ```
 
 
@@ -877,11 +889,5 @@ summary(model_a1)
 
 model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_justw1_na)
 summary(model_a2)
-```
-
-## Interactions
-
-```{r}
-
 ```
 
