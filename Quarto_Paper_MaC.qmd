@@ -544,19 +544,6 @@ The second part of the analysis explored which variables might be related to the
 
 ### Results
 
-Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and interpersonal confidence.
-
-**Table 1** Logistic Regression for Interpersonal Confidence
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model0 <- glm(intercon ~ under + ses + sex + age_num, data = merged_data, family = binomial)
-summary(model0)
-
-model00 <- glm(intercon ~ strate + ses + sex + age_num, data = merged_data, family = binomial)
-summary(model00)
-
-```
-
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Update the extraction function to avoid spaces in names
 get_coef <- function(model, model_name) {
@@ -589,65 +576,20 @@ name_mapping <- c(
 
 ```
 
-**Figure 5** Coefplot for Interpersonal Confidence
-```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# Assuming coef_df is already prepared as per previous instructions
-
-# Apply the function to both models
-coef_df0 <- get_coef(model0, "Model 0")
-coef_df00 <- get_coef(model00, "Model 00")
-
-# Combine the data frames and remove the intercept
-coef_dfprev <- rbind(coef_df0, coef_df00)
-coef_dfprev <- coef_dfprev[!coef_dfprev$Term %in% c("(Intercept)", "sex", "ses", "age_num"), ]
-
-# Calculate 95% confidence intervals and determine significance
-coef_dfprev <- coef_dfprev %>%
-  mutate(
-    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
-    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
-    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
-    )
-
-# Apply the mapping to the dataframe
-coef_dfprev <- coef_dfprev %>%
-  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
-
-# Define a dodge width for better separation
-dodge_width <- 0.5
-
-# Create the plot with updated names
-ggplot(coef_dfprev, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
-  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
-  theme_minimal() +
-  labs(x = "Variables", y = "Estimated Coefficients") +
-  coord_flip() +  # Flips the axes for better visualization of terms
-  scale_color_manual(values = c("darkblue", "darkred"),
-                     labels = c("Understanding", "Strategic")) +  # Set custom colors for each model
-  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
-  theme(
-    legend.position = "right",  # Hide the legend for line size
-    axis.text.y = element_text(size = 8)  # Adjust text size if needed
-  )
-```
-
-Tables 2, 3 and Figure 6 show the models for understanding and political orientations.
-
-
-
-**Table 2** OLS Regression for Understanding Orientation.
+**Table 1** OLS Regression for Understanding Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental, data = merged_data)
+model1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon, data = merged_data)
 summary(model1)
+
 ```
 
-**Table 3** OLS Regression for Strategic Orientation.
+**Table 2** OLS Regression for Strategic Orientation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental, data = merged_data)
+model2 <- lm(strate ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon, data = merged_data)
 summary(model2)
+
 ```
 **Figure 5** Coefplot for understanding orientation and strategic orientation.
 
@@ -665,8 +607,8 @@ coef_df <- coef_df[coef_df$Term != "(Intercept)", ]
 # Calculate 95% confidence intervals and determine significance
 coef_df <- coef_df %>%
   mutate(
-    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
-    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Lower_CI = Estimate - 1.96 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.96 * Std_Error,  # Upper bound of the CI
     Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
     )
 
@@ -694,6 +636,64 @@ ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, co
   )
 ```
 
+**Table 3** Regressions considering interactions
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+# For under
+model1_int1 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*media, data = merged_data)
+summary(model1_int1)
+
+model1_int2 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*digital, data = merged_data)
+summary(model1_int2)
+
+model1_int3 <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental + intercon + incidental*social, data = merged_data)
+summary(model1_int3)
+```
+
+
+**Figure 6** Interactions between incidental exposure and news consumption
+
+```{r  echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+merged_data$incidental_dummy <- ifelse(merged_data$incidental < 0, 0,
+                                       ifelse(merged_data$incidental > 0, 1, NA))
+
+model1_int1_plot <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental_dummy + intercon + incidental_dummy*media, data = merged_data)
+summary(model1_int1_plot)
+
+
+model1_int2_plot <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental_dummy + intercon + incidental_dummy*digital, data = merged_data)
+summary(model1_int2_plot)
+
+
+model1_int3_plot <- lm(under ~ ses + sex + age_num + media + digital + social + interest + extef + intef + ope + incidental_dummy + intercon + incidental_dummy*social, data = merged_data)
+summary(model1_int3_plot)
+
+
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+# Plotting the interaction with customized labels and no legend title
+
+plot1 <- interact_plot(model = model1_int1_plot, pred = "media", modx = "incidental_dummy", 
+                       interval = TRUE, x.label = "Media", y.label = "Understanding Orientation", 
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+
+plot2 <- interact_plot(model = model1_int2_plot, pred = "digital", modx = "incidental_dummy", 
+                       interval = TRUE, x.label = "Digital Media", y.label = "Understanding Orientation", 
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+
+plot3 <- interact_plot(model = model1_int3_plot, pred = "social", modx = "incidental_dummy", 
+                       interval = TRUE, x.label = "Social Media", y.label = "Understanding Orientation", 
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+plot1
+plot2
+plot3
+
+```
 
 
 ## Appendix
@@ -877,5 +877,11 @@ summary(model_a1)
 
 model_a2 <- lm(stratesum ~ ses + sex + age_num + mediasum + digitalsum + socialsum + polint + intercon + extefsum + intefsum + opesum, data = data_justw1_na)
 summary(model_a2)
+```
+
+## Interactions
+
+```{r}
+
 ```
 

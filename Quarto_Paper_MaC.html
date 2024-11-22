@@ -226,145 +226,199 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>Table 1 presents a parsimonious model that examines the relationship between understanding and political orientations, and interpersonal confidence.</p>
-<p><strong>Table 1</strong> Logistic Regression for Interpersonal Confidence</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = intercon ~ under + ses + sex + age_num, family = binomial, 
-    data = merged_data)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--0.9302  -0.5658  -0.4480  -0.3222   2.6612  
-
-Coefficients:
-              Estimate Std. Error z value  Pr(&gt;|z|)    
-(Intercept) -1.2708473  0.6405523  -1.984    0.0473 *  
-under        1.1124624  0.2806836   3.963 0.0000739 ***
-ses         -0.1676500  0.1085913  -1.544    0.1226    
-sex         -0.5656042  0.2735393  -2.068    0.0387 *  
-age_num     -0.0008476  0.0094649  -0.090    0.9286    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 436.83  on 571  degrees of freedom
-Residual deviance: 410.18  on 567  degrees of freedom
-AIC: 420.18
-
-Number of Fisher Scoring iterations: 5</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = intercon ~ strate + ses + sex + age_num, family = binomial, 
-    data = merged_data)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--0.8008  -0.5626  -0.4777  -0.3828   2.5329  
-
-Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)  
-(Intercept) -1.389568   0.641570  -2.166   0.0303 *
-strate      -0.520942   0.242999  -2.144   0.0320 *
-ses         -0.140746   0.106699  -1.319   0.1871  
-sex         -0.633852   0.272466  -2.326   0.0200 *
-age_num      0.002727   0.009379   0.291   0.7712  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 436.83  on 571  degrees of freedom
-Residual deviance: 423.26  on 567  degrees of freedom
-AIC: 433.26
-
-Number of Fisher Scoring iterations: 5</code></pre>
-</div>
-</div>
-<p><strong>Figure 5</strong> Coefplot for Interpersonal Confidence</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Tables 2, 3 and Figure 6 show the models for understanding and political orientations.</p>
-<p><strong>Table 2</strong> OLS Regression for Understanding Orientation.</p>
+<p><strong>Table 1</strong> OLS Regression for Understanding Orientation.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = under ~ ses + sex + age_num + media + digital + 
-    social + interest + extef + intef + ope + incidental, data = merged_data)
+    social + interest + extef + intef + ope + incidental + intercon, 
+    data = merged_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.78379 -0.29384  0.04867  0.33979  1.19559 
+-1.73714 -0.29316  0.05356  0.32274  1.21323 
 
 Coefficients:
-             Estimate Std. Error t value   Pr(&gt;|t|)    
-(Intercept) -0.086371   0.108125  -0.799     0.4247    
-ses         -0.013665   0.018091  -0.755     0.4504    
-sex         -0.050933   0.042894  -1.187     0.2356    
-age_num      0.003411   0.001629   2.094     0.0367 *  
-media       -0.009821   0.052908  -0.186     0.8528    
-digital      0.017643   0.045891   0.384     0.7008    
-social       0.043285   0.028137   1.538     0.1245    
-interest     0.065292   0.027394   2.383     0.0175 *  
-extef        0.048220   0.037423   1.289     0.1981    
-intef        0.148978   0.058433   2.550     0.0111 *  
-ope          0.041969   0.023363   1.796     0.0730 .  
-incidental   0.251125   0.051297   4.896 0.00000128 ***
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept) -0.111403   0.107786  -1.034   0.30179    
+ses         -0.011753   0.017988  -0.653   0.51377    
+sex         -0.040468   0.042775  -0.946   0.34452    
+age_num      0.003207   0.001620   1.980   0.04820 *  
+media        0.001029   0.052705   0.020   0.98443    
+digital      0.008477   0.045709   0.185   0.85293    
+social       0.047132   0.027989   1.684   0.09275 .  
+interest     0.060410   0.027272   2.215   0.02715 *  
+extef        0.031588   0.037632   0.839   0.40161    
+intef        0.132558   0.058340   2.272   0.02346 *  
+ope          0.040529   0.023219   1.745   0.08145 .  
+incidental   0.246139   0.050998   4.826 0.0000018 ***
+intercon     0.182660   0.063632   2.871   0.00425 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4931 on 560 degrees of freedom
-Multiple R-squared:  0.1958,    Adjusted R-squared:   0.18 
-F-statistic: 12.39 on 11 and 560 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+Residual standard error: 0.49 on 559 degrees of freedom
+Multiple R-squared:  0.2074,    Adjusted R-squared:  0.1904 
+F-statistic: 12.19 on 12 and 559 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
 </div>
-<p><strong>Table 3</strong> OLS Regression for Strategic Orientation.</p>
+<p><strong>Table 2</strong> OLS Regression for Strategic Orientation.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = strate ~ ses + sex + age_num + media + digital + 
-    social + interest + extef + intef + ope + incidental, data = merged_data)
+    social + interest + extef + intef + ope + incidental + intercon, 
+    data = merged_data)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.6727 -0.3588  0.0210  0.3034  1.8245 
+     Min       1Q   Median       3Q      Max 
+-1.67627 -0.36757  0.01682  0.30267  1.92092 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.134204   0.116286   1.154 0.248956    
-ses          0.040838   0.019457   2.099 0.036272 *  
-sex         -0.107736   0.046131  -2.335 0.019873 *  
-age_num     -0.004803   0.001752  -2.742 0.006296 ** 
-media        0.220695   0.056902   3.879 0.000118 ***
-digital     -0.104208   0.049355  -2.111 0.035180 *  
-social       0.069591   0.030261   2.300 0.021831 *  
-interest    -0.030429   0.029462  -1.033 0.302124    
-extef       -0.048724   0.040247  -1.211 0.226554    
-intef       -0.155836   0.062844  -2.480 0.013441 *  
-ope          0.073361   0.025127   2.920 0.003645 ** 
-incidental   0.069046   0.055168   1.252 0.211255    
+(Intercept)  0.151338   0.116429   1.300 0.194195    
+ses          0.039529   0.019430   2.034 0.042378 *  
+sex         -0.114899   0.046205  -2.487 0.013182 *  
+age_num     -0.004664   0.001750  -2.666 0.007906 ** 
+media        0.213269   0.056931   3.746 0.000198 ***
+digital     -0.097934   0.049374  -1.984 0.047798 *  
+social       0.066958   0.030233   2.215 0.027183 *  
+interest    -0.027087   0.029458  -0.920 0.358225    
+extef       -0.037340   0.040649  -0.919 0.358706    
+intef       -0.144597   0.063018  -2.295 0.022130 *  
+ope          0.074347   0.025081   2.964 0.003164 ** 
+incidental   0.072459   0.055087   1.315 0.188931    
+intercon    -0.125020   0.068734  -1.819 0.069461 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.5303 on 560 degrees of freedom
-Multiple R-squared:  0.1172,    Adjusted R-squared:  0.09988 
-F-statistic:  6.76 on 11 and 560 DF,  p-value: 0.0000000001037</code></pre>
+Residual standard error: 0.5293 on 559 degrees of freedom
+Multiple R-squared:  0.1224,    Adjusted R-squared:  0.1036 
+F-statistic: 6.498 on 12 and 559 DF,  p-value: 0.00000000006643</code></pre>
 </div>
 </div>
 <p><strong>Figure 5</strong> Coefplot for understanding orientation and strategic orientation.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Table 3</strong> Regressions considering interactions</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = under ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * media, data = merged_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7092 -0.2932  0.0551  0.3201  1.0923 
+
+Coefficients:
+                  Estimate Std. Error t value   Pr(&gt;|t|)    
+(Intercept)      -0.125813   0.106418  -1.182    0.23761    
+ses              -0.013551   0.017755  -0.763    0.44563    
+sex              -0.035495   0.042226  -0.841    0.40094    
+age_num           0.003216   0.001598   2.012    0.04471 *  
+media            -0.009793   0.052077  -0.188    0.85091    
+digital          -0.004732   0.045223  -0.105    0.91669    
+social            0.048448   0.027620   1.754    0.07996 .  
+interest          0.074116   0.027126   2.732    0.00649 ** 
+extef             0.020930   0.037228   0.562    0.57419    
+intef             0.129946   0.057571   2.257    0.02438 *  
+ope               0.039608   0.022913   1.729    0.08442 .  
+incidental        0.272060   0.050735   5.362 0.00000012 ***
+intercon          0.199664   0.062931   3.173    0.00159 ** 
+media:incidental  0.258612   0.064421   4.014 0.00006773 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4835 on 558 degrees of freedom
+Multiple R-squared:  0.2297,    Adjusted R-squared:  0.2117 
+F-statistic:  12.8 on 13 and 558 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = under ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * digital, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.71381 -0.28466  0.03987  0.32603  1.10651 
+
+Coefficients:
+                    Estimate Std. Error t value    Pr(&gt;|t|)    
+(Intercept)        -0.121852   0.106713  -1.142    0.254002    
+ses                -0.011589   0.017802  -0.651    0.515301    
+sex                -0.037547   0.042341  -0.887    0.375582    
+age_num             0.003088   0.001603   1.926    0.054626 .  
+media              -0.002515   0.052171  -0.048    0.961564    
+digital            -0.006738   0.045437  -0.148    0.882166    
+social              0.046733   0.027700   1.687    0.092145 .  
+interest            0.070357   0.027134   2.593    0.009765 ** 
+extef               0.026118   0.037275   0.701    0.483798    
+intef               0.138784   0.057764   2.403    0.016605 *  
+ope                 0.038021   0.022990   1.654    0.098732 .  
+incidental          0.269912   0.050909   5.302 0.000000165 ***
+intercon            0.182803   0.062975   2.903    0.003845 ** 
+digital:incidental  0.175122   0.049094   3.567    0.000392 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4849 on 558 degrees of freedom
+Multiple R-squared:  0.2251,    Adjusted R-squared:  0.2071 
+F-statistic: 12.47 on 13 and 558 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = under ~ ses + sex + age_num + media + digital + 
+    social + interest + extef + intef + ope + incidental + intercon + 
+    incidental * social, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.72634 -0.28710  0.05551  0.33491  1.12099 
+
+Coefficients:
+                   Estimate Std. Error t value    Pr(&gt;|t|)    
+(Intercept)       -0.130070   0.107319  -1.212     0.22603    
+ses               -0.010160   0.017885  -0.568     0.57022    
+sex               -0.031404   0.042629  -0.737     0.46163    
+age_num            0.003158   0.001610   1.961     0.05032 .  
+media              0.001902   0.052379   0.036     0.97104    
+digital            0.005903   0.045434   0.130     0.89667    
+social             0.039288   0.027953   1.406     0.16043    
+interest           0.062986   0.027118   2.323     0.02055 *  
+extef              0.030600   0.037400   0.818     0.41360    
+intef              0.133158   0.057978   2.297     0.02201 *  
+ope                0.036575   0.023117   1.582     0.11418    
+incidental         0.259906   0.050914   5.105 0.000000455 ***
+intercon           0.187158   0.063256   2.959     0.00322 ** 
+social:incidental  0.129253   0.045668   2.830     0.00482 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4869 on 558 degrees of freedom
+Multiple R-squared:  0.2187,    Adjusted R-squared:  0.2005 
+F-statistic: 12.01 on 13 and 558 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+</div>
+<p><strong>Figure 6</strong> Interactions between incidental exposure and news consumption</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-17-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -962,7 +1016,7 @@ F-statistic: 4.597 on 11 and 1365 DF,  p-value: 0.0000006762</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="Quarto_Paper_MaC_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1036,6 +1090,9 @@ F-statistic:  9.17 on 11 and 1365 DF,  p-value: 0.0000000000000005238</code></pr
 </div>
 </div>
 </section>
+</section>
+<section id="interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions">Interactions</h2>
 </section>
 </section>
 
