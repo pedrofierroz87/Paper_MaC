@@ -721,7 +721,8 @@ sem1 <- 'ope_a1 =~ ope1 + ope2 + ope3 + ope4
           digital_a1 =~ tradonline + online + podcast + officialsm
           social_a1 =~ fb + insta + twitter + whatsapp + youtube + tiktok
           under_a1 =~ under_w3_1 + under_w3_2 + under_w3_3 + under_w3_4 + under_w3_5 + under_w3_6 + under_w3_7 + under_w3_8
-          under_a1 ~ ses + sex + age_num + media_a1 + digital_a1 + social_a1 + interest_a1 + intercon + extef_a1 + intef_a1 + ope_a1'
+          incidental_a1 =~ news_agree + news_disagree + news_pol + news_pleb + news_elec
+          under_a1 ~ ses + sex + age_num + media_a1 + digital_a1 + social_a1 + interest_a1 + incidental_a1 + intercon + extef_a1 + intef_a1 + ope_a1'
 
 fit_sem1 <- sem(sem1, data = merged_data)
 
@@ -739,7 +740,8 @@ sem2 <- 'ope_a2 =~ ope1 + ope2 + ope3 + ope4
           digital_a2 =~ tradonline + online + podcast + officialsm
           social_a2 =~ fb + insta + twitter + whatsapp + youtube + tiktok
           strate_a2 =~ strate_w3_1 + strate_w3_2 + strate_w3_3 + strate_w3_4 + strate_w3_5 + strate_w3_6 + strate_w3_7 + strate_w3_8
-          strate_a2 ~ ses + sex + age_num + media_a2 + digital_a2 + social_a2 + interest_a2 + intercon + extef_a2 + intef_a2 + ope_a2'
+          incidental_a2 =~ news_agree + news_disagree + news_pol + news_pleb + news_elec
+          strate_a2 ~ ses + sex + age_num + media_a2 + digital_a2 + social_a2 + interest_a2 + incidental_a2 + intercon + extef_a2 + intef_a2 + ope_a2'
 
 fit_sem2 <- sem(sem2, data = merged_data)
 
