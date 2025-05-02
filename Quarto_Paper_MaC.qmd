@@ -126,6 +126,8 @@ library(psych)
 library(interactions)
 library(semPlot)
 library(coefplot)
+library(Hmisc)
+
 ```
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -561,8 +563,8 @@ name_mapping <- c(
   ses = "Socioeconomic Status",
   sex = "Gender",
   age_num = "Age",
-  media = "Media Expo.",
-  digital = "Dig, Media Expo.",
+  media = "Trad. Media Expo.",
+  digital = "Dig. Media Expo.",
   social = "Soc. Media Expo.",
   interest = "Pol. Interest",
   intercon = "Interp. Conf.",
@@ -706,6 +708,94 @@ plot2
 plot3
 
 ```
+
+
+### Review process R&R
+
+## Interactions
+
+```{r}
+library(interactions)
+
+plot1 <- interact_plot(model = model1_int1, pred = "media", modx = "incidental",
+                       interval = TRUE, x.label = "Media", y.label = "Understanding Orientation",
+                       modx.values = "plus-minus",  # plots mean +/- 1 SD of incidental
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+plot2 <- interact_plot(model = model1_int2, pred = "digital", modx = "incidental",
+                       interval = TRUE, x.label = "Digital Media", y.label = "Understanding Orientation",
+                       modx.values = "plus-minus",
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+plot3 <- interact_plot(model = model1_int3, pred = "social", modx = "incidental",
+                       interval = TRUE, x.label = "Social Media", y.label = "Understanding Orientation",
+                       modx.values = "plus-minus",
+                       modx.labels = c("Low Incidental", "High Incidental"))
+
+# Show plots
+plot1
+plot2
+plot3
+```
+
+## Correlation Matrix
+
+```{r}
+# List of variables in your model
+vars_of_interest <- c("under", "strate", "ses", "sex", "age_num", "media", "digital", "social", "interest", "extef", "intef", "ope", "incidental", "intercon")
+
+# Subset the data
+data_subset <- merged_data[ , vars_of_interest]
+
+
+# Compute correlation matrix (pairwise complete cases)
+cor_matrix <- cor(data_subset, use = "pairwise.complete.obs")
+
+
+# Get correlations + p-values
+correlation_results <- corr.test(data_subset, use = "pairwise")
+
+# Print correlation table with stars (psych automatically gives r and p values)
+correlation_results
+
+
+corstars <- function(x) {
+  require(Hmisc)
+  x <- as.matrix(x)
+  R <- rcorr(x)$r
+  p <- rcorr(x)$P
+  
+  # define significance levels
+  stars <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
+  
+  # format matrix
+  R <- format(round(R, 2))
+  Rnew <- matrix(paste(R, stars, sep=" "), ncol=ncol(R))
+  dimnames(Rnew) <- dimnames(R)
+  Rnew
+}
+
+
+# Apply function
+corstars(data_subset)
+
+
+```
+
+
+## Testing multicolinearity
+
+```{r}
+model1_mul1 <- lm(under ~ ses + sex + age_num + media + interest + extef + intef + ope + incidental + intercon, data = merged_data)
+summary(model1_mul1)
+
+model1_mul2 <- lm(under ~ ses + sex + age_num + digital + interest + extef + intef + ope + incidental + intercon, data = merged_data)
+summary(model1_mul2)
+
+model1_mul3 <- lm(under ~ ses + sex + age_num + social + interest + extef + intef + ope + incidental + intercon, data = merged_data)
+summary(model1_mul3)
+```
+
 
 
 ## Appendix
